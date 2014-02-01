@@ -1,0 +1,17 @@
+876
+842
+50
+1
+60
+65
+63
+66
+Bottom
+True
+True
+Segoe UI
+14
+False
+False
+False
+False
