@@ -514,7 +514,7 @@ namespace SysMana
                     comboDataSubsource.Items.Add("Left channel");
                     comboDataSubsource.Items.Add("Right channel");
 
-                    lblDataSubsource.Text = "Audio channel:";
+                    lblDataSubsource.Text = "Channel:";
                     comboDataSubsource.Visible = true;
                     break;
                 case "Text file":

@@ -811,7 +811,7 @@
             this.comboMWheelAction.FormattingEnabled = true;
             this.comboMWheelAction.Items.AddRange(new object[] {
             "Change system volume"});
-            this.comboMWheelAction.Location = new System.Drawing.Point(23, 497);
+            this.comboMWheelAction.Location = new System.Drawing.Point(19, 497);
             this.comboMWheelAction.Name = "comboMWheelAction";
             this.comboMWheelAction.Size = new System.Drawing.Size(302, 21);
             this.comboMWheelAction.TabIndex = 15;
@@ -820,7 +820,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(20, 480);
+            this.label32.Location = new System.Drawing.Point(16, 480);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(105, 13);
             this.label32.TabIndex = 14;
