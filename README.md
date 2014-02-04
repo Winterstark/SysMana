@@ -64,7 +64,7 @@ To open the Setup window right-click on SysMana and select the Setup option. Fro
 
 #### Blank Release
 
-The blank release has no resource meters when it first runs, so you will see only a blank rectangle. Right-click it and select setup to begin adding meters to it. Just click "Add" and then set the new meter's data source and visualization.
+The blank release has no resource meters when it first runs, so you will see only a blank rectangle. Right-click it and select setup to begin adding meters to it. Just click Add and then set the new meter's data source and visualization.
 
 #### Example Release
 
@@ -82,8 +82,11 @@ The right side of the window contains many options to customize the meter:
 - Data source is the resource the meter will be monitoring. Some data sources require the specification of a subsource, for example the Available disk space meter needs to know which disk to monitor.
 - Min. and max. values define the interval that will contain the data values. These values are usually automatically set, except in a few cases, like download and upload speed (which you need to set manually).
 - Visualization is the way SysMana will render the data. Each visualization presents its own set of options:
-  - sadf
-  - asdf
+  - Text: prefix and postfix strings will be displayed with the data value.
+  - Spinner: min. and max. spin speed are used to calculate how fast the image needs to spin based on the data value.
+  - Progress bar: the foreground image will be drawn over the background image; their ratio is determined by the data value. The Progress vector defines the axis and direction the foreground will use to spread over the background.
+  - Image sequence: images are added to the sequence with the Add images button. To remove or edit existing images click the Open images directory button and perform any modifications manually, then click the Reload button.
+  - Graph: width is the total width of the graph; step width is the horizontal distance between two points on the graph; line width is the thickness of the graph line. Height is the total height of the graph. Step interval determines how often the graph will refresh. The texture is the image used to fill up either the top or bottom half of the graph.
 - To resize the images in this meter use the Image zoom option.
 - Click, Drag and drop, and Mouse wheel actions fire when the user interacts with the meter.
 
@@ -93,7 +96,7 @@ The right side of the window contains many options to customize the meter:
 
 To change SysMana's location just move it around the screen (it will remember the new position).
 
-The right-click context menu has the option "On Top": this makes SysMana on top of all other windows and is necessary to have if you want to position the meters over your taskbar. It temporarily turns off when the user is viewing a fullscreen application, or when the user clicks anywhere on the taskbar.
+The right-click context menu has the option On Top: this makes SysMana on top of all other windows and is necessary to have if you want to position the meters over your taskbar. It temporarily turns off when the user is viewing a fullscreen application, or when the user clicks anywhere on the taskbar.
 
 The General Options tab under SysMana Setup has access to other options, such as: background transparency, text font, vertical alignment, running SysMana when Windows boots, etc.
 
