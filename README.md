@@ -3,7 +3,9 @@ SysMana
 
 SysMana is a Windows system monitor designed to be easy to use and flexible, enabling users to construct a varied set of monitors that display data using images, animated gifs, graphs, etc.
 
-The program can currently monitor the following resources:
+![Screenshot: SysMana](http://i.imgur.com/CMaGFS7.gif)
+
+Currently, the program can monitor the following resources:
 * CPU usage
 * RAM usage
 * Hard drive space
@@ -56,21 +58,42 @@ Installation
 Usage
 ------
 
-### Setup (Blank Release)
+### Setup
+
+To open the Setup window right-click on SysMana and select the Setup option. From there you can add, edit, or delete meters, as well as modify other options. See the next subsections for more details.
+
+#### Blank Release
 
 The blank release has no resource meters when it first runs, so you will see only a blank rectangle. Right-click it and select setup to begin adding meters to it. Just click "Add" and then set the new meter's data source and visualization.
 
-### Setup (Example Release)
+#### Example Release
 
 This release already has a bunch of resource meters set up; most of them don't need any further modification except for:
 * The download speed graph (third from the bottom): you need to select the network adapter to monitor (if you're unsure try one and see if it registers any traffic). Also you need to specify your maximum download speed (in kb/s) under max. value.
 * The weather status / text file (last one): if you don't use [Wallcreeper]() then this meter won't work at all; if you do, you need to specify the path to the "weather_status.txt" file in Wallcreeper's directory.
 
+#### Adding meters
+
+Meters are added in the SysMana Setup window by clicking the Add button. This will create a new line reading "CPU usage" (the default meter); moving the line up or down will change the order of the meters (left to right).
+
+The right side of the window contains many options to customize the meter:
+- Increasing left margin will distance the meter from the previous one. Negative values are also accepted, allowing two meters to overlap (or be positioned one above the other).
+- Top margin is the distance from the top of the window to the meter.
+- Data source is the resource the meter will be monitoring. Some data sources require the specification of a subsource, for example the Available disk space meter needs to know which disk to monitor.
+- Min. and max. values define the interval that will contain the data values. These values are usually automatically set, except in a few cases, like download and upload speed (which you need to set manually).
+- Visualization is the way SysMana will render the data. Each visualization presents its own set of options:
+  - sadf
+  - asdf
+- To resize the images in this meter use the Image zoom option.
+- Click, Drag and drop, and Mouse wheel actions fire when the user interacts with the meter.
+
+![Screenshot: Options window](http://i.imgur.com/dEzYx9S.png)
+
 ## Other options
 
 To change SysMana's location just move it around the screen (it will remember the new position).
 
-The right-click context menu has na option "On Top": this makes SysMana on top of all other windows and is necessary to have if you want to position the meters over your taskbar. It temporarily turns off when the user is viewing a fullscreen application, or when the user clicks anywhere on the taskbar.
+The right-click context menu has the option "On Top": this makes SysMana on top of all other windows and is necessary to have if you want to position the meters over your taskbar. It temporarily turns off when the user is viewing a fullscreen application, or when the user clicks anywhere on the taskbar.
 
 The General Options tab under SysMana Setup has access to other options, such as: background transparency, text font, vertical alignment, running SysMana when Windows boots, etc.
 
