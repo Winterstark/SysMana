@@ -38,6 +38,9 @@
     <Reference Include="CoreAudioApi">
       <HintPath>CoreAudio\CoreAudioApi.dll</HintPath>
     </Reference>
+    <Reference Include="GenericForms">
+      <HintPath>GenericForms\GenericForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NetworkMonitor">
       <HintPath>NetworkMonitor\NetworkMonitor.dll</HintPath>

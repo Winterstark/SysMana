@@ -1,0 +1,16 @@
+SKIP
+"To add a new resource monitor, click here."->(buttAdd)
+"Select the new line (CPU usage) that appeared at the end of this list."-[listMeters]
+"To modify this meter edit the various options found here."-[groupMeter]
+"The left margin is the horizontal distance from the previous meter to this one."->(numLeftMargin)
+"The top margin is the distance from the top of the window to the meter"->(numTopMargin)
+"Data source is the resource the meter will be monitoring."->(comboDataSource)*Some data sources require the specification of a subsource, for example the Available disk space meter needs to know which disk to monitor.
+"Min. and max. values define the interval that will contain the data values."->(numDataMin)
+"Visualization is the way SysMana will render the data."->(comboVisualization)*Each visualization presents its own set of options, which are described in the README.
+"To resize the images in this meter use the Image zoom option."->(numZoom)
+"This action occurs when the user clicks the meter."->(comboClickAction)
+"This action is performed on a file dragged onto the meter."->(comboDragFileAction)
+"This action occurs when the user rolls the mouse wheel over the meter. Currently it can only be used to change the system volume."->(comboMWheelAction)
+"This button deletes the meter."->(buttDelete)
+"Use the Move Up and Move Down buttons to change the order in which the meters will appear."->(buttMoveUp)
+"Finally, click here to save the changes."->(buttMeterSaveChanges)

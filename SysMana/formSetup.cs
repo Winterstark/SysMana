@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
+using GenericForms;
 
 namespace SysMana
 {
@@ -893,6 +894,11 @@ namespace SysMana
         {
             if (e.KeyCode == Keys.Enter)
                 checkImage(txtGraphTexture, picGraphTexture);
+        }
+
+        private void formSetup_Load(object sender, EventArgs e)
+        {
+            Tutorial tutorial = new Tutorial(Application.StartupPath + "\\tutorials\\setup.txt", this);
         }
     }
 }

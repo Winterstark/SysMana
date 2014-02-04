@@ -1627,6 +1627,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "formSetup";
             this.Text = "SysMana Setup";
+            this.Load += new System.EventHandler(this.formSetup_Load);
             this.tabs.ResumeLayout(false);
             this.tabMeters.ResumeLayout(false);
             this.groupMeter.ResumeLayout(false);
