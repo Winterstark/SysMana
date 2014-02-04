@@ -27,11 +27,11 @@ namespace SysMana
         Color backColor;
         Font font;
         VertAlign align;
-        int refresh, opacity, fixedH;
-        bool topMost, transparent;
+        int refresh, opacity, fixedH, updateNotifs;
+        bool topMost, transparent, showChangelog;
 
 
-        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg)
+        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg, int updateNotifs, bool showChangelog)
         {
             initiating = true;
 
@@ -63,6 +63,8 @@ namespace SysMana
             comboVertAlign.Text = align.ToString();
             checkTopMost.Checked = topMost;
             checkTransparent.Checked = transparent;
+            trackUpdate.Value = updateNotifs;
+            checkShowChangelog.Checked = showChangelog;
 
             comboFont.Text = font.Name;
             numFontSize.Value = (int)font.Size;
@@ -80,6 +82,8 @@ namespace SysMana
             this.topMost = topMost;
             this.transparent = transparent;
             this.font = font;
+            this.updateNotifs = updateNotifs;
+            this.showChangelog = showChangelog;
 
             //runs at startup?
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -145,7 +149,9 @@ namespace SysMana
                 checkFontBold.Checked != font.Bold ||
                 checkFontItalic.Checked != font.Italic ||
                 checkFontUnderline.Checked != font.Underline ||
-                checkFontStrikeout.Checked != font.Strikeout;
+                checkFontStrikeout.Checked != font.Strikeout ||
+                trackUpdate.Value != updateNotifs ||
+                checkShowChangelog.Checked != showChangelog;
         }
 
         void saveMeters()
@@ -252,6 +258,26 @@ namespace SysMana
             numDataMax.Value = data.GetTotalDiskSpace(comboDataSubsource.Text);
         }
 
+        void refreshUpdateNotifLabel()
+        {
+            switch (trackUpdate.Value)
+            {
+                case 0:
+                    lblUpdateNotifications.Text = "Always ask";
+                    break;
+                case 1:
+                    lblUpdateNotifications.Text = "Check for update automatically";
+                    break;
+                case 2:
+                    lblUpdateNotifications.Text = "Download update automatically";
+                    break;
+                case 3:
+                    lblUpdateNotifications.Text = "Install update automatically";
+                    break;
+            }
+        }
+
+
 
         public formSetup()
         {
@@ -318,6 +344,8 @@ namespace SysMana
             align = (VertAlign)Enum.Parse(typeof(VertAlign), comboVertAlign.Text);
             topMost = checkTopMost.Checked;
             transparent = checkTransparent.Checked;
+            updateNotifs = trackUpdate.Value;
+            showChangelog = checkShowChangelog.Checked;
 
             font = new Font(comboFont.Text, (int)numFontSize.Value, Misc.GenFontStyle(checkFontBold.Checked, checkFontItalic.Checked, checkFontUnderline.Checked, checkFontStrikeout.Checked));
 
@@ -347,6 +375,8 @@ namespace SysMana
             file.WriteLine(font.Italic);
             file.WriteLine(font.Underline);
             file.WriteLine(font.Strikeout);
+            file.WriteLine(updateNotifs);
+            file.WriteLine(showChangelog);
 
             file.Close();
 
@@ -899,6 +929,17 @@ namespace SysMana
         private void formSetup_Load(object sender, EventArgs e)
         {
             Tutorial tutorial = new Tutorial(Application.StartupPath + "\\tutorials\\setup.txt", this);
+        }
+
+        private void trackUpdate_Scroll(object sender, EventArgs e)
+        {
+            refreshUpdateNotifLabel();
+            checkForGeneralOptionsChanges();
+        }
+
+        private void checkShowChangelog_CheckedChanged(object sender, EventArgs e)
+        {
+            checkForGeneralOptionsChanges();
         }
     }
 }

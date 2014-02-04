@@ -12,11 +12,14 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using CoreAudioApi;
+using GenericForms;
 
 namespace SysMana
 {
     public partial class formSysMana : Form
     {
+        const double VERSION = 1.0;
+
         [DllImport("kernel32.dll")]
         static extern uint WinExec(string lpCmdLine, uint uCmdShow);
         public const uint SW_NORMAL = 1;
@@ -162,9 +165,9 @@ namespace SysMana
         Font font;
         VertAlign align;
 
-        bool mousedown = false, initialized = false;
+        bool mousedown = false, initialized = false, showChangelog;
         Point prevPos;
-        int fixedH, prevX, prevY;
+        int fixedH, prevX, prevY, updateNotifs;
         
 
         public Image LoadImg(string path)
@@ -228,6 +231,8 @@ namespace SysMana
             this.TopMost = bool.Parse(file.ReadLine());
             this.AllowTransparency = bool.Parse(file.ReadLine());
             font = new Font(file.ReadLine(), int.Parse(file.ReadLine()), Misc.GenFontStyle(bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine())));
+            updateNotifs = int.Parse(file.ReadLine());
+            showChangelog = bool.Parse(file.ReadLine());
 
             file.Close();
 
@@ -255,6 +260,8 @@ namespace SysMana
             file.WriteLine(font.Italic);
             file.WriteLine(font.Underline);
             file.WriteLine(font.Strikeout);
+            file.WriteLine(updateNotifs);
+            file.WriteLine(showChangelog);
 
             file.Close();
         }
@@ -365,11 +372,16 @@ namespace SysMana
         private void formSysMeters_Load(object sender, EventArgs e)
         {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
-            //this.TransparencyKey = Color.Turquoise;
-            //this.BackColor = Color.Turquoise;
 
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
             audioDevice = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
+
+            //check for updates
+            bool[] askPermissions = new bool[3] { true, true, true };
+            for (int i = 0; i < updateNotifs; i++)
+                askPermissions[i] = false;
+
+            Updater.Update(VERSION, "https://raw2.github.com/Winterstark/SysMana/master/update/update.txt", askPermissions, showChangelog);
         }
 
         private void formSysMana_Activated(object sender, EventArgs e)
@@ -579,7 +591,7 @@ namespace SysMana
             if (setup == null || setup.IsDisposed)
             {
                 setup = new formSetup();
-                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg);
+                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
                 setup.Show();
             }
         }

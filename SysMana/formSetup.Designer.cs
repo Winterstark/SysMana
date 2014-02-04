@@ -120,6 +120,10 @@
             this.buttAdd = new System.Windows.Forms.Button();
             this.listMeters = new System.Windows.Forms.ListBox();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.checkShowChangelog = new System.Windows.Forms.CheckBox();
+            this.lblUpdateNotifications = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.trackUpdate = new System.Windows.Forms.TrackBar();
             this.numFixedH = new System.Windows.Forms.NumericUpDown();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -177,6 +181,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDataMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).BeginInit();
             this.tabGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
@@ -1274,6 +1279,10 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.checkShowChangelog);
+            this.tabGeneral.Controls.Add(this.lblUpdateNotifications);
+            this.tabGeneral.Controls.Add(this.label37);
+            this.tabGeneral.Controls.Add(this.trackUpdate);
             this.tabGeneral.Controls.Add(this.numFixedH);
             this.tabGeneral.Controls.Add(this.label34);
             this.tabGeneral.Controls.Add(this.label33);
@@ -1307,9 +1316,48 @@
             this.tabGeneral.Text = "General Options";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // checkShowChangelog
+            // 
+            this.checkShowChangelog.AutoSize = true;
+            this.checkShowChangelog.Location = new System.Drawing.Point(54, 399);
+            this.checkShowChangelog.Name = "checkShowChangelog";
+            this.checkShowChangelog.Size = new System.Drawing.Size(166, 17);
+            this.checkShowChangelog.TabIndex = 18;
+            this.checkShowChangelog.Text = "Show changelog after update";
+            this.checkShowChangelog.UseVisualStyleBackColor = true;
+            this.checkShowChangelog.CheckedChanged += new System.EventHandler(this.checkShowChangelog_CheckedChanged);
+            // 
+            // lblUpdateNotifications
+            // 
+            this.lblUpdateNotifications.AutoSize = true;
+            this.lblUpdateNotifications.Location = new System.Drawing.Point(233, 348);
+            this.lblUpdateNotifications.Name = "lblUpdateNotifications";
+            this.lblUpdateNotifications.Size = new System.Drawing.Size(60, 13);
+            this.lblUpdateNotifications.TabIndex = 17;
+            this.lblUpdateNotifications.Text = "Always ask";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(19, 332);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(104, 13);
+            this.label37.TabIndex = 16;
+            this.label37.Text = "Update notifications:";
+            // 
+            // trackUpdate
+            // 
+            this.trackUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.trackUpdate.Location = new System.Drawing.Point(39, 348);
+            this.trackUpdate.Maximum = 3;
+            this.trackUpdate.Name = "trackUpdate";
+            this.trackUpdate.Size = new System.Drawing.Size(188, 45);
+            this.trackUpdate.TabIndex = 15;
+            this.trackUpdate.Scroll += new System.EventHandler(this.trackUpdate_Scroll);
+            // 
             // numFixedH
             // 
-            this.numFixedH.Location = new System.Drawing.Point(118, 158);
+            this.numFixedH.Location = new System.Drawing.Point(114, 166);
             this.numFixedH.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1329,7 +1377,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(22, 191);
+            this.label34.Location = new System.Drawing.Point(18, 199);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(130, 13);
             this.label34.TabIndex = 13;
@@ -1338,7 +1386,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(22, 160);
+            this.label33.Location = new System.Drawing.Point(18, 168);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(90, 13);
             this.label33.TabIndex = 13;
@@ -1348,7 +1396,7 @@
             // 
             this.comboFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFont.FormattingEnabled = true;
-            this.comboFont.Location = new System.Drawing.Point(354, 136);
+            this.comboFont.Location = new System.Drawing.Point(337, 25);
             this.comboFont.Name = "comboFont";
             this.comboFont.Size = new System.Drawing.Size(181, 21);
             this.comboFont.TabIndex = 12;
@@ -1362,7 +1410,7 @@
             "Top",
             "Center",
             "Bottom"});
-            this.comboVertAlign.Location = new System.Drawing.Point(118, 227);
+            this.comboVertAlign.Location = new System.Drawing.Point(118, 235);
             this.comboVertAlign.Name = "comboVertAlign";
             this.comboVertAlign.Size = new System.Drawing.Size(121, 21);
             this.comboVertAlign.TabIndex = 12;
@@ -1385,7 +1433,7 @@
             // 
             // numFontSize
             // 
-            this.numFontSize.Location = new System.Drawing.Point(354, 171);
+            this.numFontSize.Location = new System.Drawing.Point(337, 60);
             this.numFontSize.Maximum = new decimal(new int[] {
             192,
             0,
@@ -1433,7 +1481,7 @@
             // 
             // buttPickBackColor
             // 
-            this.buttPickBackColor.Location = new System.Drawing.Point(199, 89);
+            this.buttPickBackColor.Location = new System.Drawing.Point(199, 112);
             this.buttPickBackColor.Name = "buttPickBackColor";
             this.buttPickBackColor.Size = new System.Drawing.Size(27, 23);
             this.buttPickBackColor.TabIndex = 10;
@@ -1443,7 +1491,7 @@
             // 
             // picBackColor
             // 
-            this.picBackColor.Location = new System.Drawing.Point(118, 89);
+            this.picBackColor.Location = new System.Drawing.Point(118, 112);
             this.picBackColor.Name = "picBackColor";
             this.picBackColor.Size = new System.Drawing.Size(75, 23);
             this.picBackColor.TabIndex = 9;
@@ -1453,7 +1501,7 @@
             // 
             this.checkFontStrikeout.AutoSize = true;
             this.checkFontStrikeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFontStrikeout.Location = new System.Drawing.Point(485, 206);
+            this.checkFontStrikeout.Location = new System.Drawing.Point(337, 164);
             this.checkFontStrikeout.Name = "checkFontStrikeout";
             this.checkFontStrikeout.Size = new System.Drawing.Size(68, 17);
             this.checkFontStrikeout.TabIndex = 8;
@@ -1465,7 +1513,7 @@
             // 
             this.checkFontUnderline.AutoSize = true;
             this.checkFontUnderline.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFontUnderline.Location = new System.Drawing.Point(408, 206);
+            this.checkFontUnderline.Location = new System.Drawing.Point(337, 141);
             this.checkFontUnderline.Name = "checkFontUnderline";
             this.checkFontUnderline.Size = new System.Drawing.Size(71, 17);
             this.checkFontUnderline.TabIndex = 8;
@@ -1477,7 +1525,7 @@
             // 
             this.checkFontItalic.AutoSize = true;
             this.checkFontItalic.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFontItalic.Location = new System.Drawing.Point(354, 206);
+            this.checkFontItalic.Location = new System.Drawing.Point(337, 118);
             this.checkFontItalic.Name = "checkFontItalic";
             this.checkFontItalic.Size = new System.Drawing.Size(48, 17);
             this.checkFontItalic.TabIndex = 8;
@@ -1489,7 +1537,7 @@
             // 
             this.checkFontBold.AutoSize = true;
             this.checkFontBold.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFontBold.Location = new System.Drawing.Point(297, 206);
+            this.checkFontBold.Location = new System.Drawing.Point(337, 95);
             this.checkFontBold.Name = "checkFontBold";
             this.checkFontBold.Size = new System.Drawing.Size(51, 17);
             this.checkFontBold.TabIndex = 8;
@@ -1500,7 +1548,7 @@
             // checkTransparent
             // 
             this.checkTransparent.AutoSize = true;
-            this.checkTransparent.Location = new System.Drawing.Point(321, 75);
+            this.checkTransparent.Location = new System.Drawing.Point(337, 261);
             this.checkTransparent.Name = "checkTransparent";
             this.checkTransparent.Size = new System.Drawing.Size(143, 17);
             this.checkTransparent.TabIndex = 8;
@@ -1511,7 +1559,7 @@
             // checkRunAtStartup
             // 
             this.checkRunAtStartup.AutoSize = true;
-            this.checkRunAtStartup.Location = new System.Drawing.Point(321, 29);
+            this.checkRunAtStartup.Location = new System.Drawing.Point(337, 215);
             this.checkRunAtStartup.Name = "checkRunAtStartup";
             this.checkRunAtStartup.Size = new System.Drawing.Size(199, 17);
             this.checkRunAtStartup.TabIndex = 8;
@@ -1522,7 +1570,7 @@
             // checkTopMost
             // 
             this.checkTopMost.AutoSize = true;
-            this.checkTopMost.Location = new System.Drawing.Point(321, 52);
+            this.checkTopMost.Location = new System.Drawing.Point(337, 238);
             this.checkTopMost.Name = "checkTopMost";
             this.checkTopMost.Size = new System.Drawing.Size(92, 17);
             this.checkTopMost.TabIndex = 8;
@@ -1533,7 +1581,7 @@
             // buttOptionsSaveChanges
             // 
             this.buttOptionsSaveChanges.Enabled = false;
-            this.buttOptionsSaveChanges.Location = new System.Drawing.Point(42, 319);
+            this.buttOptionsSaveChanges.Location = new System.Drawing.Point(21, 468);
             this.buttOptionsSaveChanges.Name = "buttOptionsSaveChanges";
             this.buttOptionsSaveChanges.Size = new System.Drawing.Size(196, 52);
             this.buttOptionsSaveChanges.TabIndex = 7;
@@ -1563,7 +1611,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(317, 139);
+            this.label12.Location = new System.Drawing.Point(300, 28);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 13);
             this.label12.TabIndex = 0;
@@ -1572,7 +1620,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(296, 173);
+            this.label11.Location = new System.Drawing.Point(279, 62);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(52, 13);
             this.label11.TabIndex = 0;
@@ -1581,7 +1629,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 230);
+            this.label9.Location = new System.Drawing.Point(19, 238);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 13);
             this.label9.TabIndex = 0;
@@ -1599,7 +1647,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 94);
+            this.label1.Location = new System.Drawing.Point(18, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 0;
@@ -1660,6 +1708,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).EndInit();
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).EndInit();
@@ -1792,5 +1841,9 @@
         private System.Windows.Forms.TextBox txtGraphTexture;
         private System.Windows.Forms.PictureBox picGraphTexture;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.CheckBox checkShowChangelog;
+        private System.Windows.Forms.Label lblUpdateNotifications;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TrackBar trackUpdate;
     }
 }
