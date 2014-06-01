@@ -1,5 +1,4 @@
-CPU usage----Spinner--8---2--0--100--80--Open task manager------CPU usage: -- %--False--maya_steampunk_gear.png--0--360------Left to right----0--0--1--1--25--0--0--0--False----False
-Available memory----Progress bar--10--0--0--3883--38--Open control panel------Available memory: -- MB--False----0--0--Spirit.gif--mana.gif--Bottom to top----0--0--1--1--25--0--0--0--False----False
+Available memory----Progress bar--10--0--0--3883--38--Open task manager------Available memory: -- MB--False----0--0--Spirit.gif--mana.gif--Bottom to top----0--0--1--1--25--0--0--0--False----False
 Available disk space--C:\--Progress bar--0--0--0--10000--38--Launch program/file...shell:mycomputerfolder------Available disk space: -- MB--False----0--0--empty hp edited.png--hp edited.gif--Bottom to top----0--0--1--1--25--0--0--0--False----False
 System volume----Progress bar--0--0--0--100--38--Open volume mixer----Change system volume--System volume: -- %--False----0--0--empty.png--fury.gif--Bottom to top----0--0--1--1--25--0--0--0--False----False
 Battery percent remaining----Progress bar--0--0--0--100--38--Open power options------Battery percent remaining: -- %--False----0--0--empty flipped.png--arcane flipped.gif--Bottom to top----0--0--1--1--25--0--0--0--False----False

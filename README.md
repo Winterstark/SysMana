@@ -24,6 +24,8 @@ To display the data SysMana has a variety of methods:
 * Image sequence - chooses a display image from a numbered sequence of pictures
 * Graph - displays the data value's change over time (supports graph background & foreground textures)
 
+Keep in mind that SysMana might slow down your computer a little. After you set it up check Task Manager to see if it's using up too much CPU - you can reduce that number by increasing the Refresh interval in Options, and by eliminating some meters. Future versions of SysMana will probably be more optimized.
+
 
 Example monitor set
 ---------------------

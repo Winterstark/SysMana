@@ -60,8 +60,8 @@ namespace SysMana
         PerformanceCounter cpuCounter, ramCounter;
         public int TotalRAM;
 
-        DateTime prevWLANcheck, prevFileCheck;
-        int prevWLANvalue, prevFileValue;
+        DateTime prevWLANCheck, prevFileCheck, prevBinCheck;
+        int prevWLANvalue, prevFileValue, prevBinValue;
 
 
         public DataSources(List<Meter> meters)
@@ -153,16 +153,30 @@ namespace SysMana
                 case "Recycle bin size":
                     binQuery.cbSize = Marshal.SizeOf(typeof(SHQUERYRBINFO));
 
-                    try
+                    if (DateTime.Now.Subtract(prevBinCheck).TotalSeconds < 10)
+                        return prevBinValue;
+                    else
                     {
-                        if (SHQueryRecycleBin(null, ref binQuery) == 0)
-                            return (int)(Convert.ToDouble(binQuery.i64Size) / Convert.ToDouble(1024) / Convert.ToDouble(1024));
-                        else
+                        prevBinCheck = DateTime.Now;
+
+                        try
+                        {
+                            if (SHQueryRecycleBin(null, ref binQuery) == 0)
+                            {
+                                prevBinValue = (int)(Convert.ToDouble(binQuery.i64Size) / Convert.ToDouble(1024) / Convert.ToDouble(1024));
+                                return prevBinValue;
+                            }
+                            else
+                            {
+                                prevBinValue = -1;
+                                return -1;
+                            }
+                        }
+                        catch
+                        {
+                            prevBinValue = -1;
                             return -1;
-                    }
-                    catch
-                    {
-                        return -1;
+                        }
                     }
                 case "Battery percent remaining":
                     return (int)(SystemInformation.PowerStatus.BatteryLifePercent * 100);
@@ -183,7 +197,7 @@ namespace SysMana
                     else
                         return -1;
                 case "Wireless signal strength":
-                    if (DateTime.Now.Subtract(prevWLANcheck).TotalSeconds < 10)
+                    if (DateTime.Now.Subtract(prevWLANCheck).TotalSeconds < 10)
                         return prevWLANvalue;
                     else
                     {
@@ -207,7 +221,7 @@ namespace SysMana
                                 int ub = line.IndexOf("%");
 
                                 prevWLANvalue = int.Parse(line.Substring(lb, ub - lb));
-                                prevWLANcheck = DateTime.Now;
+                                prevWLANCheck = DateTime.Now;
                             }
                         }
 
