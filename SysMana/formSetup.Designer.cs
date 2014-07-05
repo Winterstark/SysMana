@@ -197,7 +197,7 @@
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(580, 570);
-            this.tabs.TabIndex = 4;
+            this.tabs.TabIndex = 1;
             // 
             // tabMeters
             // 
@@ -218,16 +218,11 @@
             // 
             // groupMeter
             // 
-            this.groupMeter.Controls.Add(this.panelGraph);
-            this.groupMeter.Controls.Add(this.panelSpin);
             this.groupMeter.Controls.Add(this.buttChooseTextFile);
-            this.groupMeter.Controls.Add(this.panelProgressBar);
             this.groupMeter.Controls.Add(this.numTopMargin);
             this.groupMeter.Controls.Add(this.label35);
             this.groupMeter.Controls.Add(this.comboMWheelAction);
             this.groupMeter.Controls.Add(this.label32);
-            this.groupMeter.Controls.Add(this.panelText);
-            this.groupMeter.Controls.Add(this.panelImageSequence);
             this.groupMeter.Controls.Add(this.comboDataSubsource);
             this.groupMeter.Controls.Add(this.lblDataSubsource);
             this.groupMeter.Controls.Add(this.numZoom);
@@ -247,6 +242,11 @@
             this.groupMeter.Controls.Add(this.label16);
             this.groupMeter.Controls.Add(this.label3);
             this.groupMeter.Controls.Add(this.label2);
+            this.groupMeter.Controls.Add(this.panelGraph);
+            this.groupMeter.Controls.Add(this.panelSpin);
+            this.groupMeter.Controls.Add(this.panelProgressBar);
+            this.groupMeter.Controls.Add(this.panelText);
+            this.groupMeter.Controls.Add(this.panelImageSequence);
             this.groupMeter.Enabled = false;
             this.groupMeter.Location = new System.Drawing.Point(233, 6);
             this.groupMeter.Name = "groupMeter";
@@ -281,7 +281,7 @@
             this.panelGraph.Location = new System.Drawing.Point(11, 167);
             this.panelGraph.Name = "panelGraph";
             this.panelGraph.Size = new System.Drawing.Size(311, 181);
-            this.panelGraph.TabIndex = 12;
+            this.panelGraph.TabIndex = 16;
             this.panelGraph.Visible = false;
             // 
             // rdbGraphTextureBack
@@ -301,7 +301,7 @@
             this.rdbGraphTextureFront.Location = new System.Drawing.Point(29, 151);
             this.rdbGraphTextureFront.Name = "rdbGraphTextureFront";
             this.rdbGraphTextureFront.Size = new System.Drawing.Size(84, 17);
-            this.rdbGraphTextureFront.TabIndex = 24;
+            this.rdbGraphTextureFront.TabIndex = 25;
             this.rdbGraphTextureFront.TabStop = true;
             this.rdbGraphTextureFront.Text = "Front texture";
             this.rdbGraphTextureFront.UseVisualStyleBackColor = true;
@@ -312,7 +312,7 @@
             this.buttGraphTexturePick.Location = new System.Drawing.Point(187, 123);
             this.buttGraphTexturePick.Name = "buttGraphTexturePick";
             this.buttGraphTexturePick.Size = new System.Drawing.Size(26, 23);
-            this.buttGraphTexturePick.TabIndex = 23;
+            this.buttGraphTexturePick.TabIndex = 24;
             this.buttGraphTexturePick.Text = "...";
             this.buttGraphTexturePick.UseVisualStyleBackColor = true;
             this.buttGraphTexturePick.Click += new System.EventHandler(this.buttGraphTexturePick_Click);
@@ -322,7 +322,7 @@
             this.txtGraphTexture.Location = new System.Drawing.Point(73, 125);
             this.txtGraphTexture.Name = "txtGraphTexture";
             this.txtGraphTexture.Size = new System.Drawing.Size(108, 20);
-            this.txtGraphTexture.TabIndex = 22;
+            this.txtGraphTexture.TabIndex = 23;
             this.txtGraphTexture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGraphTexture_KeyDown);
             // 
             // picGraphTexture
@@ -367,7 +367,7 @@
             0});
             this.numStepInterval.Name = "numStepInterval";
             this.numStepInterval.Size = new System.Drawing.Size(58, 20);
-            this.numStepInterval.TabIndex = 18;
+            this.numStepInterval.TabIndex = 19;
             this.numStepInterval.Value = new decimal(new int[] {
             25,
             0,
@@ -391,7 +391,7 @@
             this.checkGraphBorder.Location = new System.Drawing.Point(219, 71);
             this.checkGraphBorder.Name = "checkGraphBorder";
             this.checkGraphBorder.Size = new System.Drawing.Size(84, 17);
-            this.checkGraphBorder.TabIndex = 16;
+            this.checkGraphBorder.TabIndex = 21;
             this.checkGraphBorder.Text = "Draw border";
             this.checkGraphBorder.UseVisualStyleBackColor = true;
             this.checkGraphBorder.CheckedChanged += new System.EventHandler(this.meterOption_ValueChanged);
@@ -406,7 +406,7 @@
             0});
             this.numGraphLineW.Name = "numGraphLineW";
             this.numGraphLineW.Size = new System.Drawing.Size(58, 20);
-            this.numGraphLineW.TabIndex = 15;
+            this.numGraphLineW.TabIndex = 20;
             this.numGraphLineW.Value = new decimal(new int[] {
             1,
             0,
@@ -429,7 +429,7 @@
             this.buttGraphColorPick.Location = new System.Drawing.Point(154, 92);
             this.buttGraphColorPick.Name = "buttGraphColorPick";
             this.buttGraphColorPick.Size = new System.Drawing.Size(27, 23);
-            this.buttGraphColorPick.TabIndex = 13;
+            this.buttGraphColorPick.TabIndex = 22;
             this.buttGraphColorPick.Text = "...";
             this.buttGraphColorPick.UseVisualStyleBackColor = true;
             this.buttGraphColorPick.Click += new System.EventHandler(this.buttGraphColorPick_Click);
@@ -466,7 +466,7 @@
             0});
             this.numGraphStepW.Name = "numGraphStepW";
             this.numGraphStepW.Size = new System.Drawing.Size(58, 20);
-            this.numGraphStepW.TabIndex = 8;
+            this.numGraphStepW.TabIndex = 18;
             this.numGraphStepW.Value = new decimal(new int[] {
             1,
             0,
@@ -494,7 +494,7 @@
             0});
             this.numGraphH.Name = "numGraphH";
             this.numGraphH.Size = new System.Drawing.Size(58, 20);
-            this.numGraphH.TabIndex = 6;
+            this.numGraphH.TabIndex = 17;
             this.numGraphH.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numGraphH.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -517,7 +517,7 @@
             0});
             this.numGraphW.Name = "numGraphW";
             this.numGraphW.Size = new System.Drawing.Size(58, 20);
-            this.numGraphW.TabIndex = 4;
+            this.numGraphW.TabIndex = 16;
             this.numGraphW.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numGraphW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -545,7 +545,7 @@
             this.panelSpin.Location = new System.Drawing.Point(11, 167);
             this.panelSpin.Name = "panelSpin";
             this.panelSpin.Size = new System.Drawing.Size(311, 181);
-            this.panelSpin.TabIndex = 5;
+            this.panelSpin.TabIndex = 16;
             this.panelSpin.Visible = false;
             // 
             // buttLoadSpinnerImg
@@ -553,7 +553,7 @@
             this.buttLoadSpinnerImg.Location = new System.Drawing.Point(251, 20);
             this.buttLoadSpinnerImg.Name = "buttLoadSpinnerImg";
             this.buttLoadSpinnerImg.Size = new System.Drawing.Size(26, 23);
-            this.buttLoadSpinnerImg.TabIndex = 9;
+            this.buttLoadSpinnerImg.TabIndex = 17;
             this.buttLoadSpinnerImg.Text = "...";
             this.buttLoadSpinnerImg.UseVisualStyleBackColor = true;
             this.buttLoadSpinnerImg.Click += new System.EventHandler(this.buttLoadSpinnerImg_Click);
@@ -563,7 +563,7 @@
             this.txtSpinnerImage.Location = new System.Drawing.Point(107, 22);
             this.txtSpinnerImage.Name = "txtSpinnerImage";
             this.txtSpinnerImage.Size = new System.Drawing.Size(138, 20);
-            this.txtSpinnerImage.TabIndex = 8;
+            this.txtSpinnerImage.TabIndex = 16;
             this.txtSpinnerImage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSpinnerImage_KeyDown);
             // 
             // picSpinner
@@ -590,7 +590,7 @@
             -2147483648});
             this.numSpinMax.Name = "numSpinMax";
             this.numSpinMax.Size = new System.Drawing.Size(65, 20);
-            this.numSpinMax.TabIndex = 5;
+            this.numSpinMax.TabIndex = 19;
             this.numSpinMax.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numSpinMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -609,7 +609,7 @@
             -2147483648});
             this.numSpinMin.Name = "numSpinMin";
             this.numSpinMin.Size = new System.Drawing.Size(65, 20);
-            this.numSpinMin.TabIndex = 6;
+            this.numSpinMin.TabIndex = 18;
             this.numSpinMin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numSpinMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -663,7 +663,7 @@
             this.buttChooseTextFile.Location = new System.Drawing.Point(276, 74);
             this.buttChooseTextFile.Name = "buttChooseTextFile";
             this.buttChooseTextFile.Size = new System.Drawing.Size(26, 23);
-            this.buttChooseTextFile.TabIndex = 18;
+            this.buttChooseTextFile.TabIndex = 12;
             this.buttChooseTextFile.Text = "...";
             this.buttChooseTextFile.UseVisualStyleBackColor = true;
             this.buttChooseTextFile.Visible = false;
@@ -684,7 +684,7 @@
             this.panelProgressBar.Location = new System.Drawing.Point(11, 167);
             this.panelProgressBar.Name = "panelProgressBar";
             this.panelProgressBar.Size = new System.Drawing.Size(311, 181);
-            this.panelProgressBar.TabIndex = 10;
+            this.panelProgressBar.TabIndex = 16;
             this.panelProgressBar.Visible = false;
             // 
             // comboProgressVector
@@ -699,7 +699,7 @@
             this.comboProgressVector.Location = new System.Drawing.Point(100, 140);
             this.comboProgressVector.Name = "comboProgressVector";
             this.comboProgressVector.Size = new System.Drawing.Size(170, 21);
-            this.comboProgressVector.TabIndex = 19;
+            this.comboProgressVector.TabIndex = 20;
             this.comboProgressVector.SelectedIndexChanged += new System.EventHandler(this.meterOption_ValueChanged);
             // 
             // label21
@@ -734,7 +734,7 @@
             this.buttLoadForeground.Location = new System.Drawing.Point(244, 42);
             this.buttLoadForeground.Name = "buttLoadForeground";
             this.buttLoadForeground.Size = new System.Drawing.Size(26, 23);
-            this.buttLoadForeground.TabIndex = 15;
+            this.buttLoadForeground.TabIndex = 19;
             this.buttLoadForeground.Text = "...";
             this.buttLoadForeground.UseVisualStyleBackColor = true;
             this.buttLoadForeground.Click += new System.EventHandler(this.buttLoadForeground_Click);
@@ -744,7 +744,7 @@
             this.txtForeground.Location = new System.Drawing.Point(100, 44);
             this.txtForeground.Name = "txtForeground";
             this.txtForeground.Size = new System.Drawing.Size(138, 20);
-            this.txtForeground.TabIndex = 14;
+            this.txtForeground.TabIndex = 18;
             this.txtForeground.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
             // label20
@@ -761,7 +761,7 @@
             this.buttLoadBackground.Location = new System.Drawing.Point(244, 16);
             this.buttLoadBackground.Name = "buttLoadBackground";
             this.buttLoadBackground.Size = new System.Drawing.Size(26, 23);
-            this.buttLoadBackground.TabIndex = 12;
+            this.buttLoadBackground.TabIndex = 17;
             this.buttLoadBackground.Text = "...";
             this.buttLoadBackground.UseVisualStyleBackColor = true;
             this.buttLoadBackground.Click += new System.EventHandler(this.buttLoadBackground_Click);
@@ -771,7 +771,7 @@
             this.txtBackground.Location = new System.Drawing.Point(100, 18);
             this.txtBackground.Name = "txtBackground";
             this.txtBackground.Size = new System.Drawing.Size(138, 20);
-            this.txtBackground.TabIndex = 11;
+            this.txtBackground.TabIndex = 16;
             this.txtBackground.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
             // label19
@@ -798,7 +798,7 @@
             -2147483648});
             this.numTopMargin.Name = "numTopMargin";
             this.numTopMargin.Size = new System.Drawing.Size(81, 20);
-            this.numTopMargin.TabIndex = 17;
+            this.numTopMargin.TabIndex = 9;
             this.numTopMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numTopMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -819,7 +819,7 @@
             this.comboMWheelAction.Location = new System.Drawing.Point(19, 497);
             this.comboMWheelAction.Name = "comboMWheelAction";
             this.comboMWheelAction.Size = new System.Drawing.Size(302, 21);
-            this.comboMWheelAction.TabIndex = 15;
+            this.comboMWheelAction.TabIndex = 29;
             this.comboMWheelAction.SelectedIndexChanged += new System.EventHandler(this.meterOption_ValueChanged);
             // 
             // label32
@@ -841,7 +841,7 @@
             this.panelText.Location = new System.Drawing.Point(11, 167);
             this.panelText.Name = "panelText";
             this.panelText.Size = new System.Drawing.Size(311, 181);
-            this.panelText.TabIndex = 13;
+            this.panelText.TabIndex = 16;
             this.panelText.Visible = false;
             // 
             // txtPostfix
@@ -849,7 +849,7 @@
             this.txtPostfix.Location = new System.Drawing.Point(73, 52);
             this.txtPostfix.Name = "txtPostfix";
             this.txtPostfix.Size = new System.Drawing.Size(186, 20);
-            this.txtPostfix.TabIndex = 4;
+            this.txtPostfix.TabIndex = 17;
             this.txtPostfix.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             this.txtPostfix.Leave += new System.EventHandler(this.meterOption_ValueChanged);
             // 
@@ -868,7 +868,7 @@
             this.checkOnlyValue.Location = new System.Drawing.Point(74, 94);
             this.checkOnlyValue.Name = "checkOnlyValue";
             this.checkOnlyValue.Size = new System.Drawing.Size(138, 17);
-            this.checkOnlyValue.TabIndex = 2;
+            this.checkOnlyValue.TabIndex = 18;
             this.checkOnlyValue.Text = "Ignore prefix and postfix";
             this.checkOnlyValue.UseVisualStyleBackColor = true;
             this.checkOnlyValue.CheckedChanged += new System.EventHandler(this.meterOption_ValueChanged);
@@ -878,7 +878,7 @@
             this.txtPrefix.Location = new System.Drawing.Point(73, 26);
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(186, 20);
-            this.txtPrefix.TabIndex = 1;
+            this.txtPrefix.TabIndex = 16;
             this.txtPrefix.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             this.txtPrefix.Leave += new System.EventHandler(this.meterOption_ValueChanged);
             // 
@@ -901,7 +901,7 @@
             this.panelImageSequence.Location = new System.Drawing.Point(11, 167);
             this.panelImageSequence.Name = "panelImageSequence";
             this.panelImageSequence.Size = new System.Drawing.Size(311, 181);
-            this.panelImageSequence.TabIndex = 11;
+            this.panelImageSequence.TabIndex = 16;
             this.panelImageSequence.Visible = false;
             // 
             // buttImgSeqReload
@@ -909,7 +909,7 @@
             this.buttImgSeqReload.Location = new System.Drawing.Point(184, 49);
             this.buttImgSeqReload.Name = "buttImgSeqReload";
             this.buttImgSeqReload.Size = new System.Drawing.Size(94, 23);
-            this.buttImgSeqReload.TabIndex = 3;
+            this.buttImgSeqReload.TabIndex = 18;
             this.buttImgSeqReload.Text = "Reload";
             this.buttImgSeqReload.UseVisualStyleBackColor = true;
             this.buttImgSeqReload.Click += new System.EventHandler(this.buttImgSeqReload_Click);
@@ -936,7 +936,7 @@
             this.buttAddImages.Location = new System.Drawing.Point(184, 19);
             this.buttAddImages.Name = "buttAddImages";
             this.buttAddImages.Size = new System.Drawing.Size(94, 23);
-            this.buttAddImages.TabIndex = 1;
+            this.buttAddImages.TabIndex = 17;
             this.buttAddImages.Text = "Add images";
             this.buttAddImages.UseVisualStyleBackColor = true;
             this.buttAddImages.Click += new System.EventHandler(this.buttAddImages_Click);
@@ -947,7 +947,7 @@
             this.buttOpenImgSeqDir.Location = new System.Drawing.Point(21, 19);
             this.buttOpenImgSeqDir.Name = "buttOpenImgSeqDir";
             this.buttOpenImgSeqDir.Size = new System.Drawing.Size(157, 23);
-            this.buttOpenImgSeqDir.TabIndex = 0;
+            this.buttOpenImgSeqDir.TabIndex = 16;
             this.buttOpenImgSeqDir.Text = "Sequence is empty";
             this.buttOpenImgSeqDir.UseVisualStyleBackColor = true;
             this.buttOpenImgSeqDir.Click += new System.EventHandler(this.buttOpenImgSeqDir_Click);
@@ -958,7 +958,7 @@
             this.comboDataSubsource.Location = new System.Drawing.Point(84, 76);
             this.comboDataSubsource.Name = "comboDataSubsource";
             this.comboDataSubsource.Size = new System.Drawing.Size(186, 21);
-            this.comboDataSubsource.TabIndex = 9;
+            this.comboDataSubsource.TabIndex = 11;
             this.comboDataSubsource.SelectedIndexChanged += new System.EventHandler(this.comboDataSubsource_SelectedIndexChanged);
             this.comboDataSubsource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -986,7 +986,7 @@
             0});
             this.numZoom.Name = "numZoom";
             this.numZoom.Size = new System.Drawing.Size(65, 20);
-            this.numZoom.TabIndex = 7;
+            this.numZoom.TabIndex = 26;
             this.numZoom.Value = new decimal(new int[] {
             100,
             0,
@@ -1025,7 +1025,7 @@
             this.comboDragFileAction.Location = new System.Drawing.Point(19, 456);
             this.comboDragFileAction.Name = "comboDragFileAction";
             this.comboDragFileAction.Size = new System.Drawing.Size(302, 21);
-            this.comboDragFileAction.TabIndex = 3;
+            this.comboDragFileAction.TabIndex = 28;
             this.comboDragFileAction.SelectedIndexChanged += new System.EventHandler(this.comboDragFileAction_SelectedIndexChanged);
             this.comboDragFileAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             this.comboDragFileAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
@@ -1049,7 +1049,7 @@
             this.comboClickAction.Location = new System.Drawing.Point(19, 415);
             this.comboClickAction.Name = "comboClickAction";
             this.comboClickAction.Size = new System.Drawing.Size(302, 21);
-            this.comboClickAction.TabIndex = 3;
+            this.comboClickAction.TabIndex = 27;
             this.comboClickAction.SelectedIndexChanged += new System.EventHandler(this.comboClickAction_SelectedIndexChanged);
             this.comboClickAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             this.comboClickAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
@@ -1076,7 +1076,7 @@
             this.comboVisualization.Location = new System.Drawing.Point(84, 140);
             this.comboVisualization.Name = "comboVisualization";
             this.comboVisualization.Size = new System.Drawing.Size(186, 21);
-            this.comboVisualization.TabIndex = 3;
+            this.comboVisualization.TabIndex = 15;
             this.comboVisualization.SelectedIndexChanged += new System.EventHandler(this.comboVisualization_SelectedIndexChanged);
             // 
             // label5
@@ -1111,7 +1111,7 @@
             this.comboDataSource.Location = new System.Drawing.Point(84, 49);
             this.comboDataSource.Name = "comboDataSource";
             this.comboDataSource.Size = new System.Drawing.Size(186, 21);
-            this.comboDataSource.TabIndex = 3;
+            this.comboDataSource.TabIndex = 10;
             this.comboDataSource.SelectedIndexChanged += new System.EventHandler(this.comboDataSource_SelectedIndexChanged);
             // 
             // label4
@@ -1138,7 +1138,7 @@
             -2147483648});
             this.numDataMax.Name = "numDataMax";
             this.numDataMax.Size = new System.Drawing.Size(81, 20);
-            this.numDataMax.TabIndex = 2;
+            this.numDataMax.TabIndex = 14;
             this.numDataMax.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numDataMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -1157,7 +1157,7 @@
             -2147483648});
             this.numDataMin.Name = "numDataMin";
             this.numDataMin.Size = new System.Drawing.Size(81, 20);
-            this.numDataMin.TabIndex = 2;
+            this.numDataMin.TabIndex = 13;
             this.numDataMin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numDataMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -1185,7 +1185,7 @@
             -2147483648});
             this.numLeftMargin.Name = "numLeftMargin";
             this.numLeftMargin.Size = new System.Drawing.Size(81, 20);
-            this.numLeftMargin.TabIndex = 2;
+            this.numLeftMargin.TabIndex = 8;
             this.numLeftMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numLeftMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
@@ -1221,7 +1221,7 @@
             this.buttDelete.Location = new System.Drawing.Point(9, 324);
             this.buttDelete.Name = "buttDelete";
             this.buttDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttDelete.TabIndex = 5;
+            this.buttDelete.TabIndex = 4;
             this.buttDelete.Text = "Delete";
             this.buttDelete.UseVisualStyleBackColor = true;
             this.buttDelete.Click += new System.EventHandler(this.buttDelete_Click);
@@ -1232,7 +1232,7 @@
             this.buttMeterSaveChanges.Location = new System.Drawing.Point(9, 483);
             this.buttMeterSaveChanges.Name = "buttMeterSaveChanges";
             this.buttMeterSaveChanges.Size = new System.Drawing.Size(196, 52);
-            this.buttMeterSaveChanges.TabIndex = 6;
+            this.buttMeterSaveChanges.TabIndex = 7;
             this.buttMeterSaveChanges.Text = "Save Changes";
             this.buttMeterSaveChanges.UseVisualStyleBackColor = true;
             this.buttMeterSaveChanges.Click += new System.EventHandler(this.buttMeterSaveChanges_Click);
@@ -1242,7 +1242,7 @@
             this.buttMoveDown.Location = new System.Drawing.Point(130, 324);
             this.buttMoveDown.Name = "buttMoveDown";
             this.buttMoveDown.Size = new System.Drawing.Size(75, 23);
-            this.buttMoveDown.TabIndex = 7;
+            this.buttMoveDown.TabIndex = 6;
             this.buttMoveDown.Text = "Move Down";
             this.buttMoveDown.UseVisualStyleBackColor = true;
             this.buttMoveDown.Click += new System.EventHandler(this.buttMoveDown_Click);
@@ -1252,7 +1252,7 @@
             this.buttMoveUp.Location = new System.Drawing.Point(130, 295);
             this.buttMoveUp.Name = "buttMoveUp";
             this.buttMoveUp.Size = new System.Drawing.Size(75, 23);
-            this.buttMoveUp.TabIndex = 8;
+            this.buttMoveUp.TabIndex = 5;
             this.buttMoveUp.Text = "Move Up";
             this.buttMoveUp.UseVisualStyleBackColor = true;
             this.buttMoveUp.Click += new System.EventHandler(this.buttMoveUp_Click);
@@ -1262,7 +1262,7 @@
             this.buttAdd.Location = new System.Drawing.Point(9, 295);
             this.buttAdd.Name = "buttAdd";
             this.buttAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttAdd.TabIndex = 9;
+            this.buttAdd.TabIndex = 3;
             this.buttAdd.Text = "Add";
             this.buttAdd.UseVisualStyleBackColor = true;
             this.buttAdd.Click += new System.EventHandler(this.buttAdd_Click);
@@ -1273,7 +1273,7 @@
             this.listMeters.Location = new System.Drawing.Point(6, 6);
             this.listMeters.Name = "listMeters";
             this.listMeters.Size = new System.Drawing.Size(199, 277);
-            this.listMeters.TabIndex = 4;
+            this.listMeters.TabIndex = 2;
             this.listMeters.SelectedIndexChanged += new System.EventHandler(this.listMeters_SelectedIndexChanged);
             this.listMeters.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listMeters_KeyDown);
             // 
@@ -1352,7 +1352,7 @@
             this.trackUpdate.Maximum = 3;
             this.trackUpdate.Name = "trackUpdate";
             this.trackUpdate.Size = new System.Drawing.Size(188, 45);
-            this.trackUpdate.TabIndex = 15;
+            this.trackUpdate.TabIndex = 17;
             this.trackUpdate.Scroll += new System.EventHandler(this.trackUpdate_Scroll);
             // 
             // numFixedH
@@ -1365,7 +1365,7 @@
             0});
             this.numFixedH.Name = "numFixedH";
             this.numFixedH.Size = new System.Drawing.Size(59, 20);
-            this.numFixedH.TabIndex = 14;
+            this.numFixedH.TabIndex = 5;
             this.numFixedH.Value = new decimal(new int[] {
             100,
             0,
@@ -1399,7 +1399,7 @@
             this.comboFont.Location = new System.Drawing.Point(337, 25);
             this.comboFont.Name = "comboFont";
             this.comboFont.Size = new System.Drawing.Size(181, 21);
-            this.comboFont.TabIndex = 12;
+            this.comboFont.TabIndex = 7;
             this.comboFont.SelectedIndexChanged += new System.EventHandler(this.generalOption_ValueChanged);
             // 
             // comboVertAlign
@@ -1413,7 +1413,7 @@
             this.comboVertAlign.Location = new System.Drawing.Point(118, 235);
             this.comboVertAlign.Name = "comboVertAlign";
             this.comboVertAlign.Size = new System.Drawing.Size(121, 21);
-            this.comboVertAlign.TabIndex = 12;
+            this.comboVertAlign.TabIndex = 13;
             this.comboVertAlign.SelectedIndexChanged += new System.EventHandler(this.generalOption_ValueChanged);
             // 
             // numOpacity
@@ -1421,7 +1421,7 @@
             this.numOpacity.Location = new System.Drawing.Point(118, 52);
             this.numOpacity.Name = "numOpacity";
             this.numOpacity.Size = new System.Drawing.Size(59, 20);
-            this.numOpacity.TabIndex = 11;
+            this.numOpacity.TabIndex = 3;
             this.numOpacity.Value = new decimal(new int[] {
             1,
             0,
@@ -1446,7 +1446,7 @@
             0});
             this.numFontSize.Name = "numFontSize";
             this.numFontSize.Size = new System.Drawing.Size(59, 20);
-            this.numFontSize.TabIndex = 11;
+            this.numFontSize.TabIndex = 8;
             this.numFontSize.Value = new decimal(new int[] {
             12,
             0,
@@ -1470,7 +1470,7 @@
             0});
             this.numRefresh.Name = "numRefresh";
             this.numRefresh.Size = new System.Drawing.Size(59, 20);
-            this.numRefresh.TabIndex = 11;
+            this.numRefresh.TabIndex = 2;
             this.numRefresh.Value = new decimal(new int[] {
             50,
             0,
@@ -1484,7 +1484,7 @@
             this.buttPickBackColor.Location = new System.Drawing.Point(199, 112);
             this.buttPickBackColor.Name = "buttPickBackColor";
             this.buttPickBackColor.Size = new System.Drawing.Size(27, 23);
-            this.buttPickBackColor.TabIndex = 10;
+            this.buttPickBackColor.TabIndex = 4;
             this.buttPickBackColor.Text = "...";
             this.buttPickBackColor.UseVisualStyleBackColor = true;
             this.buttPickBackColor.Click += new System.EventHandler(this.buttPickBackColor_Click);
@@ -1504,7 +1504,7 @@
             this.checkFontStrikeout.Location = new System.Drawing.Point(337, 164);
             this.checkFontStrikeout.Name = "checkFontStrikeout";
             this.checkFontStrikeout.Size = new System.Drawing.Size(68, 17);
-            this.checkFontStrikeout.TabIndex = 8;
+            this.checkFontStrikeout.TabIndex = 12;
             this.checkFontStrikeout.Text = "Strikeout";
             this.checkFontStrikeout.UseVisualStyleBackColor = true;
             this.checkFontStrikeout.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1516,7 +1516,7 @@
             this.checkFontUnderline.Location = new System.Drawing.Point(337, 141);
             this.checkFontUnderline.Name = "checkFontUnderline";
             this.checkFontUnderline.Size = new System.Drawing.Size(71, 17);
-            this.checkFontUnderline.TabIndex = 8;
+            this.checkFontUnderline.TabIndex = 11;
             this.checkFontUnderline.Text = "Underline";
             this.checkFontUnderline.UseVisualStyleBackColor = true;
             this.checkFontUnderline.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1528,7 +1528,7 @@
             this.checkFontItalic.Location = new System.Drawing.Point(337, 118);
             this.checkFontItalic.Name = "checkFontItalic";
             this.checkFontItalic.Size = new System.Drawing.Size(48, 17);
-            this.checkFontItalic.TabIndex = 8;
+            this.checkFontItalic.TabIndex = 10;
             this.checkFontItalic.Text = "Italic";
             this.checkFontItalic.UseVisualStyleBackColor = true;
             this.checkFontItalic.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1540,7 +1540,7 @@
             this.checkFontBold.Location = new System.Drawing.Point(337, 95);
             this.checkFontBold.Name = "checkFontBold";
             this.checkFontBold.Size = new System.Drawing.Size(51, 17);
-            this.checkFontBold.TabIndex = 8;
+            this.checkFontBold.TabIndex = 9;
             this.checkFontBold.Text = "Bold";
             this.checkFontBold.UseVisualStyleBackColor = true;
             this.checkFontBold.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1551,7 +1551,7 @@
             this.checkTransparent.Location = new System.Drawing.Point(337, 261);
             this.checkTransparent.Name = "checkTransparent";
             this.checkTransparent.Size = new System.Drawing.Size(143, 17);
-            this.checkTransparent.TabIndex = 8;
+            this.checkTransparent.TabIndex = 16;
             this.checkTransparent.Text = "Transparent background";
             this.checkTransparent.UseVisualStyleBackColor = true;
             this.checkTransparent.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1562,7 +1562,7 @@
             this.checkRunAtStartup.Location = new System.Drawing.Point(337, 215);
             this.checkRunAtStartup.Name = "checkRunAtStartup";
             this.checkRunAtStartup.Size = new System.Drawing.Size(199, 17);
-            this.checkRunAtStartup.TabIndex = 8;
+            this.checkRunAtStartup.TabIndex = 14;
             this.checkRunAtStartup.Text = "Start SysMana when Windows starts";
             this.checkRunAtStartup.UseVisualStyleBackColor = true;
             this.checkRunAtStartup.CheckedChanged += new System.EventHandler(this.checkRunAtStartup_CheckedChanged);
@@ -1573,7 +1573,7 @@
             this.checkTopMost.Location = new System.Drawing.Point(337, 238);
             this.checkTopMost.Name = "checkTopMost";
             this.checkTopMost.Size = new System.Drawing.Size(92, 17);
-            this.checkTopMost.TabIndex = 8;
+            this.checkTopMost.TabIndex = 15;
             this.checkTopMost.Text = "Always on top";
             this.checkTopMost.UseVisualStyleBackColor = true;
             this.checkTopMost.CheckedChanged += new System.EventHandler(this.generalOption_ValueChanged);
@@ -1584,7 +1584,7 @@
             this.buttOptionsSaveChanges.Location = new System.Drawing.Point(21, 468);
             this.buttOptionsSaveChanges.Name = "buttOptionsSaveChanges";
             this.buttOptionsSaveChanges.Size = new System.Drawing.Size(196, 52);
-            this.buttOptionsSaveChanges.TabIndex = 7;
+            this.buttOptionsSaveChanges.TabIndex = 19;
             this.buttOptionsSaveChanges.Text = "Save Changes";
             this.buttOptionsSaveChanges.UseVisualStyleBackColor = true;
             this.buttOptionsSaveChanges.Click += new System.EventHandler(this.buttOptionsSaveChanges_Click);
