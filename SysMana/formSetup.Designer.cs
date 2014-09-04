@@ -33,6 +33,30 @@
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabMeters = new System.Windows.Forms.TabPage();
             this.groupMeter = new System.Windows.Forms.GroupBox();
+            this.buttChooseTextFile = new System.Windows.Forms.Button();
+            this.numTopMargin = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.comboMWheelAction = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.comboDataSubsource = new System.Windows.Forms.ComboBox();
+            this.lblDataSubsource = new System.Windows.Forms.Label();
+            this.numZoom = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblZoom = new System.Windows.Forms.Label();
+            this.comboDragFileAction = new System.Windows.Forms.ComboBox();
+            this.comboClickAction = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboVisualization = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboDataSource = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numDataMax = new System.Windows.Forms.NumericUpDown();
+            this.numDataMin = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.numLeftMargin = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelGraph = new System.Windows.Forms.Panel();
             this.rdbGraphTextureBack = new System.Windows.Forms.RadioButton();
             this.rdbGraphTextureFront = new System.Windows.Forms.RadioButton();
@@ -66,7 +90,6 @@
             this.lblSpinMax = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblSpinMin = new System.Windows.Forms.Label();
-            this.buttChooseTextFile = new System.Windows.Forms.Button();
             this.panelProgressBar = new System.Windows.Forms.Panel();
             this.comboProgressVector = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -78,10 +101,6 @@
             this.buttLoadBackground = new System.Windows.Forms.Button();
             this.txtBackground = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.numTopMargin = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.comboMWheelAction = new System.Windows.Forms.ComboBox();
-            this.label32 = new System.Windows.Forms.Label();
             this.panelText = new System.Windows.Forms.Panel();
             this.txtPostfix = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -94,25 +113,6 @@
             this.lblImgSequence = new System.Windows.Forms.Label();
             this.buttAddImages = new System.Windows.Forms.Button();
             this.buttOpenImgSeqDir = new System.Windows.Forms.Button();
-            this.comboDataSubsource = new System.Windows.Forms.ComboBox();
-            this.lblDataSubsource = new System.Windows.Forms.Label();
-            this.numZoom = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblZoom = new System.Windows.Forms.Label();
-            this.comboDragFileAction = new System.Windows.Forms.ComboBox();
-            this.comboClickAction = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboVisualization = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboDataSource = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numDataMax = new System.Windows.Forms.NumericUpDown();
-            this.numDataMin = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.numLeftMargin = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.buttDelete = new System.Windows.Forms.Button();
             this.buttMeterSaveChanges = new System.Windows.Forms.Button();
             this.buttMoveDown = new System.Windows.Forms.Button();
@@ -158,6 +158,11 @@
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDataMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).BeginInit();
             this.panelGraph.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picGraphTexture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStepInterval)).BeginInit();
@@ -173,13 +178,8 @@
             this.panelProgressBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picForeground)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).BeginInit();
             this.panelText.SuspendLayout();
             this.panelImageSequence.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numZoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDataMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).BeginInit();
             this.tabGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).BeginInit();
@@ -254,6 +254,329 @@
             this.groupMeter.TabIndex = 10;
             this.groupMeter.TabStop = false;
             this.groupMeter.Text = "No meter selected";
+            // 
+            // buttChooseTextFile
+            // 
+            this.buttChooseTextFile.Location = new System.Drawing.Point(276, 74);
+            this.buttChooseTextFile.Name = "buttChooseTextFile";
+            this.buttChooseTextFile.Size = new System.Drawing.Size(26, 23);
+            this.buttChooseTextFile.TabIndex = 12;
+            this.buttChooseTextFile.Text = "...";
+            this.buttChooseTextFile.UseVisualStyleBackColor = true;
+            this.buttChooseTextFile.Visible = false;
+            this.buttChooseTextFile.Click += new System.EventHandler(this.buttChooseTextFile_Click);
+            // 
+            // numTopMargin
+            // 
+            this.numTopMargin.Location = new System.Drawing.Point(240, 19);
+            this.numTopMargin.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numTopMargin.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numTopMargin.Name = "numTopMargin";
+            this.numTopMargin.Size = new System.Drawing.Size(81, 20);
+            this.numTopMargin.TabIndex = 9;
+            this.numTopMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            this.numTopMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(171, 21);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(63, 13);
+            this.label35.TabIndex = 16;
+            this.label35.Text = "Top margin:";
+            // 
+            // comboMWheelAction
+            // 
+            this.comboMWheelAction.FormattingEnabled = true;
+            this.comboMWheelAction.Items.AddRange(new object[] {
+            "Change system volume"});
+            this.comboMWheelAction.Location = new System.Drawing.Point(19, 497);
+            this.comboMWheelAction.Name = "comboMWheelAction";
+            this.comboMWheelAction.Size = new System.Drawing.Size(302, 21);
+            this.comboMWheelAction.TabIndex = 29;
+            this.comboMWheelAction.SelectedIndexChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(16, 480);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(105, 13);
+            this.label32.TabIndex = 14;
+            this.label32.Text = "Mouse wheel action:";
+            // 
+            // comboDataSubsource
+            // 
+            this.comboDataSubsource.FormattingEnabled = true;
+            this.comboDataSubsource.Location = new System.Drawing.Point(84, 76);
+            this.comboDataSubsource.Name = "comboDataSubsource";
+            this.comboDataSubsource.Size = new System.Drawing.Size(186, 21);
+            this.comboDataSubsource.TabIndex = 11;
+            this.comboDataSubsource.SelectedIndexChanged += new System.EventHandler(this.comboDataSubsource_SelectedIndexChanged);
+            this.comboDataSubsource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            // 
+            // lblDataSubsource
+            // 
+            this.lblDataSubsource.Location = new System.Drawing.Point(6, 76);
+            this.lblDataSubsource.Name = "lblDataSubsource";
+            this.lblDataSubsource.Size = new System.Drawing.Size(72, 21);
+            this.lblDataSubsource.TabIndex = 8;
+            this.lblDataSubsource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numZoom
+            // 
+            this.numZoom.Enabled = false;
+            this.numZoom.Location = new System.Drawing.Point(89, 364);
+            this.numZoom.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numZoom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numZoom.Name = "numZoom";
+            this.numZoom.Size = new System.Drawing.Size(65, 20);
+            this.numZoom.TabIndex = 26;
+            this.numZoom.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numZoom.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Enabled = false;
+            this.label18.Location = new System.Drawing.Point(160, 366);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(15, 13);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "%";
+            // 
+            // lblZoom
+            // 
+            this.lblZoom.AutoSize = true;
+            this.lblZoom.Enabled = false;
+            this.lblZoom.Location = new System.Drawing.Point(16, 366);
+            this.lblZoom.Name = "lblZoom";
+            this.lblZoom.Size = new System.Drawing.Size(67, 13);
+            this.lblZoom.TabIndex = 6;
+            this.lblZoom.Text = "Image zoom:";
+            // 
+            // comboDragFileAction
+            // 
+            this.comboDragFileAction.FormattingEnabled = true;
+            this.comboDragFileAction.Items.AddRange(new object[] {
+            "Run",
+            "Copy to directory...",
+            "Move to directory...",
+            "Send to Recycle Bin"});
+            this.comboDragFileAction.Location = new System.Drawing.Point(19, 456);
+            this.comboDragFileAction.Name = "comboDragFileAction";
+            this.comboDragFileAction.Size = new System.Drawing.Size(302, 21);
+            this.comboDragFileAction.TabIndex = 28;
+            this.comboDragFileAction.SelectedIndexChanged += new System.EventHandler(this.comboDragFileAction_SelectedIndexChanged);
+            this.comboDragFileAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            this.comboDragFileAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // comboClickAction
+            // 
+            this.comboClickAction.FormattingEnabled = true;
+            this.comboClickAction.Items.AddRange(new object[] {
+            "Open recycle bin",
+            "Open control panel",
+            "Open task manager",
+            "Open mobility center",
+            "Open power options",
+            "Open volume mixer",
+            "Popup volume control",
+            "Popup WLAN connections",
+            "Launch program/file...",
+            "Launch web page...",
+            "Change system volume (Vertical meter)",
+            "Change system volume (Horizontal meter)"});
+            this.comboClickAction.Location = new System.Drawing.Point(19, 415);
+            this.comboClickAction.Name = "comboClickAction";
+            this.comboClickAction.Size = new System.Drawing.Size(302, 21);
+            this.comboClickAction.TabIndex = 27;
+            this.comboClickAction.SelectedIndexChanged += new System.EventHandler(this.comboClickAction_SelectedIndexChanged);
+            this.comboClickAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            this.comboClickAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(16, 439);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(126, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Drag and drop file action:";
+            // 
+            // comboVisualization
+            // 
+            this.comboVisualization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVisualization.FormattingEnabled = true;
+            this.comboVisualization.Items.AddRange(new object[] {
+            "Text",
+            "Spinner",
+            "Progress bar",
+            "Image sequence",
+            "Graph"});
+            this.comboVisualization.Location = new System.Drawing.Point(84, 140);
+            this.comboVisualization.Name = "comboVisualization";
+            this.comboVisualization.Size = new System.Drawing.Size(186, 21);
+            this.comboVisualization.TabIndex = 15;
+            this.comboVisualization.SelectedIndexChanged += new System.EventHandler(this.comboVisualization_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 399);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Click action:";
+            // 
+            // comboDataSource
+            // 
+            this.comboDataSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDataSource.FormattingEnabled = true;
+            this.comboDataSource.Items.AddRange(new object[] {
+            "CPU usage",
+            "Available memory",
+            "Used memory",
+            "Available disk space",
+            "Used disk space",
+            "Recycle bin file count",
+            "Recycle bin size",
+            "Battery percent remaining",
+            "Battery minutes remaining",
+            "Download speed",
+            "Upload speed",
+            "Wireless signal strength",
+            "System volume",
+            "Audio peak level",
+            "Text file"});
+            this.comboDataSource.Location = new System.Drawing.Point(84, 49);
+            this.comboDataSource.Name = "comboDataSource";
+            this.comboDataSource.Size = new System.Drawing.Size(186, 21);
+            this.comboDataSource.TabIndex = 10;
+            this.comboDataSource.SelectedIndexChanged += new System.EventHandler(this.comboDataSource_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 143);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Visualization:";
+            // 
+            // numDataMax
+            // 
+            this.numDataMax.Location = new System.Drawing.Point(240, 103);
+            this.numDataMax.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numDataMax.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numDataMax.Name = "numDataMax";
+            this.numDataMax.Size = new System.Drawing.Size(81, 20);
+            this.numDataMax.TabIndex = 14;
+            this.numDataMax.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            this.numDataMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            // 
+            // numDataMin
+            // 
+            this.numDataMin.Location = new System.Drawing.Point(84, 103);
+            this.numDataMin.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numDataMin.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numDataMin.Name = "numDataMin";
+            this.numDataMin.Size = new System.Drawing.Size(81, 20);
+            this.numDataMin.TabIndex = 13;
+            this.numDataMin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            this.numDataMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(172, 105);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(62, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Max. value:";
+            // 
+            // numLeftMargin
+            // 
+            this.numLeftMargin.Location = new System.Drawing.Point(84, 19);
+            this.numLeftMargin.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numLeftMargin.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numLeftMargin.Name = "numLeftMargin";
+            this.numLeftMargin.Size = new System.Drawing.Size(81, 20);
+            this.numLeftMargin.TabIndex = 8;
+            this.numLeftMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            this.numLeftMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(19, 105);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(59, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Min. value:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 52);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Data source:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Left margin:";
             // 
             // panelGraph
             // 
@@ -658,17 +981,6 @@
             this.lblSpinMin.TabIndex = 4;
             this.lblSpinMin.Text = "Min. spin speed:";
             // 
-            // buttChooseTextFile
-            // 
-            this.buttChooseTextFile.Location = new System.Drawing.Point(276, 74);
-            this.buttChooseTextFile.Name = "buttChooseTextFile";
-            this.buttChooseTextFile.Size = new System.Drawing.Size(26, 23);
-            this.buttChooseTextFile.TabIndex = 12;
-            this.buttChooseTextFile.Text = "...";
-            this.buttChooseTextFile.UseVisualStyleBackColor = true;
-            this.buttChooseTextFile.Visible = false;
-            this.buttChooseTextFile.Click += new System.EventHandler(this.buttChooseTextFile_Click);
-            // 
             // panelProgressBar
             // 
             this.panelProgressBar.Controls.Add(this.comboProgressVector);
@@ -695,7 +1007,8 @@
             "Left to right",
             "Right to left",
             "Bottom to top",
-            "Top to bottom"});
+            "Top to bottom",
+            "Radial"});
             this.comboProgressVector.Location = new System.Drawing.Point(100, 140);
             this.comboProgressVector.Name = "comboProgressVector";
             this.comboProgressVector.Size = new System.Drawing.Size(170, 21);
@@ -782,54 +1095,6 @@
             this.label19.Size = new System.Drawing.Size(68, 13);
             this.label19.TabIndex = 10;
             this.label19.Text = "Background:";
-            // 
-            // numTopMargin
-            // 
-            this.numTopMargin.Location = new System.Drawing.Point(240, 19);
-            this.numTopMargin.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numTopMargin.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numTopMargin.Name = "numTopMargin";
-            this.numTopMargin.Size = new System.Drawing.Size(81, 20);
-            this.numTopMargin.TabIndex = 9;
-            this.numTopMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            this.numTopMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(171, 21);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(63, 13);
-            this.label35.TabIndex = 16;
-            this.label35.Text = "Top margin:";
-            // 
-            // comboMWheelAction
-            // 
-            this.comboMWheelAction.FormattingEnabled = true;
-            this.comboMWheelAction.Items.AddRange(new object[] {
-            "Change system volume"});
-            this.comboMWheelAction.Location = new System.Drawing.Point(19, 497);
-            this.comboMWheelAction.Name = "comboMWheelAction";
-            this.comboMWheelAction.Size = new System.Drawing.Size(302, 21);
-            this.comboMWheelAction.TabIndex = 29;
-            this.comboMWheelAction.SelectedIndexChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(16, 480);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(105, 13);
-            this.label32.TabIndex = 14;
-            this.label32.Text = "Mouse wheel action:";
             // 
             // panelText
             // 
@@ -951,270 +1216,6 @@
             this.buttOpenImgSeqDir.Text = "Sequence is empty";
             this.buttOpenImgSeqDir.UseVisualStyleBackColor = true;
             this.buttOpenImgSeqDir.Click += new System.EventHandler(this.buttOpenImgSeqDir_Click);
-            // 
-            // comboDataSubsource
-            // 
-            this.comboDataSubsource.FormattingEnabled = true;
-            this.comboDataSubsource.Location = new System.Drawing.Point(84, 76);
-            this.comboDataSubsource.Name = "comboDataSubsource";
-            this.comboDataSubsource.Size = new System.Drawing.Size(186, 21);
-            this.comboDataSubsource.TabIndex = 11;
-            this.comboDataSubsource.SelectedIndexChanged += new System.EventHandler(this.comboDataSubsource_SelectedIndexChanged);
-            this.comboDataSubsource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            // 
-            // lblDataSubsource
-            // 
-            this.lblDataSubsource.Location = new System.Drawing.Point(6, 76);
-            this.lblDataSubsource.Name = "lblDataSubsource";
-            this.lblDataSubsource.Size = new System.Drawing.Size(72, 21);
-            this.lblDataSubsource.TabIndex = 8;
-            this.lblDataSubsource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numZoom
-            // 
-            this.numZoom.Enabled = false;
-            this.numZoom.Location = new System.Drawing.Point(89, 364);
-            this.numZoom.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numZoom.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numZoom.Name = "numZoom";
-            this.numZoom.Size = new System.Drawing.Size(65, 20);
-            this.numZoom.TabIndex = 26;
-            this.numZoom.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numZoom.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Enabled = false;
-            this.label18.Location = new System.Drawing.Point(160, 366);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(15, 13);
-            this.label18.TabIndex = 6;
-            this.label18.Text = "%";
-            // 
-            // lblZoom
-            // 
-            this.lblZoom.AutoSize = true;
-            this.lblZoom.Enabled = false;
-            this.lblZoom.Location = new System.Drawing.Point(16, 366);
-            this.lblZoom.Name = "lblZoom";
-            this.lblZoom.Size = new System.Drawing.Size(67, 13);
-            this.lblZoom.TabIndex = 6;
-            this.lblZoom.Text = "Image zoom:";
-            // 
-            // comboDragFileAction
-            // 
-            this.comboDragFileAction.FormattingEnabled = true;
-            this.comboDragFileAction.Items.AddRange(new object[] {
-            "Run",
-            "Copy to directory...",
-            "Move to directory...",
-            "Send to Recycle Bin"});
-            this.comboDragFileAction.Location = new System.Drawing.Point(19, 456);
-            this.comboDragFileAction.Name = "comboDragFileAction";
-            this.comboDragFileAction.Size = new System.Drawing.Size(302, 21);
-            this.comboDragFileAction.TabIndex = 28;
-            this.comboDragFileAction.SelectedIndexChanged += new System.EventHandler(this.comboDragFileAction_SelectedIndexChanged);
-            this.comboDragFileAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            this.comboDragFileAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
-            // 
-            // comboClickAction
-            // 
-            this.comboClickAction.FormattingEnabled = true;
-            this.comboClickAction.Items.AddRange(new object[] {
-            "Open recycle bin",
-            "Open control panel",
-            "Open task manager",
-            "Open mobility center",
-            "Open power options",
-            "Open volume mixer",
-            "Popup volume control",
-            "Popup WLAN connections",
-            "Launch program/file...",
-            "Launch web page...",
-            "Change system volume (Vertical meter)",
-            "Change system volume (Horizontal meter)"});
-            this.comboClickAction.Location = new System.Drawing.Point(19, 415);
-            this.comboClickAction.Name = "comboClickAction";
-            this.comboClickAction.Size = new System.Drawing.Size(302, 21);
-            this.comboClickAction.TabIndex = 27;
-            this.comboClickAction.SelectedIndexChanged += new System.EventHandler(this.comboClickAction_SelectedIndexChanged);
-            this.comboClickAction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            this.comboClickAction.Leave += new System.EventHandler(this.meterOption_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 439);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Drag and drop file action:";
-            // 
-            // comboVisualization
-            // 
-            this.comboVisualization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboVisualization.FormattingEnabled = true;
-            this.comboVisualization.Items.AddRange(new object[] {
-            "Text",
-            "Spinner",
-            "Progress bar",
-            "Image sequence",
-            "Graph"});
-            this.comboVisualization.Location = new System.Drawing.Point(84, 140);
-            this.comboVisualization.Name = "comboVisualization";
-            this.comboVisualization.Size = new System.Drawing.Size(186, 21);
-            this.comboVisualization.TabIndex = 15;
-            this.comboVisualization.SelectedIndexChanged += new System.EventHandler(this.comboVisualization_SelectedIndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 399);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Click action:";
-            // 
-            // comboDataSource
-            // 
-            this.comboDataSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDataSource.FormattingEnabled = true;
-            this.comboDataSource.Items.AddRange(new object[] {
-            "CPU usage",
-            "Available memory",
-            "Used memory",
-            "Available disk space",
-            "Used disk space",
-            "Recycle bin file count",
-            "Recycle bin size",
-            "Battery percent remaining",
-            "Battery minutes remaining",
-            "Download speed",
-            "Upload speed",
-            "Wireless signal strength",
-            "System volume",
-            "Audio peak level",
-            "Text file"});
-            this.comboDataSource.Location = new System.Drawing.Point(84, 49);
-            this.comboDataSource.Name = "comboDataSource";
-            this.comboDataSource.Size = new System.Drawing.Size(186, 21);
-            this.comboDataSource.TabIndex = 10;
-            this.comboDataSource.SelectedIndexChanged += new System.EventHandler(this.comboDataSource_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 143);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Visualization:";
-            // 
-            // numDataMax
-            // 
-            this.numDataMax.Location = new System.Drawing.Point(240, 103);
-            this.numDataMax.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.numDataMax.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.numDataMax.Name = "numDataMax";
-            this.numDataMax.Size = new System.Drawing.Size(81, 20);
-            this.numDataMax.TabIndex = 14;
-            this.numDataMax.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            this.numDataMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            // 
-            // numDataMin
-            // 
-            this.numDataMin.Location = new System.Drawing.Point(84, 103);
-            this.numDataMin.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.numDataMin.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.numDataMin.Name = "numDataMin";
-            this.numDataMin.Size = new System.Drawing.Size(81, 20);
-            this.numDataMin.TabIndex = 13;
-            this.numDataMin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            this.numDataMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(172, 105);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(62, 13);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Max. value:";
-            // 
-            // numLeftMargin
-            // 
-            this.numLeftMargin.Location = new System.Drawing.Point(84, 19);
-            this.numLeftMargin.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numLeftMargin.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numLeftMargin.Name = "numLeftMargin";
-            this.numLeftMargin.Size = new System.Drawing.Size(81, 20);
-            this.numLeftMargin.TabIndex = 8;
-            this.numLeftMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
-            this.numLeftMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(19, 105);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 13);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "Min. value:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 52);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Data source:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Left margin:";
             // 
             // buttDelete
             // 
@@ -1680,6 +1681,11 @@
             this.tabMeters.ResumeLayout(false);
             this.groupMeter.ResumeLayout(false);
             this.groupMeter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDataMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).EndInit();
             this.panelGraph.ResumeLayout(false);
             this.panelGraph.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picGraphTexture)).EndInit();
@@ -1698,14 +1704,9 @@
             this.panelProgressBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picForeground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).EndInit();
             this.panelText.ResumeLayout(false);
             this.panelText.PerformLayout();
             this.panelImageSequence.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numZoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDataMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLeftMargin)).EndInit();
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).EndInit();

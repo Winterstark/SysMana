@@ -181,9 +181,9 @@ namespace SysMana
                 case "Text":
                     string output;
                     if (onlyValue)
-                        output = data.ToString();
+                        output = currDataValue.ToString();
                     else
-                        output = prefix + data.ToString() + postfix;
+                        output = prefix + currDataValue.ToString() + postfix;
 
                     SizeF txtSize = gfx.MeasureString(output, font);
                     y += setAlignment(align, (int)txtSize.Height, fixedH);
@@ -221,10 +221,11 @@ namespace SysMana
                     }
                     break;
                 case "Progress bar":
-                    if (!(backgroundImg == null || foregroundImg == null || min == max))
+                    if (!(foregroundImg == null || min == max))
                     {
-                        gfx.DrawImage(backgroundImg, left, y + setAlignment(align, zoomLength(backgroundImg.Height, zoom), fixedH), zoomLength(backgroundImg.Width, zoom), zoomLength(backgroundImg.Height, zoom));
-                        
+                        if (backgroundImg != null)
+                            gfx.DrawImage(backgroundImg, left, y + setAlignment(align, zoomLength(backgroundImg.Height, zoom), fixedH), zoomLength(backgroundImg.Width, zoom), zoomLength(backgroundImg.Height, zoom));
+
                         y += setAlignment(align, zoomLength(foregroundImg.Height, zoom), fixedH);
                         int progress;
 
@@ -246,10 +247,31 @@ namespace SysMana
                                 progress = (int)interpolateData(currDataValue, 0, foregroundImg.Height);
                                 gfx.DrawImage(foregroundImg, new Rectangle(left, y, zoomLength(foregroundImg.Width, zoom), zoomLength(progress, zoom)), new Rectangle(0, 0, foregroundImg.Width, progress), GraphicsUnit.Pixel);
                                 break;
+                            case "Radial":
+                                TextureBrush foreBrush = new TextureBrush(foregroundImg);
+                                progress = (int)interpolateData(currDataValue, 0, Math.Min(foregroundImg.Width, foregroundImg.Height));
+
+                                gfx.TranslateTransform(left, y);
+                                gfx.ScaleTransform((float)zoom / 100, (float)zoom / 100);
+
+                                gfx.FillEllipse(foreBrush, (foregroundImg.Width - progress) / 2, (foregroundImg.Height - progress) / 2, progress, progress);
+                                
+                                gfx.ResetTransform();
+                                foreBrush.Dispose();
+                                break;
+                        }
+                        
+                        if (backgroundImg != null)
+                        {
+                            left += Math.Max(zoomLength(backgroundImg.Width, zoom), zoomLength(foregroundImg.Width, zoom));
+                            this.h = Math.Max(zoomLength(backgroundImg.Height, zoom), zoomLength(foregroundImg.Height, zoom));
+                        }
+                        else
+                        {
+                            left += zoomLength(foregroundImg.Width, zoom);
+                            this.h = zoomLength(foregroundImg.Height, zoom);
                         }
 
-                        left += Math.Max(zoomLength(backgroundImg.Width, zoom), zoomLength(foregroundImg.Width, zoom));
-                        this.h = Math.Max(zoomLength(backgroundImg.Height, zoom), zoomLength(foregroundImg.Height, zoom));
                         h = Math.Max(h, this.h);
                     }
                     break;
