@@ -60,12 +60,17 @@ namespace SysMana
         PerformanceCounter cpuCounter, ramCounter;
         public int TotalRAM;
 
-        DateTime prevWLANCheck, prevFileCheck, prevBinCheck;
-        int prevWLANvalue, prevFileValue, prevBinValue;
+        Dictionary<string, DateTime> prevFileCheck;
+        Dictionary<string, int> prevFileValue;
+        DateTime prevWLANCheck, prevBinCheck;
+        int prevWLANvalue, prevBinValue;
 
 
         public DataSources(List<Meter> meters)
         {
+            prevFileCheck = new Dictionary<string, DateTime>();
+            prevFileValue = new Dictionary<string, int>();
+
             monitor = new NetworkMonitor();
             adapters = monitor.Adapters;
 
@@ -245,19 +250,28 @@ namespace SysMana
                             return -1;
                     }
                 case "Text file":
-                    if (DateTime.Now.Subtract(prevFileCheck).TotalSeconds > 5 && File.Exists(subSource))
+                    if (!prevFileCheck.ContainsKey(subSource))
                     {
-                        prevFileCheck = DateTime.Now;
+                        prevFileCheck.Add(subSource, DateTime.Now.AddDays(-1));
+                        prevFileValue.Add(subSource, -1);
+                    }
+
+                    if (DateTime.Now.Subtract(prevFileCheck[subSource]).TotalSeconds > 5 && File.Exists(subSource))
+                    {
+                        prevFileCheck[subSource] = DateTime.Now;
 
                         StreamReader file = new StreamReader(subSource);
                         string contents = file.ReadLine();
                         file.Close();
 
-                        if (!int.TryParse(contents, out prevFileValue))
-                            prevFileValue = -1;
+                        int temp;
+                        if (!int.TryParse(contents, out temp))
+                            prevFileValue[subSource] = -1;
+                        else
+                            prevFileValue[subSource] = temp;
                     }
 
-                    return prevFileValue;
+                    return prevFileValue[subSource];
                 default:
                     return -1;
             }
