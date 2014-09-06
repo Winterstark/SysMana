@@ -47,7 +47,7 @@ namespace SysMana
 
             listMeters.Items.Clear();
             foreach (Meter meter in meters)
-                listMeters.Items.Add(meter.data);
+                listMeters.Items.Add(meter.Data);
 
             //load system fonts
             comboFont.Items.Clear();
@@ -103,35 +103,35 @@ namespace SysMana
                 buttMeterSaveChanges.Enabled = false;
             else
                 buttMeterSaveChanges.Enabled =
-                    numLeftMargin.Value != meters[listMeters.SelectedIndex].leftMargin ||
-                    numTopMargin.Value != meters[listMeters.SelectedIndex].topMargin ||
-                    numDataMin.Value != meters[listMeters.SelectedIndex].min ||
-                    numDataMax.Value != meters[listMeters.SelectedIndex].max ||
-                    numZoom.Value != meters[listMeters.SelectedIndex].zoom ||
-                    comboClickAction.Text != meters[listMeters.SelectedIndex].clickAction ||
-                    comboDragFileAction.Text != meters[listMeters.SelectedIndex].dragFileAction ||
-                    comboMWheelAction.Text != meters[listMeters.SelectedIndex].mWheelAction ||
-                    comboDataSource.Text != meters[listMeters.SelectedIndex].data ||
-                    (comboDataSubsource.Visible && comboDataSubsource.Text != meters[listMeters.SelectedIndex].dataSubsource) ||
-                    comboVisualization.Text != meters[listMeters.SelectedIndex].vis ||
-                    txtPrefix.Text != meters[listMeters.SelectedIndex].prefix ||
-                    txtPostfix.Text != meters[listMeters.SelectedIndex].postfix ||
-                    checkOnlyValue.Checked != meters[listMeters.SelectedIndex].onlyValue ||
-                    txtSpinnerImage.Text != meters[listMeters.SelectedIndex].spinner ||
-                    numSpinMin.Value != meters[listMeters.SelectedIndex].minSpin ||
-                    numSpinMax.Value != meters[listMeters.SelectedIndex].maxSpin ||
-                    txtBackground.Text != meters[listMeters.SelectedIndex].background ||
-                    txtForeground.Text != meters[listMeters.SelectedIndex].foreground ||
-                    comboProgressVector.Text != meters[listMeters.SelectedIndex].vector ||
-                    numGraphW.Value != meters[listMeters.SelectedIndex].graphW ||
-                    numGraphH.Value != meters[listMeters.SelectedIndex].graphH ||
-                    numGraphStepW.Value != meters[listMeters.SelectedIndex].graphStepW ||
-                    numGraphLineW.Value != meters[listMeters.SelectedIndex].graphLineW ||
-                    numStepInterval.Value != meters[listMeters.SelectedIndex].graphInterval ||
-                    picGraphColor.BackColor != meters[listMeters.SelectedIndex].graphLineColor ||
-                    checkGraphBorder.Checked != meters[listMeters.SelectedIndex].graphBorder ||
-                    txtGraphTexture.Text != meters[listMeters.SelectedIndex].graphTex ||
-                    rdbGraphTextureFront.Checked != meters[listMeters.SelectedIndex].graphTexFront;
+                    numLeftMargin.Value != meters[listMeters.SelectedIndex].LeftMargin ||
+                    numTopMargin.Value != meters[listMeters.SelectedIndex].TopMargin ||
+                    numDataMin.Value != meters[listMeters.SelectedIndex].Min ||
+                    numDataMax.Value != meters[listMeters.SelectedIndex].Max ||
+                    numZoom.Value != meters[listMeters.SelectedIndex].Zoom ||
+                    comboClickAction.Text != meters[listMeters.SelectedIndex].ClickAction ||
+                    comboDragFileAction.Text != meters[listMeters.SelectedIndex].DragFileAction ||
+                    comboMWheelAction.Text != meters[listMeters.SelectedIndex].MouseWheelAction ||
+                    comboDataSource.Text != meters[listMeters.SelectedIndex].Data ||
+                    (comboDataSubsource.Visible && comboDataSubsource.Text != meters[listMeters.SelectedIndex].DataSubsource) ||
+                    comboVisualization.Text != meters[listMeters.SelectedIndex].Vis ||
+                    txtPrefix.Text != meters[listMeters.SelectedIndex].Prefix ||
+                    txtPostfix.Text != meters[listMeters.SelectedIndex].Postfix ||
+                    checkOnlyValue.Checked != meters[listMeters.SelectedIndex].OnlyValue ||
+                    txtSpinnerImage.Text != meters[listMeters.SelectedIndex].Spinner ||
+                    numSpinMin.Value != meters[listMeters.SelectedIndex].MinSpin ||
+                    numSpinMax.Value != meters[listMeters.SelectedIndex].MaxSpin ||
+                    txtBackground.Text != meters[listMeters.SelectedIndex].Background ||
+                    txtForeground.Text != meters[listMeters.SelectedIndex].Foreground ||
+                    comboProgressVector.Text != meters[listMeters.SelectedIndex].Vector ||
+                    numGraphW.Value != meters[listMeters.SelectedIndex].GraphW ||
+                    numGraphH.Value != meters[listMeters.SelectedIndex].GraphH ||
+                    numGraphStepW.Value != meters[listMeters.SelectedIndex].GraphStepW ||
+                    numGraphLineW.Value != meters[listMeters.SelectedIndex].GraphLineW ||
+                    numStepInterval.Value != meters[listMeters.SelectedIndex].GraphInterval ||
+                    picGraphColor.BackColor != meters[listMeters.SelectedIndex].GraphLineColor ||
+                    checkGraphBorder.Checked != meters[listMeters.SelectedIndex].GraphBorder ||
+                    txtGraphTexture.Text != meters[listMeters.SelectedIndex].GraphTex ||
+                    rdbGraphTextureFront.Checked != meters[listMeters.SelectedIndex].GraphTexFront;
         }
 
         void checkForGeneralOptionsChanges()
@@ -229,7 +229,7 @@ namespace SysMana
 
         void reloadImgSeq()
         {
-            if (meters[listMeters.SelectedIndex].imgSeqDir != "" && Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir))
+            if (meters[listMeters.SelectedIndex].ImgSeqDir != "" && Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir))
             {
                 meters[listMeters.SelectedIndex].LoadResources();
                 dispImgSeq();
@@ -238,7 +238,7 @@ namespace SysMana
 
         void dispImgSeq()
         {
-            if (meters[listMeters.SelectedIndex].imgSeqDir == "" || !Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir))
+            if (meters[listMeters.SelectedIndex].ImgSeqDir == "" || !Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir))
             {
                 buttOpenImgSeqDir.Text = "Sequence is empty";
                 buttOpenImgSeqDir.Enabled = false;
@@ -248,7 +248,7 @@ namespace SysMana
             {
                 buttOpenImgSeqDir.Text = "Open images directory";
                 buttOpenImgSeqDir.Enabled = true;
-                lblImgSequence.Text = Directory.GetFiles(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir).Length + " images in sequence";
+                lblImgSequence.Text = Directory.GetFiles(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir).Length + " images in sequence";
             }
         }
 
@@ -456,40 +456,40 @@ namespace SysMana
             groupMeter.Text = "Meter: " + listMeters.Text;
 
             //general fields
-            comboDataSource.Text = meters[listMeters.SelectedIndex].data;
-            comboDataSubsource.Text = meters[listMeters.SelectedIndex].dataSubsource;
-            comboVisualization.Text = meters[listMeters.SelectedIndex].vis;
-            comboClickAction.Text = meters[listMeters.SelectedIndex].clickAction;
-            comboDragFileAction.Text = meters[listMeters.SelectedIndex].dragFileAction;
-            comboMWheelAction.Text = meters[listMeters.SelectedIndex].mWheelAction;
-            numLeftMargin.Value = meters[listMeters.SelectedIndex].leftMargin;
-            numTopMargin.Value = meters[listMeters.SelectedIndex].topMargin;
-            numDataMin.Value = meters[listMeters.SelectedIndex].min;
-            numDataMax.Value = meters[listMeters.SelectedIndex].max;
-            numZoom.Value = meters[listMeters.SelectedIndex].zoom;
+            comboDataSource.Text = meters[listMeters.SelectedIndex].Data;
+            comboDataSubsource.Text = meters[listMeters.SelectedIndex].DataSubsource;
+            comboVisualization.Text = meters[listMeters.SelectedIndex].Vis;
+            comboClickAction.Text = meters[listMeters.SelectedIndex].ClickAction;
+            comboDragFileAction.Text = meters[listMeters.SelectedIndex].DragFileAction;
+            comboMWheelAction.Text = meters[listMeters.SelectedIndex].MouseWheelAction;
+            numLeftMargin.Value = meters[listMeters.SelectedIndex].LeftMargin;
+            numTopMargin.Value = meters[listMeters.SelectedIndex].TopMargin;
+            numDataMin.Value = meters[listMeters.SelectedIndex].Min;
+            numDataMax.Value = meters[listMeters.SelectedIndex].Max;
+            numZoom.Value = meters[listMeters.SelectedIndex].Zoom;
 
             //visualization-specific fields
-            txtPrefix.Text = meters[listMeters.SelectedIndex].prefix;
-            txtPostfix.Text = meters[listMeters.SelectedIndex].postfix;
-            checkOnlyValue.Checked = meters[listMeters.SelectedIndex].onlyValue;
+            txtPrefix.Text = meters[listMeters.SelectedIndex].Prefix;
+            txtPostfix.Text = meters[listMeters.SelectedIndex].Postfix;
+            checkOnlyValue.Checked = meters[listMeters.SelectedIndex].OnlyValue;
 
-            txtSpinnerImage.Text = meters[listMeters.SelectedIndex].spinner;
-            numSpinMin.Value = meters[listMeters.SelectedIndex].minSpin;
-            numSpinMax.Value = meters[listMeters.SelectedIndex].maxSpin;
+            txtSpinnerImage.Text = meters[listMeters.SelectedIndex].Spinner;
+            numSpinMin.Value = meters[listMeters.SelectedIndex].MinSpin;
+            numSpinMax.Value = meters[listMeters.SelectedIndex].MaxSpin;
 
-            txtBackground.Text = meters[listMeters.SelectedIndex].background;
-            txtForeground.Text = meters[listMeters.SelectedIndex].foreground;
-            comboProgressVector.Text = meters[listMeters.SelectedIndex].vector;
+            txtBackground.Text = meters[listMeters.SelectedIndex].Background;
+            txtForeground.Text = meters[listMeters.SelectedIndex].Foreground;
+            comboProgressVector.Text = meters[listMeters.SelectedIndex].Vector;
 
-            numGraphW.Value = meters[listMeters.SelectedIndex].graphW;
-            numGraphH.Value = meters[listMeters.SelectedIndex].graphH;
-            numGraphStepW.Value = meters[listMeters.SelectedIndex].graphStepW;
-            numGraphLineW.Value = meters[listMeters.SelectedIndex].graphLineW;
-            numStepInterval.Value = meters[listMeters.SelectedIndex].graphInterval;
-            picGraphColor.BackColor = meters[listMeters.SelectedIndex].graphLineColor;
-            checkGraphBorder.Checked = meters[listMeters.SelectedIndex].graphBorder;
-            txtGraphTexture.Text = meters[listMeters.SelectedIndex].graphTex;
-            if (meters[listMeters.SelectedIndex].graphTexFront)
+            numGraphW.Value = meters[listMeters.SelectedIndex].GraphW;
+            numGraphH.Value = meters[listMeters.SelectedIndex].GraphH;
+            numGraphStepW.Value = meters[listMeters.SelectedIndex].GraphStepW;
+            numGraphLineW.Value = meters[listMeters.SelectedIndex].GraphLineW;
+            numStepInterval.Value = meters[listMeters.SelectedIndex].GraphInterval;
+            picGraphColor.BackColor = meters[listMeters.SelectedIndex].GraphLineColor;
+            checkGraphBorder.Checked = meters[listMeters.SelectedIndex].GraphBorder;
+            txtGraphTexture.Text = meters[listMeters.SelectedIndex].GraphTex;
+            if (meters[listMeters.SelectedIndex].GraphTexFront)
                 rdbGraphTextureFront.Checked = true;
             else
                 rdbGraphTextureBack.Checked = true;
@@ -566,7 +566,7 @@ namespace SysMana
 
             ignoreChanges = true;
 
-            comboDataSubsource.Text = meters[listMeters.SelectedIndex].dataSubsource;
+            comboDataSubsource.Text = meters[listMeters.SelectedIndex].DataSubsource;
             if (comboDataSubsource.SelectedIndex == -1 && comboDataSubsource.Items.Count > 0)
                 comboDataSubsource.SelectedIndex = 0;
 
@@ -574,7 +574,7 @@ namespace SysMana
                 ignoreChanges = false;
 
             //automatically fill in min&max values and prefix&postfix descriptors
-            if (comboDataSource.Text != meters[listMeters.SelectedIndex].data)
+            if (comboDataSource.Text != meters[listMeters.SelectedIndex].Data)
             {
                 switch (comboDataSource.Text)
                 {
@@ -586,7 +586,7 @@ namespace SysMana
                         numDataMin.Value = 0;
                         numDataMax.Value = 100;
 
-                        txtPostfix.Text = " %";
+                        txtPostfix.Text = "%";
                         break;
                     case "Available memory":
                     case "Used memory":
@@ -636,11 +636,11 @@ namespace SysMana
             }
             else
             {
-                numDataMin.Value = meters[listMeters.SelectedIndex].min;
-                numDataMax.Value = meters[listMeters.SelectedIndex].max;
+                numDataMin.Value = meters[listMeters.SelectedIndex].Min;
+                numDataMax.Value = meters[listMeters.SelectedIndex].Max;
 
-                txtPrefix.Text = meters[listMeters.SelectedIndex].prefix;
-                txtPostfix.Text = meters[listMeters.SelectedIndex].postfix;
+                txtPrefix.Text = meters[listMeters.SelectedIndex].Prefix;
+                txtPostfix.Text = meters[listMeters.SelectedIndex].Postfix;
             }
             
             checkForMeterChanges();
@@ -648,12 +648,12 @@ namespace SysMana
 
         private void comboDataSubsource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboDataSource.Text != meters[listMeters.SelectedIndex].data || comboDataSubsource.Text != meters[listMeters.SelectedIndex].dataSubsource)
+            if (comboDataSource.Text != meters[listMeters.SelectedIndex].Data || comboDataSubsource.Text != meters[listMeters.SelectedIndex].DataSubsource)
                 showDiskMinMax();
             else
             {
-                numDataMin.Value = meters[listMeters.SelectedIndex].min;
-                numDataMax.Value = meters[listMeters.SelectedIndex].max;
+                numDataMin.Value = meters[listMeters.SelectedIndex].Min;
+                numDataMax.Value = meters[listMeters.SelectedIndex].Max;
             }
 
             checkForMeterChanges();
@@ -728,52 +728,52 @@ namespace SysMana
             if (listMeters.SelectedIndex != -1)
             {
                 //general fields
-                meters[listMeters.SelectedIndex].leftMargin = (int)numLeftMargin.Value;
-                meters[listMeters.SelectedIndex].topMargin = (int)numTopMargin.Value;
-                meters[listMeters.SelectedIndex].min = (int)numDataMin.Value;
-                meters[listMeters.SelectedIndex].max = (int)numDataMax.Value;
-                meters[listMeters.SelectedIndex].zoom = (int)numZoom.Value;
-                meters[listMeters.SelectedIndex].data = comboDataSource.Text;
-                meters[listMeters.SelectedIndex].dataSubsource = comboDataSubsource.Text;
-                meters[listMeters.SelectedIndex].vis = comboVisualization.Text;
-                meters[listMeters.SelectedIndex].clickAction = comboClickAction.Text;
-                meters[listMeters.SelectedIndex].dragFileAction = comboDragFileAction.Text;
-                meters[listMeters.SelectedIndex].mWheelAction = comboMWheelAction.Text;
+                meters[listMeters.SelectedIndex].LeftMargin = (int)numLeftMargin.Value;
+                meters[listMeters.SelectedIndex].TopMargin = (int)numTopMargin.Value;
+                meters[listMeters.SelectedIndex].Min = (int)numDataMin.Value;
+                meters[listMeters.SelectedIndex].Max = (int)numDataMax.Value;
+                meters[listMeters.SelectedIndex].Zoom = (int)numZoom.Value;
+                meters[listMeters.SelectedIndex].Data = comboDataSource.Text;
+                meters[listMeters.SelectedIndex].DataSubsource = comboDataSubsource.Text;
+                meters[listMeters.SelectedIndex].Vis = comboVisualization.Text;
+                meters[listMeters.SelectedIndex].ClickAction = comboClickAction.Text;
+                meters[listMeters.SelectedIndex].DragFileAction = comboDragFileAction.Text;
+                meters[listMeters.SelectedIndex].MouseWheelAction = comboMWheelAction.Text;
 
                 //visualization-specific fields
-                meters[listMeters.SelectedIndex].prefix = txtPrefix.Text;
-                meters[listMeters.SelectedIndex].postfix = txtPostfix.Text;
-                meters[listMeters.SelectedIndex].onlyValue = checkOnlyValue.Checked;
+                meters[listMeters.SelectedIndex].Prefix = txtPrefix.Text;
+                meters[listMeters.SelectedIndex].Postfix = txtPostfix.Text;
+                meters[listMeters.SelectedIndex].OnlyValue = checkOnlyValue.Checked;
 
-                meters[listMeters.SelectedIndex].spinner = txtSpinnerImage.Text;
-                meters[listMeters.SelectedIndex].minSpin = (int)numSpinMin.Value;
-                meters[listMeters.SelectedIndex].maxSpin = (int)numSpinMax.Value;
+                meters[listMeters.SelectedIndex].Spinner = txtSpinnerImage.Text;
+                meters[listMeters.SelectedIndex].MinSpin = (int)numSpinMin.Value;
+                meters[listMeters.SelectedIndex].MaxSpin = (int)numSpinMax.Value;
 
-                meters[listMeters.SelectedIndex].background = txtBackground.Text;
-                meters[listMeters.SelectedIndex].foreground = txtForeground.Text;
-                meters[listMeters.SelectedIndex].vector = comboProgressVector.Text;
+                meters[listMeters.SelectedIndex].Background = txtBackground.Text;
+                meters[listMeters.SelectedIndex].Foreground = txtForeground.Text;
+                meters[listMeters.SelectedIndex].Vector = comboProgressVector.Text;
 
-                meters[listMeters.SelectedIndex].graphW = (int)numGraphW.Value;
-                meters[listMeters.SelectedIndex].graphH = (int)numGraphH.Value;
-                meters[listMeters.SelectedIndex].graphStepW = (int)numGraphStepW.Value;
-                meters[listMeters.SelectedIndex].graphLineW = (int)numGraphLineW.Value;
-                meters[listMeters.SelectedIndex].graphInterval = (int)numStepInterval.Value;
-                meters[listMeters.SelectedIndex].graphLineColor = picGraphColor.BackColor;
-                meters[listMeters.SelectedIndex].graphBorder = checkGraphBorder.Checked;
-                meters[listMeters.SelectedIndex].graphTex = txtGraphTexture.Text;
-                meters[listMeters.SelectedIndex].graphTexFront = rdbGraphTextureFront.Checked;
+                meters[listMeters.SelectedIndex].GraphW = (int)numGraphW.Value;
+                meters[listMeters.SelectedIndex].GraphH = (int)numGraphH.Value;
+                meters[listMeters.SelectedIndex].GraphStepW = (int)numGraphStepW.Value;
+                meters[listMeters.SelectedIndex].GraphLineW = (int)numGraphLineW.Value;
+                meters[listMeters.SelectedIndex].GraphInterval = (int)numStepInterval.Value;
+                meters[listMeters.SelectedIndex].GraphLineColor = picGraphColor.BackColor;
+                meters[listMeters.SelectedIndex].GraphBorder = checkGraphBorder.Checked;
+                meters[listMeters.SelectedIndex].GraphTex = txtGraphTexture.Text;
+                meters[listMeters.SelectedIndex].GraphTexFront = rdbGraphTextureFront.Checked;
 
                 //copy any new imgs
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].spinner);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].background);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].foreground);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].graphTex);
+                checkIfNewImg(ref meters[listMeters.SelectedIndex].Spinner);
+                checkIfNewImg(ref meters[listMeters.SelectedIndex].Background);
+                checkIfNewImg(ref meters[listMeters.SelectedIndex].Foreground);
+                checkIfNewImg(ref meters[listMeters.SelectedIndex].GraphTex);
 
                 //update imgs & colors
                 meters[listMeters.SelectedIndex].LoadResources();
 
                 //update meter name in list
-                listMeters.Items[listMeters.SelectedIndex] = meters[listMeters.SelectedIndex].data;
+                listMeters.Items[listMeters.SelectedIndex] = meters[listMeters.SelectedIndex].Data;
             }
 
             saveMeters();
@@ -809,7 +809,7 @@ namespace SysMana
 
             if (openDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
-                if (meters[listMeters.SelectedIndex].imgSeqDir == "" || !Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir))
+                if (meters[listMeters.SelectedIndex].ImgSeqDir == "" || !Directory.Exists(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir))
                 {
                     //create new dir
                     string name = Path.GetFileNameWithoutExtension(openDialog.FileNames[0]);
@@ -823,13 +823,13 @@ namespace SysMana
                     }
 
                     Directory.CreateDirectory(Application.StartupPath + "\\imgs\\" + name);
-                    meters[listMeters.SelectedIndex].imgSeqDir = name;
+                    meters[listMeters.SelectedIndex].ImgSeqDir = name;
                 }
 
                 //copy files
                 foreach (string file in openDialog.FileNames)
                 {
-                    string dest = Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir + "\\" + Path.GetFileName(file);
+                    string dest = Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir + "\\" + Path.GetFileName(file);
 
                     if (!File.Exists(dest))
                         File.Copy(file, dest);
@@ -845,7 +845,7 @@ namespace SysMana
 
         private void buttOpenImgSeqDir_Click(object sender, EventArgs e)
         {
-            Process.Start(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].imgSeqDir);
+            Process.Start(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir);
         }
 
         private void buttImgSeqReload_Click(object sender, EventArgs e)
@@ -911,8 +911,13 @@ namespace SysMana
 
         private void buttChooseTextFile_Click(object sender, EventArgs e)
         {
-            if (openTextFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            if (openTextFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel && File.Exists(openTextFile.FileName))
+            {
                 comboDataSubsource.Text = openTextFile.FileName;
+
+                txtPrefix.Text = Path.GetFileNameWithoutExtension(openTextFile.FileName) + ": ";
+                checkForMeterChanges();
+            }
         }
 
         private void buttGraphTexturePick_Click(object sender, EventArgs e)

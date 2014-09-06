@@ -11,62 +11,62 @@ namespace SysMana
 {
     public class Meter
     {
-        public string data, dataSubsource, vis;
-        public int leftMargin, topMargin, min, max, zoom, currDataValue;
-        public string clickAction, dragFileAction, mWheelAction;
+        public string Data, DataSubsource, Vis;
+        public int LeftMargin, TopMargin, Min, Max, Zoom, CurrDataValue;
+        public string ClickAction, DragFileAction, MouseWheelAction;
 
         DateTime prevDraw;
         string imgsDir;
 
-        public string prefix, postfix;
-        public bool onlyValue;
+        public string Prefix, Postfix;
+        public bool OnlyValue;
         
-        public string spinner;
+        public string Spinner;
         Image spinnerImg;
-        public int minSpin, maxSpin;
+        public int MinSpin, MaxSpin;
         double spin;
 
-        public string background, foreground, vector;
+        public string Background, Foreground, Vector;
         Image backgroundImg, foregroundImg;
 
-        public string imgSeqDir;
+        public string ImgSeqDir;
         Image[] imgSeq;
 
-        public int graphW, graphH, graphStepW, graphLineW, graphInterval;
-        public Color graphLineColor;
-        public bool graphBorder, graphTexFront;
-        public string graphTex;
+        public int GraphW, GraphH, GraphStepW, GraphLineW, GraphInterval;
+        public Color GraphLineColor;
+        public bool GraphBorder, GraphTexFront;
+        public string GraphTex;
         List<float> graphValues;
         Pen graphPen;
         Image graphTexImg;
         DateTime prevGraphTick;
 
-        public int left, h;
+        public int Left, H;
         Func<string, Image> LoadImg;
         Action<Image> DisposeImg;
 
 
         public Meter(string data, string vis, string imgsDir, Func<string, Image> LoadImg, Action<Image> DisposeImg)
         {
-            this.data = data;
-            this.vis = vis;
+            this.Data = data;
+            this.Vis = vis;
             this.imgsDir = imgsDir;
             this.LoadImg = LoadImg;
             this.DisposeImg = DisposeImg;
 
-            prefix = "CPU usage: ";
-            postfix = " %";
-            leftMargin = 0;
-            topMargin = 0;
-            min = 0;
-            max = 100;
-            zoom = 100;
-            vector = "Left to right";
-            imgSeqDir = "";
-            graphStepW = 1;
-            graphLineW = 1;
-            graphInterval = 25;
-            graphLineColor = Color.Black;
+            Prefix = "CPU usage: ";
+            Postfix = "%";
+            LeftMargin = 0;
+            TopMargin = 0;
+            Min = 0;
+            Max = 100;
+            Zoom = 100;
+            Vector = "Left to right";
+            ImgSeqDir = "";
+            GraphStepW = 1;
+            GraphLineW = 1;
+            GraphInterval = 25;
+            GraphLineColor = Color.Black;
         }
 
         public Meter(string lineFromFile, string imgsDir, Func<string, Image> LoadImg, Action<Image> DisposeImg)
@@ -78,41 +78,41 @@ namespace SysMana
             string[] parts = lineFromFile.Split(new string[] { "--" }, StringSplitOptions.None);
             int i = 0;
 
-            data = parts[i++];
-            dataSubsource = parts[i++];
-            vis = parts[i++];
-            leftMargin = int.Parse(parts[i++]);
-            topMargin = int.Parse(parts[i++]);
-            min = int.Parse(parts[i++]);
-            max = int.Parse(parts[i++]);
-            zoom = int.Parse(parts[i++]);
-            clickAction = parts[i++];
-            dragFileAction = parts[i++];
-            mWheelAction = parts[i++];
+            Data = parts[i++];
+            DataSubsource = parts[i++];
+            Vis = parts[i++];
+            LeftMargin = int.Parse(parts[i++]);
+            TopMargin = int.Parse(parts[i++]);
+            Min = int.Parse(parts[i++]);
+            Max = int.Parse(parts[i++]);
+            Zoom = int.Parse(parts[i++]);
+            ClickAction = parts[i++];
+            DragFileAction = parts[i++];
+            MouseWheelAction = parts[i++];
 
-            prefix = parts[i++];
-            postfix = parts[i++];
-            onlyValue = bool.Parse(parts[i++]);
+            Prefix = parts[i++];
+            Postfix = parts[i++];
+            OnlyValue = bool.Parse(parts[i++]);
 
-            spinner = parts[i++];
-            minSpin = int.Parse(parts[i++]);
-            maxSpin = int.Parse(parts[i++]);
+            Spinner = parts[i++];
+            MinSpin = int.Parse(parts[i++]);
+            MaxSpin = int.Parse(parts[i++]);
 
-            background = parts[i++];
-            foreground = parts[i++];
-            vector = parts[i++];
+            Background = parts[i++];
+            Foreground = parts[i++];
+            Vector = parts[i++];
 
-            imgSeqDir = parts[i++];
+            ImgSeqDir = parts[i++];
 
-            graphW = int.Parse(parts[i++]);
-            graphH = int.Parse(parts[i++]);
-            graphStepW = int.Parse(parts[i++]);
-            graphLineW = int.Parse(parts[i++]);
-            graphInterval = int.Parse(parts[i++]);
-            graphLineColor = Color.FromArgb(int.Parse(parts[i++]), int.Parse(parts[i++]), int.Parse(parts[i++]));
-            graphBorder = bool.Parse(parts[i++]);
-            graphTex = parts[i++];
-            graphTexFront = bool.Parse(parts[i++]);
+            GraphW = int.Parse(parts[i++]);
+            GraphH = int.Parse(parts[i++]);
+            GraphStepW = int.Parse(parts[i++]);
+            GraphLineW = int.Parse(parts[i++]);
+            GraphInterval = int.Parse(parts[i++]);
+            GraphLineColor = Color.FromArgb(int.Parse(parts[i++]), int.Parse(parts[i++]), int.Parse(parts[i++]));
+            GraphBorder = bool.Parse(parts[i++]);
+            GraphTex = parts[i++];
+            GraphTexFront = bool.Parse(parts[i++]);
 
             LoadResources();
         }
@@ -128,62 +128,62 @@ namespace SysMana
                 foreach (Image img in imgSeq)
                     DisposeImg(img);
             
-            switch (vis)
+            switch (Vis)
             {
                 case "Spinner":
-                    spinnerImg = LoadImg(imgsDir + spinner);
+                    spinnerImg = LoadImg(imgsDir + Spinner);
                     break;
                 case "Progress bar":
-                    backgroundImg = LoadImg(imgsDir + background);
-                    foregroundImg = LoadImg(imgsDir + foreground);
+                    backgroundImg = LoadImg(imgsDir + Background);
+                    foregroundImg = LoadImg(imgsDir + Foreground);
                     break;
                 case "Image sequence":
-                    if (imgSeqDir != "" && Directory.Exists(imgsDir + "\\" + imgSeqDir))
+                    if (ImgSeqDir != "" && Directory.Exists(imgsDir + "\\" + ImgSeqDir))
                     {
-                        string[] files = Misc.GetFilesInNaturalOrder(imgsDir + imgSeqDir);
+                        string[] files = Misc.GetFilesInNaturalOrder(imgsDir + ImgSeqDir);
                         imgSeq = new Image[files.Length];
                         
                         for (int i = 0; i < files.Length; i++)
-                            imgSeq[i] = LoadImg(imgsDir + imgSeqDir + "\\" + Path.GetFileName(files[i]));
+                            imgSeq[i] = LoadImg(imgsDir + ImgSeqDir + "\\" + Path.GetFileName(files[i]));
                     }
                     break;
                 case "Graph":
-                    graphTexImg = LoadImg(imgsDir + graphTex);
+                    graphTexImg = LoadImg(imgsDir + GraphTex);
                     break;
             }
             
             //drawing resources
-            graphPen = new Pen(graphLineColor, graphLineW);
+            graphPen = new Pen(GraphLineColor, GraphLineW);
         }
 
         public string FormatForFile()
         {
             return
-                data + "--" + dataSubsource + "--" + vis + "--" + leftMargin + "--" + topMargin + "--" + min + "--" + max + "--" + zoom + "--" + clickAction + "--" + dragFileAction + "--" + mWheelAction + "--" +
-                prefix + "--" + postfix + "--" + onlyValue + "--" +
-                spinner + "--" + minSpin + "--" + maxSpin + "--" +
-                background + "--" + foreground + "--" + vector + "--" +
-                imgSeqDir + "--" +
-                graphW + "--" + graphH + "--" + graphStepW + "--" + graphLineW + "--" + graphInterval + "--" + graphLineColor.R + "--" + graphLineColor.G + "--" + graphLineColor.B + "--" + graphBorder + "--" + graphTex + "--" + graphTexFront;
+                Data + "--" + DataSubsource + "--" + Vis + "--" + LeftMargin + "--" + TopMargin + "--" + Min + "--" + Max + "--" + Zoom + "--" + ClickAction + "--" + DragFileAction + "--" + MouseWheelAction + "--" +
+                Prefix + "--" + Postfix + "--" + OnlyValue + "--" +
+                Spinner + "--" + MinSpin + "--" + MaxSpin + "--" +
+                Background + "--" + Foreground + "--" + Vector + "--" +
+                ImgSeqDir + "--" +
+                GraphW + "--" + GraphH + "--" + GraphStepW + "--" + GraphLineW + "--" + GraphInterval + "--" + GraphLineColor.R + "--" + GraphLineColor.G + "--" + GraphLineColor.B + "--" + GraphBorder + "--" + GraphTex + "--" + GraphTexFront;
         }
 
         public void Draw(Graphics gfx, Font font, int fixedH, VertAlign align, ref int left, ref int h)
         {
-            left += leftMargin;
-            this.left = left;
-            int y = topMargin;
+            left += LeftMargin;
+            this.Left = left;
+            int y = TopMargin;
 
             if (fixedH == 0)
                 fixedH = h;
 
-            switch (vis)
+            switch (Vis)
             {
                 case "Text":
                     string output;
-                    if (onlyValue)
-                        output = currDataValue.ToString();
+                    if (OnlyValue)
+                        output = CurrDataValue.ToString();
                     else
-                        output = prefix + currDataValue.ToString() + postfix;
+                        output = Prefix + CurrDataValue.ToString() + Postfix;
 
                     SizeF txtSize = gfx.MeasureString(output, font);
                     y += setAlignment(align, (int)txtSize.Height, fixedH);
@@ -191,16 +191,16 @@ namespace SysMana
                     gfx.DrawString(output, font, Brushes.Black, left, y);
 
                     left += (int)txtSize.Width;
-                    this.h = (int)txtSize.Height;
-                    h = Math.Max(h, this.h);
+                    this.H = (int)txtSize.Height;
+                    h = Math.Max(h, this.H);
                     break;
                 case "Spinner":
-                    if (!(spinnerImg == null || prevDraw.Ticks == 0 || min == max))
+                    if (!(spinnerImg == null || prevDraw.Ticks == 0 || Min == Max))
                     {
-                        float speed = interpolateData(currDataValue, minSpin, maxSpin);
+                        float speed = interpolateData(CurrDataValue, MinSpin, MaxSpin);
                         double s = DateTime.Now.Subtract(prevDraw).TotalSeconds; //seconds elapsed since last draw
-                        int destW = zoomLength(spinnerImg.Width, zoom);
-                        int destH = zoomLength(spinnerImg.Height, zoom);
+                        int destW = zoomLength(spinnerImg.Width, Zoom);
+                        int destH = zoomLength(spinnerImg.Height, Zoom);
 
                         //left += spinMargin - destW / 2;
 
@@ -216,43 +216,43 @@ namespace SysMana
                         gfx.ResetTransform();
 
                         left += destW;
-                        this.h = destH;
-                        h = Math.Max(h, this.h);
+                        this.H = destH;
+                        h = Math.Max(h, this.H);
                     }
                     break;
                 case "Progress bar":
-                    if (!(foregroundImg == null || min == max))
+                    if (!(foregroundImg == null || Min == Max))
                     {
                         if (backgroundImg != null)
-                            gfx.DrawImage(backgroundImg, left, y + setAlignment(align, zoomLength(backgroundImg.Height, zoom), fixedH), zoomLength(backgroundImg.Width, zoom), zoomLength(backgroundImg.Height, zoom));
+                            gfx.DrawImage(backgroundImg, left, y + setAlignment(align, zoomLength(backgroundImg.Height, Zoom), fixedH), zoomLength(backgroundImg.Width, Zoom), zoomLength(backgroundImg.Height, Zoom));
 
-                        y += setAlignment(align, zoomLength(foregroundImg.Height, zoom), fixedH);
+                        y += setAlignment(align, zoomLength(foregroundImg.Height, Zoom), fixedH);
                         int progress;
 
-                        switch (vector)
+                        switch (Vector)
                         {
                             case "Left to right":
-                                progress = (int)interpolateData(currDataValue, 0, foregroundImg.Width);
-                                gfx.DrawImage(foregroundImg, new Rectangle(left, y, zoomLength(progress, zoom), zoomLength(foregroundImg.Height, zoom)), new Rectangle(0, 0, progress, foregroundImg.Height), GraphicsUnit.Pixel);
+                                progress = (int)interpolateData(CurrDataValue, 0, foregroundImg.Width);
+                                gfx.DrawImage(foregroundImg, new Rectangle(left, y, zoomLength(progress, Zoom), zoomLength(foregroundImg.Height, Zoom)), new Rectangle(0, 0, progress, foregroundImg.Height), GraphicsUnit.Pixel);
                                 break;
                             case "Right to left":
-                                progress = (int)interpolateData(currDataValue, 0, foregroundImg.Width);
-                                gfx.DrawImage(foregroundImg, new Rectangle(left + zoomLength(foregroundImg.Width - progress, zoom), y, zoomLength(progress, zoom), zoomLength(foregroundImg.Height, zoom)), new Rectangle(foregroundImg.Width - progress, 0, progress, foregroundImg.Height), GraphicsUnit.Pixel);
+                                progress = (int)interpolateData(CurrDataValue, 0, foregroundImg.Width);
+                                gfx.DrawImage(foregroundImg, new Rectangle(left + zoomLength(foregroundImg.Width - progress, Zoom), y, zoomLength(progress, Zoom), zoomLength(foregroundImg.Height, Zoom)), new Rectangle(foregroundImg.Width - progress, 0, progress, foregroundImg.Height), GraphicsUnit.Pixel);
                                 break;
                             case "Bottom to top":
-                                progress = (int)interpolateData(currDataValue, 0, foregroundImg.Height);
-                                gfx.DrawImage(foregroundImg, new Rectangle(left, y + zoomLength(foregroundImg.Height - progress, zoom), zoomLength(foregroundImg.Width, zoom), zoomLength(progress, zoom)), new Rectangle(0, foregroundImg.Height - progress, foregroundImg.Width, progress), GraphicsUnit.Pixel);
+                                progress = (int)interpolateData(CurrDataValue, 0, foregroundImg.Height);
+                                gfx.DrawImage(foregroundImg, new Rectangle(left, y + zoomLength(foregroundImg.Height - progress, Zoom), zoomLength(foregroundImg.Width, Zoom), zoomLength(progress, Zoom)), new Rectangle(0, foregroundImg.Height - progress, foregroundImg.Width, progress), GraphicsUnit.Pixel);
                                 break;
                             case "Top to bottom":
-                                progress = (int)interpolateData(currDataValue, 0, foregroundImg.Height);
-                                gfx.DrawImage(foregroundImg, new Rectangle(left, y, zoomLength(foregroundImg.Width, zoom), zoomLength(progress, zoom)), new Rectangle(0, 0, foregroundImg.Width, progress), GraphicsUnit.Pixel);
+                                progress = (int)interpolateData(CurrDataValue, 0, foregroundImg.Height);
+                                gfx.DrawImage(foregroundImg, new Rectangle(left, y, zoomLength(foregroundImg.Width, Zoom), zoomLength(progress, Zoom)), new Rectangle(0, 0, foregroundImg.Width, progress), GraphicsUnit.Pixel);
                                 break;
                             case "Radial":
                                 TextureBrush foreBrush = new TextureBrush(foregroundImg);
-                                progress = (int)interpolateData(currDataValue, 0, Math.Min(foregroundImg.Width, foregroundImg.Height));
+                                progress = (int)interpolateData(CurrDataValue, 0, Math.Min(foregroundImg.Width, foregroundImg.Height));
 
                                 gfx.TranslateTransform(left, y);
-                                gfx.ScaleTransform((float)zoom / 100, (float)zoom / 100);
+                                gfx.ScaleTransform((float)Zoom / 100, (float)Zoom / 100);
 
                                 gfx.FillEllipse(foreBrush, (foregroundImg.Width - progress) / 2, (foregroundImg.Height - progress) / 2, progress, progress);
                                 
@@ -263,53 +263,53 @@ namespace SysMana
                         
                         if (backgroundImg != null)
                         {
-                            left += Math.Max(zoomLength(backgroundImg.Width, zoom), zoomLength(foregroundImg.Width, zoom));
-                            this.h = Math.Max(zoomLength(backgroundImg.Height, zoom), zoomLength(foregroundImg.Height, zoom));
+                            left += Math.Max(zoomLength(backgroundImg.Width, Zoom), zoomLength(foregroundImg.Width, Zoom));
+                            this.H = Math.Max(zoomLength(backgroundImg.Height, Zoom), zoomLength(foregroundImg.Height, Zoom));
                         }
                         else
                         {
-                            left += zoomLength(foregroundImg.Width, zoom);
-                            this.h = zoomLength(foregroundImg.Height, zoom);
+                            left += zoomLength(foregroundImg.Width, Zoom);
+                            this.H = zoomLength(foregroundImg.Height, Zoom);
                         }
 
-                        h = Math.Max(h, this.h);
+                        h = Math.Max(h, this.H);
                     }
                     break;
                 case "Image sequence":
-                    if (!(imgSeq == null || imgSeq.Length == 0 || min == max))
+                    if (!(imgSeq == null || imgSeq.Length == 0 || Min == Max))
                     {
-                        int imgInd = (int)interpolateData(currDataValue, 0, imgSeq.Length);
+                        int imgInd = (int)interpolateData(CurrDataValue, 0, imgSeq.Length);
                         imgInd = Math.Max(Math.Min(imgInd, imgSeq.Length - 1), 0);
 
-                        int destW = zoomLength(imgSeq[imgInd].Width, zoom);
-                        int destH = zoomLength(imgSeq[imgInd].Height, zoom);
+                        int destW = zoomLength(imgSeq[imgInd].Width, Zoom);
+                        int destH = zoomLength(imgSeq[imgInd].Height, Zoom);
 
                         y += setAlignment(align, destH, fixedH);
 
                         gfx.DrawImage(imgSeq[imgInd], left, y, destW, destH);
 
                         left += destW;
-                        this.h = destH;
-                        h = Math.Max(h, this.h);
+                        this.H = destH;
+                        h = Math.Max(h, this.H);
                     }
                     break;
                 case "Graph":
-                    if (!(graphW == 0 || graphH == 0 || min == max))
+                    if (!(GraphW == 0 || GraphH == 0 || Min == Max))
                     {
                         //init
                         if (graphValues == null)
                             graphValues = new List<float>();
                         if (graphPen == null)
-                            graphPen = new Pen(graphLineColor, graphLineW);
+                            graphPen = new Pen(GraphLineColor, GraphLineW);
 
                         gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                         gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-                        if (DateTime.Now.Subtract(prevGraphTick).TotalMilliseconds >= graphInterval)
+                        if (DateTime.Now.Subtract(prevGraphTick).TotalMilliseconds >= GraphInterval)
                         {
                             //get new value
-                            graphValues.Add(interpolateData(currDataValue, graphH, 1));
-                            if (graphValues.Count > Math.Ceiling((float)graphW / graphStepW) + 1)
+                            graphValues.Add(interpolateData(CurrDataValue, GraphH, 1));
+                            if (graphValues.Count > Math.Ceiling((float)GraphW / GraphStepW) + 1)
                                 graphValues.RemoveAt(0); //discard last value when graph too large
 
                             prevGraphTick = DateTime.Now;
@@ -317,13 +317,13 @@ namespace SysMana
 
                         //build graph path
                         GraphicsPath path = new GraphicsPath();
-                        float x = left + graphW;
-                        y += setAlignment(align, graphH, fixedH) + graphLineW / 2;
+                        float x = left + GraphW;
+                        y += setAlignment(align, GraphH, fixedH) + GraphLineW / 2;
 
                         for (int i = graphValues.Count - 1; i >= 1; i--)
                         {
-                            path.AddLine(x, y + graphValues[i], x - graphStepW, y + graphValues[i - 1]);
-                            x -= graphStepW;
+                            path.AddLine(x, y + graphValues[i], x - GraphStepW, y + graphValues[i - 1]);
+                            x -= GraphStepW;
                         }
 
                         //draw graph
@@ -333,22 +333,22 @@ namespace SysMana
                         if (graphTexImg != null)
                         {
                             //finish path
-                            if (graphTexFront)
+                            if (GraphTexFront)
                             {
-                                path.AddLine(x, y + graphValues[0], x, y + graphH);
-                                path.AddLine(x, y + graphH, left + graphW, y + graphH);
-                                path.AddLine(left + graphW, y + graphH, left + graphW, y + graphValues[graphValues.Count - 1]);
+                                path.AddLine(x, y + graphValues[0], x, y + GraphH);
+                                path.AddLine(x, y + GraphH, left + GraphW, y + GraphH);
+                                path.AddLine(left + GraphW, y + GraphH, left + GraphW, y + graphValues[graphValues.Count - 1]);
                             }
                             else
                             {
                                 path.AddLine(x, y + graphValues[0], x, y);
-                                path.AddLine(x, y, left + graphW, y);
-                                path.AddLine(left + graphW, y, left + graphW, y + graphValues[graphValues.Count - 1]);
+                                path.AddLine(x, y, left + GraphW, y);
+                                path.AddLine(left + GraphW, y, left + GraphW, y + graphValues[graphValues.Count - 1]);
                             }
 
                             //draw texture to img (because the texture can be an animated gif, and this will copy its current state)
-                            int destW = (int)((float)zoom / 100 * graphTexImg.Width);
-                            int destH = (int)((float)zoom / 100 * graphTexImg.Height);
+                            int destW = (int)((float)Zoom / 100 * graphTexImg.Width);
+                            int destH = (int)((float)Zoom / 100 * graphTexImg.Height);
 
                             Image temp = new Bitmap(destW, destH);
                             Graphics tempGfx = Graphics.FromImage(temp);
@@ -365,11 +365,11 @@ namespace SysMana
                             temp.Dispose();
                         }
 
-                        if (graphBorder)
+                        if (GraphBorder)
                         {
                             //draw border
-                            int right = left + graphW;
-                            int bottom = graphH;
+                            int right = left + GraphW;
+                            int bottom = GraphH;
 
                             gfx.DrawLine(graphPen, left, y, right, y);
                             gfx.DrawLine(graphPen, right, y, right, y + bottom);
@@ -377,9 +377,9 @@ namespace SysMana
                             gfx.DrawLine(graphPen, left, y, left, y + bottom);
                         }
 
-                        left += graphW + (graphBorder ? 1 : 0);
-                        this.h = graphH + (graphBorder ? 1 : 0);
-                        h = Math.Max(h, this.h);
+                        left += GraphW + (GraphBorder ? 1 : 0);
+                        this.H = GraphH + (GraphBorder ? 1 : 0);
+                        h = Math.Max(h, this.H);
                     }
                     break;
             }
@@ -389,7 +389,7 @@ namespace SysMana
 
         float interpolateData(int data, int visMin, int visMax)
         {
-            return visMin + (visMax - visMin) * (data - min) / (max - min);
+            return visMin + (visMax - visMin) * (data - Min) / (Max - Min);
         }
 
         int zoomLength(int l, int zoom)

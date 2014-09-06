@@ -81,7 +81,7 @@ namespace SysMana
             bool startedMonitoring = false;
 
             foreach (Meter meter in meters)
-                switch (meter.data)
+                switch (meter.Data)
                 {
                     case "CPU usage":
                         if (cpuCounter == null)

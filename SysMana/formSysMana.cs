@@ -274,7 +274,7 @@ namespace SysMana
         Meter GetSelectedMeter(int mouseX)
         {
             for (int i = meters.Count - 1; i >= 0; i--)
-                if (meters[i].left < mouseX)
+                if (meters[i].Left < mouseX)
                     return meters[i];
 
             return null;
@@ -287,11 +287,11 @@ namespace SysMana
             else
             {
                 string tip;
-
-                if (meter.onlyValue)
-                    tip = data.GetValue(meter.data, meter.dataSubsource).ToString();
+                
+                if (meter.OnlyValue)
+                    tip = data.GetValue(meter.Data, meter.DataSubsource).ToString();
                 else
-                    tip = meter.prefix + data.GetValue(meter.data, meter.dataSubsource).ToString() + meter.postfix;
+                    tip = meter.Prefix + data.GetValue(meter.Data, meter.DataSubsource).ToString() + meter.Postfix;
 
                 return tip;
             }
@@ -300,7 +300,7 @@ namespace SysMana
         void meterClick(int meterInd, Point mouse)
         {
             if (meters[meterInd] != null)
-                switch (meters[meterInd].clickAction)
+                switch (meters[meterInd].ClickAction)
                 {
                     case "Open recycle bin":
                         Process.Start("shell:RecycleBinFolder");
@@ -327,27 +327,27 @@ namespace SysMana
                         WinExec("rundll32 van.dll,RunVAN", SW_NORMAL);
                         break;
                     case "Change system volume (Vertical meter)":
-                        audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Math.Min(Math.Max((float)(meters[meterInd].h - mouse.Y) / meters[meterInd].h, 0), 1);
+                        audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Math.Min(Math.Max((float)(meters[meterInd].H - mouse.Y) / meters[meterInd].H, 0), 1);
                         break;
                     case "Change system volume (Horizontal meter)":
                         int nextLeft;
                         if (meterInd < meters.Count - 1)
-                            nextLeft = meters[meterInd + 1].left - meters[meterInd + 1].leftMargin;
+                            nextLeft = meters[meterInd + 1].Left - meters[meterInd + 1].LeftMargin;
                         else
                             nextLeft = this.Width;
 
-                        audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Math.Min(Math.Max((float)(mouse.X - meters[meterInd].left) / (nextLeft - meters[meterInd].left), 0), 1);
+                        audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Math.Min(Math.Max((float)(mouse.X - meters[meterInd].Left) / (nextLeft - meters[meterInd].Left), 0), 1);
                         break;
                     default:
-                        if (meters[meterInd].clickAction.Contains("Launch program/file...") || meters[meterInd].clickAction.Contains("Launch web page..."))
-                            Process.Start(meters[meterInd].clickAction.Substring(meters[meterInd].clickAction.IndexOf("...") + 3));
+                        if (meters[meterInd].ClickAction.Contains("Launch program/file...") || meters[meterInd].ClickAction.Contains("Launch web page..."))
+                            Process.Start(meters[meterInd].ClickAction.Substring(meters[meterInd].ClickAction.IndexOf("...") + 3));
                         break;
                 }
         }
 
         void meterScroll(Meter meter, int delta)
         {
-            if (meter != null && meter.mWheelAction == "Change system volume")
+            if (meter != null && meter.MouseWheelAction == "Change system volume")
                 audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = Math.Min(Math.Max(audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar + (float)delta / 24 / 100, 0), 1);
         }
 
@@ -402,7 +402,7 @@ namespace SysMana
             {
                 Meter meter = GetSelectedMeter(e.X - this.Left);
 
-                if (meter != null && meter.dragFileAction != "")
+                if (meter != null && meter.DragFileAction != "")
                     e.Effect = DragDropEffects.All;
                 else
                     e.Effect = DragDropEffects.None;
@@ -417,7 +417,7 @@ namespace SysMana
 
             if (meter != null)
                 foreach (string path in (string[])e.Data.GetData(DataFormats.FileDrop))
-                    switch (meter.dragFileAction)
+                    switch (meter.DragFileAction)
                     {
                         case "Run":
                             Process.Start(path);
@@ -429,9 +429,9 @@ namespace SysMana
                                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(path, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
                             break;
                         default:
-                            if (meter.dragFileAction.Contains("Copy to directory..."))
+                            if (meter.DragFileAction.Contains("Copy to directory..."))
                             {
-                                string dest = meter.dragFileAction.Substring(meter.dragFileAction.IndexOf("...") + 3);
+                                string dest = meter.DragFileAction.Substring(meter.DragFileAction.IndexOf("...") + 3);
                                 if (dest[dest.Length - 1] != '\\')
                                     dest += "\\";
 
@@ -448,9 +448,9 @@ namespace SysMana
                                     //source is file
                                     Microsoft.VisualBasic.FileIO.FileSystem.CopyFile(path, dest + Path.GetFileName(path), Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing);
                             }
-                            else if (meter.dragFileAction.Contains("Move to directory..."))
+                            else if (meter.DragFileAction.Contains("Move to directory..."))
                             {
-                                string dest = meter.dragFileAction.Substring(meter.dragFileAction.IndexOf("...") + 3);
+                                string dest = meter.DragFileAction.Substring(meter.DragFileAction.IndexOf("...") + 3);
                                 if (dest[dest.Length - 1] != '\\')
                                     dest += "\\";
 
@@ -620,7 +620,7 @@ namespace SysMana
         private void timerUpdateData_Tick(object sender, EventArgs e)
         {
             foreach (Meter meter in meters)
-                meter.currDataValue = data.GetValue(meter.data, meter.dataSubsource);
+                meter.CurrDataValue = data.GetValue(meter.Data, meter.DataSubsource);
         }
     }
 }
