@@ -38,6 +38,19 @@ namespace SysMana
         } 
         #endregion
 
+        #region Play Sound
+        [DllImport("WinMM.dll")]
+        private static extern bool PlaySound(string fname, int Mod, int flag);
+
+        private static int SND_ASYNC = 0x0001;
+
+        public static void PlaySound(string file)
+        {
+            if (File.Exists(file))
+                PlaySound(file, 0, SND_ASYNC);
+        }
+        #endregion
+
         public static FontStyle GenFontStyle(bool bold, bool italic, bool underline, bool strikeout)
         {
             return (bold ? FontStyle.Bold : FontStyle.Regular) | (italic ? FontStyle.Italic : FontStyle.Regular) | (underline ? FontStyle.Underline : FontStyle.Regular) | (strikeout ? FontStyle.Strikeout : FontStyle.Regular);

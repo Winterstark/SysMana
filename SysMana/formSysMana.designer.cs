@@ -109,6 +109,7 @@
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.formSysMana_DragEnter);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.formSysMeters_MouseDown);
             this.MouseEnter += new System.EventHandler(this.formSysMana_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.formSysMana_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formSysMeters_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.formSysMeters_MouseUp);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.formSysMeters_MouseWheel);

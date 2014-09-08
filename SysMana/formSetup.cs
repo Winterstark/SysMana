@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
+using System.Net;
 using Microsoft.VisualBasic;
 using GenericForms;
 
@@ -102,36 +103,46 @@ namespace SysMana
             if (ignoreChanges)
                 buttMeterSaveChanges.Enabled = false;
             else
+            {
+                Meter meter = meters[listMeters.SelectedIndex];
+
                 buttMeterSaveChanges.Enabled =
-                    numLeftMargin.Value != meters[listMeters.SelectedIndex].LeftMargin ||
-                    numTopMargin.Value != meters[listMeters.SelectedIndex].TopMargin ||
-                    numDataMin.Value != meters[listMeters.SelectedIndex].Min ||
-                    numDataMax.Value != meters[listMeters.SelectedIndex].Max ||
-                    numZoom.Value != meters[listMeters.SelectedIndex].Zoom ||
-                    comboClickAction.Text != meters[listMeters.SelectedIndex].ClickAction ||
-                    comboDragFileAction.Text != meters[listMeters.SelectedIndex].DragFileAction ||
-                    comboMWheelAction.Text != meters[listMeters.SelectedIndex].MouseWheelAction ||
-                    comboDataSource.Text != meters[listMeters.SelectedIndex].Data ||
-                    (comboDataSubsource.Visible && comboDataSubsource.Text != meters[listMeters.SelectedIndex].DataSubsource) ||
-                    comboVisualization.Text != meters[listMeters.SelectedIndex].Vis ||
-                    txtPrefix.Text != meters[listMeters.SelectedIndex].Prefix ||
-                    txtPostfix.Text != meters[listMeters.SelectedIndex].Postfix ||
-                    checkOnlyValue.Checked != meters[listMeters.SelectedIndex].OnlyValue ||
-                    txtSpinnerImage.Text != meters[listMeters.SelectedIndex].Spinner ||
-                    numSpinMin.Value != meters[listMeters.SelectedIndex].MinSpin ||
-                    numSpinMax.Value != meters[listMeters.SelectedIndex].MaxSpin ||
-                    txtBackground.Text != meters[listMeters.SelectedIndex].Background ||
-                    txtForeground.Text != meters[listMeters.SelectedIndex].Foreground ||
-                    comboProgressVector.Text != meters[listMeters.SelectedIndex].Vector ||
-                    numGraphW.Value != meters[listMeters.SelectedIndex].GraphW ||
-                    numGraphH.Value != meters[listMeters.SelectedIndex].GraphH ||
-                    numGraphStepW.Value != meters[listMeters.SelectedIndex].GraphStepW ||
-                    numGraphLineW.Value != meters[listMeters.SelectedIndex].GraphLineW ||
-                    numStepInterval.Value != meters[listMeters.SelectedIndex].GraphInterval ||
-                    picGraphColor.BackColor != meters[listMeters.SelectedIndex].GraphLineColor ||
-                    checkGraphBorder.Checked != meters[listMeters.SelectedIndex].GraphBorder ||
-                    txtGraphTexture.Text != meters[listMeters.SelectedIndex].GraphTex ||
-                    rdbGraphTextureFront.Checked != meters[listMeters.SelectedIndex].GraphTexFront;
+                    numLeftMargin.Value != meter.LeftMargin ||
+                    numTopMargin.Value != meter.TopMargin ||
+                    numDataMin.Value != meter.Min ||
+                    numDataMax.Value != meter.Max ||
+                    numZoom.Value != meter.Zoom ||
+                    comboClickAction.Text != meter.ClickAction ||
+                    comboDragFileAction.Text != meter.DragFileAction ||
+                    comboMWheelAction.Text != meter.MouseWheelAction ||
+                    comboDataSource.Text != meter.Data ||
+                    (comboDataSubsource.Visible && comboDataSubsource.Text != meter.DataSubsource) ||
+                    comboVisualization.Text != meter.Vis ||
+                    txtPrefix.Text != meter.Prefix ||
+                    txtPostfix.Text != meter.Postfix ||
+                    checkOnlyValue.Checked != meter.OnlyValue ||
+                    txtSpinnerImage.Text != meter.Spinner ||
+                    numSpinMin.Value != meter.MinSpin ||
+                    numSpinMax.Value != meter.MaxSpin ||
+                    txtBackground.Text != meter.Background ||
+                    txtForeground.Text != meter.Foreground ||
+                    comboProgressVector.Text != meter.Vector ||
+                    numGraphW.Value != meter.GraphW ||
+                    numGraphH.Value != meter.GraphH ||
+                    numGraphStepW.Value != meter.GraphStepW ||
+                    numGraphLineW.Value != meter.GraphLineW ||
+                    numStepInterval.Value != meter.GraphInterval ||
+                    picGraphColor.BackColor != meter.GraphLineColor ||
+                    checkGraphBorder.Checked != meter.GraphBorder ||
+                    txtGraphTexture.Text != meter.GraphTex ||
+                    rdbGraphTextureFront.Checked != meter.GraphTexFront ||
+                    rdbClock24HourFormat.Checked != meter.Clock24HrFormat ||
+                    checkClockPlaySounds.Checked != meter.ClockPlaySounds ||
+                    checkClockPlaySoundsOnStartup.Checked != meter.ClockPlaySoundsOnStartup ||
+                    txtClockLatitude.Text != meter.ClockLatitude.ToString() ||
+                    txtClockLongitude.Text != meter.ClockLongitude.ToString() ||
+                    txtClockTimeZone.Text != meter.ClockTimeZone.ToString();
+            }
         }
 
         void checkForGeneralOptionsChanges()
@@ -276,7 +287,48 @@ namespace SysMana
                     break;
             }
         }
+        
+        #region Geolocation search functions
+        string dlPage(string URL)
+        {
+            try
+            {
+                WebClient web = new WebClient();
+                web.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
+                return web.DownloadString(URL);
+            }
+            catch
+            {
+                return "error";
+            }
+        }
+
+        double parseCoord(string txt)
+        {
+            txt = txt.Replace(" ", "");
+
+            double coord = parseCoordElement(ref txt, "&deg;");
+            coord += parseCoordElement(ref txt, "\\'") / 60;
+            coord += parseCoordElement(ref txt, "&quot;") / 3600;
+
+            if (txt[txt.Length - 1] == 'S' || txt[txt.Length - 1] == 'W')
+                coord *= -1;
+
+            return coord;
+        }
+
+        double parseCoordElement(ref string txt, string element)
+        {
+            if (!txt.Contains(element))
+                return 0;
+
+            double coordEl = double.Parse(txt.Substring(0, txt.IndexOf(element)));
+            txt = txt.Substring(txt.IndexOf(element) + element.Length);
+
+            return coordEl;
+        }
+        #endregion
 
 
         public formSetup()
@@ -456,43 +508,55 @@ namespace SysMana
             groupMeter.Text = "Meter: " + listMeters.Text;
 
             //general fields
-            comboDataSource.Text = meters[listMeters.SelectedIndex].Data;
-            comboDataSubsource.Text = meters[listMeters.SelectedIndex].DataSubsource;
-            comboVisualization.Text = meters[listMeters.SelectedIndex].Vis;
-            comboClickAction.Text = meters[listMeters.SelectedIndex].ClickAction;
-            comboDragFileAction.Text = meters[listMeters.SelectedIndex].DragFileAction;
-            comboMWheelAction.Text = meters[listMeters.SelectedIndex].MouseWheelAction;
-            numLeftMargin.Value = meters[listMeters.SelectedIndex].LeftMargin;
-            numTopMargin.Value = meters[listMeters.SelectedIndex].TopMargin;
-            numDataMin.Value = meters[listMeters.SelectedIndex].Min;
-            numDataMax.Value = meters[listMeters.SelectedIndex].Max;
-            numZoom.Value = meters[listMeters.SelectedIndex].Zoom;
+            Meter meter = meters[listMeters.SelectedIndex];
+
+            comboDataSource.Text = meter.Data;
+            comboDataSubsource.Text = meter.DataSubsource;
+            comboVisualization.Text = meter.Vis;
+            comboClickAction.Text = meter.ClickAction;
+            comboDragFileAction.Text = meter.DragFileAction;
+            comboMWheelAction.Text = meter.MouseWheelAction;
+            numLeftMargin.Value = meter.LeftMargin;
+            numTopMargin.Value = meter.TopMargin;
+            numDataMin.Value = meter.Min;
+            numDataMax.Value = meter.Max;
+            numZoom.Value = meter.Zoom;
 
             //visualization-specific fields
-            txtPrefix.Text = meters[listMeters.SelectedIndex].Prefix;
-            txtPostfix.Text = meters[listMeters.SelectedIndex].Postfix;
-            checkOnlyValue.Checked = meters[listMeters.SelectedIndex].OnlyValue;
+            txtPrefix.Text = meter.Prefix;
+            txtPostfix.Text = meter.Postfix;
+            checkOnlyValue.Checked = meter.OnlyValue;
 
-            txtSpinnerImage.Text = meters[listMeters.SelectedIndex].Spinner;
-            numSpinMin.Value = meters[listMeters.SelectedIndex].MinSpin;
-            numSpinMax.Value = meters[listMeters.SelectedIndex].MaxSpin;
+            txtSpinnerImage.Text = meter.Spinner;
+            numSpinMin.Value = meter.MinSpin;
+            numSpinMax.Value = meter.MaxSpin;
 
-            txtBackground.Text = meters[listMeters.SelectedIndex].Background;
-            txtForeground.Text = meters[listMeters.SelectedIndex].Foreground;
-            comboProgressVector.Text = meters[listMeters.SelectedIndex].Vector;
+            txtBackground.Text = meter.Background;
+            txtForeground.Text = meter.Foreground;
+            comboProgressVector.Text = meter.Vector;
 
-            numGraphW.Value = meters[listMeters.SelectedIndex].GraphW;
-            numGraphH.Value = meters[listMeters.SelectedIndex].GraphH;
-            numGraphStepW.Value = meters[listMeters.SelectedIndex].GraphStepW;
-            numGraphLineW.Value = meters[listMeters.SelectedIndex].GraphLineW;
-            numStepInterval.Value = meters[listMeters.SelectedIndex].GraphInterval;
-            picGraphColor.BackColor = meters[listMeters.SelectedIndex].GraphLineColor;
-            checkGraphBorder.Checked = meters[listMeters.SelectedIndex].GraphBorder;
-            txtGraphTexture.Text = meters[listMeters.SelectedIndex].GraphTex;
-            if (meters[listMeters.SelectedIndex].GraphTexFront)
+            numGraphW.Value = meter.GraphW;
+            numGraphH.Value = meter.GraphH;
+            numGraphStepW.Value = meter.GraphStepW;
+            numGraphLineW.Value = meter.GraphLineW;
+            numStepInterval.Value = meter.GraphInterval;
+            picGraphColor.BackColor = meter.GraphLineColor;
+            checkGraphBorder.Checked = meter.GraphBorder;
+            txtGraphTexture.Text = meter.GraphTex;
+            if (meter.GraphTexFront)
                 rdbGraphTextureFront.Checked = true;
             else
                 rdbGraphTextureBack.Checked = true;
+
+            if (meter.Clock24HrFormat)
+                rdbClock24HourFormat.Checked = true;
+            else
+                rdbClock12HourFormat.Checked = true;
+            checkClockPlaySounds.Checked = meter.ClockPlaySounds;
+            checkClockPlaySoundsOnStartup.Checked = meter.ClockPlaySoundsOnStartup;
+            txtClockLatitude.Text = meter.ClockLatitude.ToString();
+            txtClockLongitude.Text = meter.ClockLongitude.ToString();
+            txtClockTimeZone.Text = meter.ClockTimeZone.ToString();
 
             //dispose of any prev imgs
             if (picSpinner.Image != null)
@@ -642,6 +706,40 @@ namespace SysMana
                 txtPrefix.Text = meters[listMeters.SelectedIndex].Prefix;
                 txtPostfix.Text = meters[listMeters.SelectedIndex].Postfix;
             }
+
+            //dota-style clock UI setup
+            if (comboDataSource.Text == "Dota-style clock")
+            {
+                lblDataMin.Visible = false;
+                numDataMin.Visible = false;
+                lblDataMax.Visible = false;
+                numDataMax.Visible = false;
+
+                if (comboVisualization.Items.Count != 1)
+                {
+                    comboVisualization.Items.Clear();
+                    comboVisualization.Items.Add("Dota-style clock");
+                    comboVisualization.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                lblDataMin.Visible = true;
+                numDataMin.Visible = true;
+                lblDataMax.Visible = true;
+                numDataMax.Visible = true;
+                
+                if (comboVisualization.Items.Count != 5)
+                {
+                    comboVisualization.Items.Clear();
+
+                    comboVisualization.Items.Add("Text");
+                    comboVisualization.Items.Add("Spinner");
+                    comboVisualization.Items.Add("Progress bar");
+                    comboVisualization.Items.Add("Image sequence");
+                    comboVisualization.Items.Add("Graph");
+                }
+            }
             
             checkForMeterChanges();
         }
@@ -672,6 +770,7 @@ namespace SysMana
                     panelProgressBar.Visible = false;
                     panelImageSequence.Visible = false;
                     panelGraph.Visible = false;
+                    panelDotaClock.Visible = false;
 
                     numZoom.Enabled = false;
                     lblZoom.Enabled = false;
@@ -682,6 +781,7 @@ namespace SysMana
                     panelProgressBar.Visible = false;
                     panelImageSequence.Visible = false;
                     panelGraph.Visible = false;
+                    panelDotaClock.Visible = false;
                     
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
@@ -692,6 +792,7 @@ namespace SysMana
                     panelProgressBar.Visible = true;
                     panelImageSequence.Visible = false;
                     panelGraph.Visible = false;
+                    panelDotaClock.Visible = false;
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
@@ -702,6 +803,7 @@ namespace SysMana
                     panelProgressBar.Visible = false;
                     panelImageSequence.Visible = true;
                     panelGraph.Visible = false;
+                    panelDotaClock.Visible = false;
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
@@ -714,11 +816,23 @@ namespace SysMana
                     panelProgressBar.Visible = false;
                     panelImageSequence.Visible = false;
                     panelGraph.Visible = true;
+                    panelDotaClock.Visible = false;
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
 
                     dispImgSeq();
+                    break;
+                case "Dota-style clock":
+                    panelText.Visible = false;
+                    panelSpin.Visible = false;
+                    panelProgressBar.Visible = false;
+                    panelImageSequence.Visible = false;
+                    panelGraph.Visible = false;
+                    panelDotaClock.Visible = true;
+
+                    numZoom.Enabled = true;
+                    lblZoom.Enabled = true;
                     break;
             }
         }
@@ -727,53 +841,67 @@ namespace SysMana
         {
             if (listMeters.SelectedIndex != -1)
             {
+                Meter meter = meters[listMeters.SelectedIndex];
+
                 //general fields
-                meters[listMeters.SelectedIndex].LeftMargin = (int)numLeftMargin.Value;
-                meters[listMeters.SelectedIndex].TopMargin = (int)numTopMargin.Value;
-                meters[listMeters.SelectedIndex].Min = (int)numDataMin.Value;
-                meters[listMeters.SelectedIndex].Max = (int)numDataMax.Value;
-                meters[listMeters.SelectedIndex].Zoom = (int)numZoom.Value;
-                meters[listMeters.SelectedIndex].Data = comboDataSource.Text;
-                meters[listMeters.SelectedIndex].DataSubsource = comboDataSubsource.Text;
-                meters[listMeters.SelectedIndex].Vis = comboVisualization.Text;
-                meters[listMeters.SelectedIndex].ClickAction = comboClickAction.Text;
-                meters[listMeters.SelectedIndex].DragFileAction = comboDragFileAction.Text;
-                meters[listMeters.SelectedIndex].MouseWheelAction = comboMWheelAction.Text;
+                meter.LeftMargin = (int)numLeftMargin.Value;
+                meter.TopMargin = (int)numTopMargin.Value;
+                meter.Min = (int)numDataMin.Value;
+                meter.Max = (int)numDataMax.Value;
+                meter.Zoom = (int)numZoom.Value;
+                meter.Data = comboDataSource.Text;
+                meter.DataSubsource = comboDataSubsource.Text;
+                meter.Vis = comboVisualization.Text;
+                meter.ClickAction = comboClickAction.Text;
+                meter.DragFileAction = comboDragFileAction.Text;
+                meter.MouseWheelAction = comboMWheelAction.Text;
 
                 //visualization-specific fields
-                meters[listMeters.SelectedIndex].Prefix = txtPrefix.Text;
-                meters[listMeters.SelectedIndex].Postfix = txtPostfix.Text;
-                meters[listMeters.SelectedIndex].OnlyValue = checkOnlyValue.Checked;
+                meter.Prefix = txtPrefix.Text;
+                meter.Postfix = txtPostfix.Text;
+                meter.OnlyValue = checkOnlyValue.Checked;
 
-                meters[listMeters.SelectedIndex].Spinner = txtSpinnerImage.Text;
-                meters[listMeters.SelectedIndex].MinSpin = (int)numSpinMin.Value;
-                meters[listMeters.SelectedIndex].MaxSpin = (int)numSpinMax.Value;
+                meter.Spinner = txtSpinnerImage.Text;
+                meter.MinSpin = (int)numSpinMin.Value;
+                meter.MaxSpin = (int)numSpinMax.Value;
 
-                meters[listMeters.SelectedIndex].Background = txtBackground.Text;
-                meters[listMeters.SelectedIndex].Foreground = txtForeground.Text;
-                meters[listMeters.SelectedIndex].Vector = comboProgressVector.Text;
+                meter.Background = txtBackground.Text;
+                meter.Foreground = txtForeground.Text;
+                meter.Vector = comboProgressVector.Text;
 
-                meters[listMeters.SelectedIndex].GraphW = (int)numGraphW.Value;
-                meters[listMeters.SelectedIndex].GraphH = (int)numGraphH.Value;
-                meters[listMeters.SelectedIndex].GraphStepW = (int)numGraphStepW.Value;
-                meters[listMeters.SelectedIndex].GraphLineW = (int)numGraphLineW.Value;
-                meters[listMeters.SelectedIndex].GraphInterval = (int)numStepInterval.Value;
-                meters[listMeters.SelectedIndex].GraphLineColor = picGraphColor.BackColor;
-                meters[listMeters.SelectedIndex].GraphBorder = checkGraphBorder.Checked;
-                meters[listMeters.SelectedIndex].GraphTex = txtGraphTexture.Text;
-                meters[listMeters.SelectedIndex].GraphTexFront = rdbGraphTextureFront.Checked;
+                meter.GraphW = (int)numGraphW.Value;
+                meter.GraphH = (int)numGraphH.Value;
+                meter.GraphStepW = (int)numGraphStepW.Value;
+                meter.GraphLineW = (int)numGraphLineW.Value;
+                meter.GraphInterval = (int)numStepInterval.Value;
+                meter.GraphLineColor = picGraphColor.BackColor;
+                meter.GraphBorder = checkGraphBorder.Checked;
+                meter.GraphTex = txtGraphTexture.Text;
+                meter.GraphTexFront = rdbGraphTextureFront.Checked;
+
+                meter.Clock24HrFormat = rdbClock24HourFormat.Checked;
+                meter.ClockPlaySounds = checkClockPlaySounds.Checked;
+                meter.ClockPlaySoundsOnStartup = checkClockPlaySoundsOnStartup.Checked;
+                double tempDbl;
+                if (double.TryParse(txtClockLatitude.Text, out tempDbl))
+                    meter.ClockLatitude = tempDbl;
+                if (double.TryParse(txtClockLongitude.Text, out tempDbl))
+                    meter.ClockLongitude = tempDbl;
+                int tempInt;
+                if (int.TryParse(txtClockTimeZone.Text, out tempInt))
+                    meter.ClockTimeZone = tempInt;
 
                 //copy any new imgs
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].Spinner);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].Background);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].Foreground);
-                checkIfNewImg(ref meters[listMeters.SelectedIndex].GraphTex);
+                checkIfNewImg(ref meter.Spinner);
+                checkIfNewImg(ref meter.Background);
+                checkIfNewImg(ref meter.Foreground);
+                checkIfNewImg(ref meter.GraphTex);
 
                 //update imgs & colors
-                meters[listMeters.SelectedIndex].LoadResources();
+                meter.LoadResources();
 
                 //update meter name in list
-                listMeters.Items[listMeters.SelectedIndex] = meters[listMeters.SelectedIndex].Data;
+                listMeters.Items[listMeters.SelectedIndex] = meter.Data;
             }
 
             saveMeters();
@@ -845,7 +973,18 @@ namespace SysMana
 
         private void buttOpenImgSeqDir_Click(object sender, EventArgs e)
         {
-            Process.Start(Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir);
+            string dir = Application.StartupPath + "\\imgs\\" + meters[listMeters.SelectedIndex].ImgSeqDir;
+
+            if (Directory.Exists(dir))
+                Process.Start(dir);
+        }
+
+        private void buttDotaClockOpenResDir_Click(object sender, EventArgs e)
+        {
+            string dir = Application.StartupPath + "\\imgs\\dota_clock";
+
+            if (Directory.Exists(dir))
+                Process.Start(dir);
         }
 
         private void buttImgSeqReload_Click(object sender, EventArgs e)
@@ -945,6 +1084,68 @@ namespace SysMana
         private void checkShowChangelog_CheckedChanged(object sender, EventArgs e)
         {
             checkForGeneralOptionsChanges();
+        }
+
+        private void buttGetData_Click(object sender, EventArgs e)
+        {
+            //geocoordinates
+            try
+            {
+                lblWAStatus.Text = "Downloading geocoordinates...";
+                this.Refresh();
+
+                string page = dlPage("http://www.wolframalpha.com/input/?i=" + txtLocation.Text + "+coordinates");
+
+                if (page == "error")
+                    throw new Exception();
+
+                int lb = page.LastIndexOf('"', page.IndexOf("&deg;")) + 1;
+                int ub = page.IndexOf('"', lb);
+                string[] coords = page.Substring(lb, ub - lb).Split(',');
+
+                txtClockLatitude.Text = parseCoord(coords[0]).ToString();
+                txtClockLongitude.Text = parseCoord(coords[1]).ToString();
+            }
+            catch
+            {
+                if (MessageBox.Show("Would you like to open Wolfram|Alpha webpage?", "Error while downloading geocoordinates.", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.Yes)
+                    Process.Start("http://www.wolframalpha.com/input/?i=" + txtLocation.Text + "+coordinates");
+            }
+
+            try
+            {
+                //timezone
+                lblWAStatus.Text = "Downloading time zone data...";
+                this.Refresh();
+
+                string page = dlPage("http://www.wolframalpha.com/input/?i=" + txtLocation.Text + "+timezone");
+
+                if (page == "error")
+                    throw new Exception();
+
+                int lb = page.IndexOf("from UTC | ") + 11;
+                if (lb == 10)
+                    throw new Exception();
+
+                int ub = page.IndexOf(" ", lb);
+                if (lb == -1)
+                    throw new Exception();
+
+                txtClockTimeZone.Text = page.Substring(lb, ub - lb);
+
+                //dst
+                bool plusPrefix = txtClockTimeZone.Text[0] == '+';
+
+                if (TimeZone.CurrentTimeZone.IsDaylightSavingTime(DateTime.Now))
+                    txtClockTimeZone.Text = (plusPrefix ? "+" : "") + (int.Parse(txtClockTimeZone.Text) - 1).ToString();
+            }
+            catch
+            {
+                if (MessageBox.Show("Would you like to open Wolfram|Alpha webpage?", "Error while downloading timezone information.", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == System.Windows.Forms.DialogResult.Yes)
+                    Process.Start("http://www.wolframalpha.com/input/?i=" + txtLocation.Text + "+timezone");
+            }
+
+            lblWAStatus.Text = "Enter your geocoordinates, or search by location:";
         }
     }
 }

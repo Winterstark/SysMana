@@ -165,7 +165,8 @@ namespace SysMana
         Font font;
         VertAlign align;
 
-        bool mousedown = false, initialized = false, showChangelog;
+        Meter clockMeter;
+        bool mousedown = false, mouseOverClock = false, initialized = false, showChangelog;
         Point prevPos;
         int fixedH, prevX, prevY, updateNotifs;
         
@@ -287,11 +288,16 @@ namespace SysMana
             else
             {
                 string tip;
-                
-                if (meter.OnlyValue)
-                    tip = data.GetValue(meter.Data, meter.DataSubsource).ToString();
+
+                if (meter.Data == "Dota-style clock")
+                    tip = DateTime.Now.Date.ToLongDateString();
                 else
-                    tip = meter.Prefix + data.GetValue(meter.Data, meter.DataSubsource).ToString() + meter.Postfix;
+                {
+                    if (meter.OnlyValue)
+                        tip = data.GetValue(meter.Data, meter.DataSubsource).ToString();
+                    else
+                        tip = meter.Prefix + data.GetValue(meter.Data, meter.DataSubsource).ToString() + meter.Postfix;
+                }
 
                 return tip;
             }
@@ -316,6 +322,9 @@ namespace SysMana
                         break;
                     case "Open power options":
                         WinExec(@"C:\Windows\System32\control.exe /name Microsoft.PowerOptions", SW_NORMAL);
+                        break;
+                    case "Open date and time options":
+                        WinExec(@"C:\Windows\System32\control.exe /name Microsoft.DateAndTime", SW_NORMAL);
                         break;
                     case "Open volume mixer":
                         WinExec("sndvol.exe", SW_NORMAL);
@@ -530,10 +539,22 @@ namespace SysMana
             }
             else
             {
-                string newTip = getTooltip(GetSelectedMeter(e.X));
+                Meter meter = GetSelectedMeter(e.X);
 
+                string newTip = getTooltip(meter);
                 if (tipInfo.GetToolTip(this) != newTip)
                     tipInfo.SetToolTip(this, newTip);
+
+                if (meter != null && meter.Data == "Dota-style clock")
+                {
+                    meter.ClockMouseover = true;
+                    clockMeter = meter;
+                }
+                else if (clockMeter != null)
+                {
+                    clockMeter.ClockMouseover = false;
+                    clockMeter = null;
+                }
             }
         }
 
@@ -566,6 +587,15 @@ namespace SysMana
             meterScroll(GetSelectedMeter(e.X), e.Delta);
         }
 
+        private void formSysMana_MouseLeave(object sender, EventArgs e)
+        {
+            if (clockMeter != null)
+            {
+                clockMeter.ClockMouseover = false;
+                clockMeter = null;
+            }
+        }
+
         private void timerRefresh_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -584,6 +614,12 @@ namespace SysMana
                 this.TopMost = false;
                 SetWindowPos(this.Handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
             }
+        }
+
+        private void timerUpdateData_Tick(object sender, EventArgs e)
+        {
+            foreach (Meter meter in meters)
+                meter.CurrDataValue = data.GetValue(meter.Data, meter.DataSubsource);
         }
 
         private void menuSetup_Click(object sender, EventArgs e)
@@ -615,12 +651,6 @@ namespace SysMana
         private void menuExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void timerUpdateData_Tick(object sender, EventArgs e)
-        {
-            foreach (Meter meter in meters)
-                meter.CurrDataValue = data.GetValue(meter.Data, meter.DataSubsource);
         }
     }
 }

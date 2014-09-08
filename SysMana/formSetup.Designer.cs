@@ -33,6 +33,22 @@
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabMeters = new System.Windows.Forms.TabPage();
             this.groupMeter = new System.Windows.Forms.GroupBox();
+            this.panelDotaClock = new System.Windows.Forms.Panel();
+            this.lblWAStatus = new System.Windows.Forms.Label();
+            this.txtClockTimeZone = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.txtClockLongitude = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.txtClockLatitude = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.buttGetData = new System.Windows.Forms.Button();
+            this.txtLocation = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.buttClockOpenResDir = new System.Windows.Forms.Button();
+            this.checkClockPlaySoundsOnStartup = new System.Windows.Forms.CheckBox();
+            this.checkClockPlaySounds = new System.Windows.Forms.CheckBox();
+            this.rdbClock24HourFormat = new System.Windows.Forms.RadioButton();
+            this.rdbClock12HourFormat = new System.Windows.Forms.RadioButton();
             this.buttChooseTextFile = new System.Windows.Forms.Button();
             this.numTopMargin = new System.Windows.Forms.NumericUpDown();
             this.label35 = new System.Windows.Forms.Label();
@@ -52,9 +68,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.numDataMax = new System.Windows.Forms.NumericUpDown();
             this.numDataMin = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblDataMax = new System.Windows.Forms.Label();
             this.numLeftMargin = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblDataMin = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelGraph = new System.Windows.Forms.Panel();
@@ -158,6 +174,7 @@
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
+            this.panelDotaClock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).BeginInit();
@@ -218,6 +235,7 @@
             // 
             // groupMeter
             // 
+            this.groupMeter.Controls.Add(this.panelDotaClock);
             this.groupMeter.Controls.Add(this.buttChooseTextFile);
             this.groupMeter.Controls.Add(this.numTopMargin);
             this.groupMeter.Controls.Add(this.label35);
@@ -237,9 +255,9 @@
             this.groupMeter.Controls.Add(this.label4);
             this.groupMeter.Controls.Add(this.numDataMax);
             this.groupMeter.Controls.Add(this.numDataMin);
-            this.groupMeter.Controls.Add(this.label17);
+            this.groupMeter.Controls.Add(this.lblDataMax);
             this.groupMeter.Controls.Add(this.numLeftMargin);
-            this.groupMeter.Controls.Add(this.label16);
+            this.groupMeter.Controls.Add(this.lblDataMin);
             this.groupMeter.Controls.Add(this.label3);
             this.groupMeter.Controls.Add(this.label2);
             this.groupMeter.Controls.Add(this.panelGraph);
@@ -254,6 +272,169 @@
             this.groupMeter.TabIndex = 10;
             this.groupMeter.TabStop = false;
             this.groupMeter.Text = "No meter selected";
+            // 
+            // panelDotaClock
+            // 
+            this.panelDotaClock.Controls.Add(this.lblWAStatus);
+            this.panelDotaClock.Controls.Add(this.txtClockTimeZone);
+            this.panelDotaClock.Controls.Add(this.label39);
+            this.panelDotaClock.Controls.Add(this.txtClockLongitude);
+            this.panelDotaClock.Controls.Add(this.label38);
+            this.panelDotaClock.Controls.Add(this.txtClockLatitude);
+            this.panelDotaClock.Controls.Add(this.label17);
+            this.panelDotaClock.Controls.Add(this.buttGetData);
+            this.panelDotaClock.Controls.Add(this.txtLocation);
+            this.panelDotaClock.Controls.Add(this.label16);
+            this.panelDotaClock.Controls.Add(this.buttClockOpenResDir);
+            this.panelDotaClock.Controls.Add(this.checkClockPlaySoundsOnStartup);
+            this.panelDotaClock.Controls.Add(this.checkClockPlaySounds);
+            this.panelDotaClock.Controls.Add(this.rdbClock24HourFormat);
+            this.panelDotaClock.Controls.Add(this.rdbClock12HourFormat);
+            this.panelDotaClock.Location = new System.Drawing.Point(11, 167);
+            this.panelDotaClock.Name = "panelDotaClock";
+            this.panelDotaClock.Size = new System.Drawing.Size(311, 181);
+            this.panelDotaClock.TabIndex = 30;
+            // 
+            // lblWAStatus
+            // 
+            this.lblWAStatus.AutoSize = true;
+            this.lblWAStatus.Location = new System.Drawing.Point(9, 109);
+            this.lblWAStatus.Name = "lblWAStatus";
+            this.lblWAStatus.Size = new System.Drawing.Size(238, 13);
+            this.lblWAStatus.TabIndex = 66;
+            this.lblWAStatus.Text = "Enter your geocoordinates, or search by location:";
+            // 
+            // txtClockTimeZone
+            // 
+            this.txtClockTimeZone.Location = new System.Drawing.Point(244, 152);
+            this.txtClockTimeZone.Name = "txtClockTimeZone";
+            this.txtClockTimeZone.Size = new System.Drawing.Size(37, 20);
+            this.txtClockTimeZone.TabIndex = 64;
+            this.txtClockTimeZone.TextChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(179, 155);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(59, 13);
+            this.label39.TabIndex = 65;
+            this.label39.Text = "Time zone:";
+            // 
+            // txtClockLongitude
+            // 
+            this.txtClockLongitude.Location = new System.Drawing.Point(130, 152);
+            this.txtClockLongitude.Name = "txtClockLongitude";
+            this.txtClockLongitude.Size = new System.Drawing.Size(44, 20);
+            this.txtClockLongitude.TabIndex = 52;
+            this.txtClockLongitude.TextChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(90, 156);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(34, 13);
+            this.label38.TabIndex = 53;
+            this.label38.Text = "Long:";
+            // 
+            // txtClockLatitude
+            // 
+            this.txtClockLatitude.Location = new System.Drawing.Point(40, 153);
+            this.txtClockLatitude.Name = "txtClockLatitude";
+            this.txtClockLatitude.Size = new System.Drawing.Size(44, 20);
+            this.txtClockLatitude.TabIndex = 50;
+            this.txtClockLatitude.TextChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 156);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(25, 13);
+            this.label17.TabIndex = 51;
+            this.label17.Text = "Lat:";
+            // 
+            // buttGetData
+            // 
+            this.buttGetData.Location = new System.Drawing.Point(221, 125);
+            this.buttGetData.Name = "buttGetData";
+            this.buttGetData.Size = new System.Drawing.Size(60, 23);
+            this.buttGetData.TabIndex = 49;
+            this.buttGetData.Text = "Get data";
+            this.buttGetData.UseVisualStyleBackColor = true;
+            this.buttGetData.Click += new System.EventHandler(this.buttGetData_Click);
+            // 
+            // txtLocation
+            // 
+            this.txtLocation.Location = new System.Drawing.Point(66, 127);
+            this.txtLocation.Name = "txtLocation";
+            this.txtLocation.Size = new System.Drawing.Size(149, 20);
+            this.txtLocation.TabIndex = 47;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 130);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(51, 13);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "Location:";
+            // 
+            // buttClockOpenResDir
+            // 
+            this.buttClockOpenResDir.Location = new System.Drawing.Point(206, 11);
+            this.buttClockOpenResDir.Name = "buttClockOpenResDir";
+            this.buttClockOpenResDir.Size = new System.Drawing.Size(99, 44);
+            this.buttClockOpenResDir.TabIndex = 4;
+            this.buttClockOpenResDir.Text = "Open resources directory";
+            this.buttClockOpenResDir.UseVisualStyleBackColor = true;
+            this.buttClockOpenResDir.Click += new System.EventHandler(this.buttDotaClockOpenResDir_Click);
+            // 
+            // checkClockPlaySoundsOnStartup
+            // 
+            this.checkClockPlaySoundsOnStartup.AutoSize = true;
+            this.checkClockPlaySoundsOnStartup.Location = new System.Drawing.Point(12, 71);
+            this.checkClockPlaySoundsOnStartup.Name = "checkClockPlaySoundsOnStartup";
+            this.checkClockPlaySoundsOnStartup.Size = new System.Drawing.Size(257, 17);
+            this.checkClockPlaySoundsOnStartup.TabIndex = 1;
+            this.checkClockPlaySoundsOnStartup.Text = "Play sunrise sound if SysMana starts before noon";
+            this.checkClockPlaySoundsOnStartup.UseVisualStyleBackColor = true;
+            this.checkClockPlaySoundsOnStartup.CheckedChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // checkClockPlaySounds
+            // 
+            this.checkClockPlaySounds.AutoSize = true;
+            this.checkClockPlaySounds.Location = new System.Drawing.Point(12, 52);
+            this.checkClockPlaySounds.Name = "checkClockPlaySounds";
+            this.checkClockPlaySounds.Size = new System.Drawing.Size(165, 17);
+            this.checkClockPlaySounds.TabIndex = 1;
+            this.checkClockPlaySounds.Text = "Play sound on sunrise/sunset";
+            this.checkClockPlaySounds.UseVisualStyleBackColor = true;
+            this.checkClockPlaySounds.CheckedChanged += new System.EventHandler(this.meterOption_ValueChanged);
+            // 
+            // rdbClock24HourFormat
+            // 
+            this.rdbClock24HourFormat.AutoSize = true;
+            this.rdbClock24HourFormat.Checked = true;
+            this.rdbClock24HourFormat.Location = new System.Drawing.Point(108, 14);
+            this.rdbClock24HourFormat.Name = "rdbClock24HourFormat";
+            this.rdbClock24HourFormat.Size = new System.Drawing.Size(90, 17);
+            this.rdbClock24HourFormat.TabIndex = 0;
+            this.rdbClock24HourFormat.TabStop = true;
+            this.rdbClock24HourFormat.Text = "24-hour clock";
+            this.rdbClock24HourFormat.UseVisualStyleBackColor = true;
+            // 
+            // rdbClock12HourFormat
+            // 
+            this.rdbClock12HourFormat.AutoSize = true;
+            this.rdbClock12HourFormat.Location = new System.Drawing.Point(12, 13);
+            this.rdbClock12HourFormat.Name = "rdbClock12HourFormat";
+            this.rdbClock12HourFormat.Size = new System.Drawing.Size(90, 17);
+            this.rdbClock12HourFormat.TabIndex = 0;
+            this.rdbClock12HourFormat.Text = "12-hour clock";
+            this.rdbClock12HourFormat.UseVisualStyleBackColor = true;
+            this.rdbClock12HourFormat.CheckedChanged += new System.EventHandler(this.meterOption_ValueChanged);
             // 
             // buttChooseTextFile
             // 
@@ -402,6 +583,7 @@
             "Open mobility center",
             "Open power options",
             "Open volume mixer",
+            "Open date and time options",
             "Popup volume control",
             "Popup WLAN connections",
             "Launch program/file...",
@@ -469,7 +651,8 @@
             "Wireless signal strength",
             "System volume",
             "Audio peak level",
-            "Text file"});
+            "Text file",
+            "Dota-style clock"});
             this.comboDataSource.Location = new System.Drawing.Point(84, 49);
             this.comboDataSource.Name = "comboDataSource";
             this.comboDataSource.Size = new System.Drawing.Size(186, 21);
@@ -523,14 +706,14 @@
             this.numDataMin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numDataMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
-            // label17
+            // lblDataMax
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(172, 105);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(62, 13);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Max. value:";
+            this.lblDataMax.AutoSize = true;
+            this.lblDataMax.Location = new System.Drawing.Point(172, 105);
+            this.lblDataMax.Name = "lblDataMax";
+            this.lblDataMax.Size = new System.Drawing.Size(62, 13);
+            this.lblDataMax.TabIndex = 1;
+            this.lblDataMax.Text = "Max. value:";
             // 
             // numLeftMargin
             // 
@@ -551,14 +734,14 @@
             this.numLeftMargin.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             this.numLeftMargin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.meterOption_KeyDown);
             // 
-            // label16
+            // lblDataMin
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(19, 105);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 13);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "Min. value:";
+            this.lblDataMin.AutoSize = true;
+            this.lblDataMin.Location = new System.Drawing.Point(19, 105);
+            this.lblDataMin.Name = "lblDataMin";
+            this.lblDataMin.Size = new System.Drawing.Size(59, 13);
+            this.lblDataMin.TabIndex = 1;
+            this.lblDataMin.Text = "Min. value:";
             // 
             // label3
             // 
@@ -1681,6 +1864,8 @@
             this.tabMeters.ResumeLayout(false);
             this.groupMeter.ResumeLayout(false);
             this.groupMeter.PerformLayout();
+            this.panelDotaClock.ResumeLayout(false);
+            this.panelDotaClock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDataMax)).EndInit();
@@ -1777,9 +1962,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.NumericUpDown numDataMin;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblDataMin;
         private System.Windows.Forms.NumericUpDown numDataMax;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblDataMax;
         private System.Windows.Forms.NumericUpDown numZoom;
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label label18;
@@ -1846,5 +2031,21 @@
         private System.Windows.Forms.Label lblUpdateNotifications;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TrackBar trackUpdate;
+        private System.Windows.Forms.Panel panelDotaClock;
+        private System.Windows.Forms.RadioButton rdbClock24HourFormat;
+        private System.Windows.Forms.RadioButton rdbClock12HourFormat;
+        private System.Windows.Forms.CheckBox checkClockPlaySoundsOnStartup;
+        private System.Windows.Forms.CheckBox checkClockPlaySounds;
+        private System.Windows.Forms.Button buttClockOpenResDir;
+        private System.Windows.Forms.TextBox txtClockTimeZone;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox txtClockLongitude;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox txtClockLatitude;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button buttGetData;
+        private System.Windows.Forms.TextBox txtLocation;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblWAStatus;
     }
 }

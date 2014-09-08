@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.IO;
 
 namespace SysMana
@@ -41,6 +42,17 @@ namespace SysMana
         Image graphTexImg;
         DateTime prevGraphTick;
 
+        public bool Clock24HrFormat, ClockPlaySounds, ClockPlaySoundsOnStartup, ClockMouseover;
+        public double ClockLatitude, ClockLongitude;
+        public int ClockTimeZone;
+        DateTime clockSunrise, clockSunset, clockYesterdaySunset, clockTomorrowSunrise, clockNextUpdate;
+        Image clockOrb, clockRotatedOrb, clockFrame, clockDayIcon, clockNightIcon;
+        TextureBrush clockDayBrush, clockNightBrush;
+        float clockDayAngle;
+        int clockYOffset;
+        enum UpdateStatus { FirstUpdate, Day, Night };
+        UpdateStatus prevUpdateStatus;
+
         public int Left, H;
         Func<string, Image> LoadImg;
         Action<Image> DisposeImg;
@@ -67,6 +79,13 @@ namespace SysMana
             GraphLineW = 1;
             GraphInterval = 25;
             GraphLineColor = Color.Black;
+            Clock24HrFormat = true;
+            ClockPlaySounds = true;
+            ClockPlaySoundsOnStartup = true;
+            ClockLatitude = 0;
+            ClockLongitude = 0;
+            ClockTimeZone = 0;
+            clockYOffset = 0;
         }
 
         public Meter(string lineFromFile, string imgsDir, Func<string, Image> LoadImg, Action<Image> DisposeImg)
@@ -75,59 +94,82 @@ namespace SysMana
             this.LoadImg = LoadImg;
             this.DisposeImg = DisposeImg;
 
-            string[] parts = lineFromFile.Split(new string[] { "--" }, StringSplitOptions.None);
-            int i = 0;
+            try
+            {
+                string[] parts = lineFromFile.Split(new string[] { "--" }, StringSplitOptions.None);
+                int i = 0;
 
-            Data = parts[i++];
-            DataSubsource = parts[i++];
-            Vis = parts[i++];
-            LeftMargin = int.Parse(parts[i++]);
-            TopMargin = int.Parse(parts[i++]);
-            Min = int.Parse(parts[i++]);
-            Max = int.Parse(parts[i++]);
-            Zoom = int.Parse(parts[i++]);
-            ClickAction = parts[i++];
-            DragFileAction = parts[i++];
-            MouseWheelAction = parts[i++];
+                Data = parts[i++];
+                DataSubsource = parts[i++];
+                Vis = parts[i++];
+                LeftMargin = int.Parse(parts[i++]);
+                TopMargin = int.Parse(parts[i++]);
+                Min = int.Parse(parts[i++]);
+                Max = int.Parse(parts[i++]);
+                Zoom = int.Parse(parts[i++]);
+                ClickAction = parts[i++];
+                DragFileAction = parts[i++];
+                MouseWheelAction = parts[i++];
 
-            Prefix = parts[i++];
-            Postfix = parts[i++];
-            OnlyValue = bool.Parse(parts[i++]);
+                Prefix = parts[i++];
+                Postfix = parts[i++];
+                OnlyValue = bool.Parse(parts[i++]);
 
-            Spinner = parts[i++];
-            MinSpin = int.Parse(parts[i++]);
-            MaxSpin = int.Parse(parts[i++]);
+                Spinner = parts[i++];
+                MinSpin = int.Parse(parts[i++]);
+                MaxSpin = int.Parse(parts[i++]);
 
-            Background = parts[i++];
-            Foreground = parts[i++];
-            Vector = parts[i++];
+                Background = parts[i++];
+                Foreground = parts[i++];
+                Vector = parts[i++];
 
-            ImgSeqDir = parts[i++];
+                ImgSeqDir = parts[i++];
 
-            GraphW = int.Parse(parts[i++]);
-            GraphH = int.Parse(parts[i++]);
-            GraphStepW = int.Parse(parts[i++]);
-            GraphLineW = int.Parse(parts[i++]);
-            GraphInterval = int.Parse(parts[i++]);
-            GraphLineColor = Color.FromArgb(int.Parse(parts[i++]), int.Parse(parts[i++]), int.Parse(parts[i++]));
-            GraphBorder = bool.Parse(parts[i++]);
-            GraphTex = parts[i++];
-            GraphTexFront = bool.Parse(parts[i++]);
+                GraphW = int.Parse(parts[i++]);
+                GraphH = int.Parse(parts[i++]);
+                GraphStepW = int.Parse(parts[i++]);
+                GraphLineW = int.Parse(parts[i++]);
+                GraphInterval = int.Parse(parts[i++]);
+                GraphLineColor = Color.FromArgb(int.Parse(parts[i++]), int.Parse(parts[i++]), int.Parse(parts[i++]));
+                GraphBorder = bool.Parse(parts[i++]);
+                GraphTex = parts[i++];
+                GraphTexFront = bool.Parse(parts[i++]);
+
+                Clock24HrFormat = bool.Parse(parts[i++]);
+                ClockPlaySounds = bool.Parse(parts[i++]);
+                ClockPlaySoundsOnStartup = bool.Parse(parts[i++]);
+                ClockLatitude = double.Parse(parts[i++]);
+                ClockLongitude = double.Parse(parts[i++]);
+                ClockTimeZone = int.Parse(parts[i++]);
+
+                clockYOffset = 0;
+            }
+            catch
+            {
+                //meters file is corrupted or comes from a previous version (in which case SysMana should continue to run fine)
+            }
 
             LoadResources();
         }
 
         public void LoadResources()
         {
+            //cleanup previous resources
             DisposeImg(spinnerImg);
             DisposeImg(backgroundImg);
             DisposeImg(foregroundImg);
             DisposeImg(graphTexImg);
+            DisposeImg(clockOrb);
+            DisposeImg(clockRotatedOrb);
+            DisposeImg(clockFrame);
+            DisposeImg(clockDayIcon);
+            DisposeImg(clockNightIcon);
 
             if (imgSeq != null)
                 foreach (Image img in imgSeq)
                     DisposeImg(img);
             
+            //load images
             switch (Vis)
             {
                 case "Spinner":
@@ -138,7 +180,7 @@ namespace SysMana
                     foregroundImg = LoadImg(imgsDir + Foreground);
                     break;
                 case "Image sequence":
-                    if (ImgSeqDir != "" && Directory.Exists(imgsDir + "\\" + ImgSeqDir))
+                    if (ImgSeqDir != "" && Directory.Exists(imgsDir + ImgSeqDir))
                     {
                         string[] files = Misc.GetFilesInNaturalOrder(imgsDir + ImgSeqDir);
                         imgSeq = new Image[files.Length];
@@ -149,6 +191,17 @@ namespace SysMana
                     break;
                 case "Graph":
                     graphTexImg = LoadImg(imgsDir + GraphTex);
+                    break;
+                case "Dota-style clock":
+                    clockFrame = LoadImg(imgsDir + "dota_clock\\frame.png");
+                    clockDayIcon = LoadImg(imgsDir + "dota_clock\\day.png");
+                    clockNightIcon = LoadImg(imgsDir + "dota_clock\\night.png");
+
+                    clockDayBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\day orb.png"));
+                    clockNightBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\night orb.png"));
+
+                    clockNextUpdate = DateTime.Now;
+                    clockSunrise = new DateTime(); //force calcTwilights call
                     break;
             }
             
@@ -164,7 +217,8 @@ namespace SysMana
                 Spinner + "--" + MinSpin + "--" + MaxSpin + "--" +
                 Background + "--" + Foreground + "--" + Vector + "--" +
                 ImgSeqDir + "--" +
-                GraphW + "--" + GraphH + "--" + GraphStepW + "--" + GraphLineW + "--" + GraphInterval + "--" + GraphLineColor.R + "--" + GraphLineColor.G + "--" + GraphLineColor.B + "--" + GraphBorder + "--" + GraphTex + "--" + GraphTexFront;
+                GraphW + "--" + GraphH + "--" + GraphStepW + "--" + GraphLineW + "--" + GraphInterval + "--" + GraphLineColor.R + "--" + GraphLineColor.G + "--" + GraphLineColor.B + "--" + GraphBorder + "--" + GraphTex + "--" + GraphTexFront + "--" +
+                Clock24HrFormat + "--" + ClockPlaySounds + "--" + ClockPlaySoundsOnStartup + "--" + ClockLatitude + "--" + ClockLongitude + "--" + ClockTimeZone;
         }
 
         public void Draw(Graphics gfx, Font font, int fixedH, VertAlign align, ref int left, ref int h)
@@ -382,6 +436,146 @@ namespace SysMana
                         h = Math.Max(h, this.H);
                     }
                     break;
+                case "Dota-style clock":
+                    if (!(clockDayBrush == null || clockNightBrush == null || clockFrame == null || clockDayIcon == null || clockNightIcon == null))
+                    {
+                        //calculate clock rotation
+                        if (DateTime.Now > clockNextUpdate)
+                        {
+                            DisposeImg(clockRotatedOrb); //cleanup previous orb
+
+                            //recalculate sunrise/sunset times if new day
+                            if (clockSunrise.Date != DateTime.Now.Date)
+                            {
+                                calcTwilights();
+
+                                //generate orb with new day/night ratio
+                                clockDayAngle = 360.0f * (float)(clockSunset - clockSunrise).TotalSeconds / (60 * 60 * 24);
+                                int orbSize = clockDayBrush.Image.Width;
+
+                                DisposeImg(clockOrb);
+                                clockOrb = new Bitmap(orbSize, orbSize);
+
+                                Graphics tempOrbGfx = Graphics.FromImage(clockOrb);
+                                tempOrbGfx.FillPie(clockDayBrush, 0, 0, orbSize, orbSize, -90, clockDayAngle);
+                                tempOrbGfx.FillPie(clockNightBrush, 0, 0, orbSize, orbSize, -90 + clockDayAngle, 360 - clockDayAngle);
+                                tempOrbGfx.Dispose();
+                            }
+
+                            //rotate orb
+                            float rotAngle;
+                            if (DateTime.Now < clockSunrise)
+                                //before sunrise
+                                rotAngle = (360.0f - clockDayAngle) * (clockSunrise - DateTime.Now).Ticks / (clockSunrise - clockYesterdaySunset).Ticks;
+                            else if (DateTime.Now < clockSunset)
+                                //daytime
+                                rotAngle = -clockDayAngle * (DateTime.Now - clockSunrise).Ticks / (clockSunset - clockSunrise).Ticks;
+                            else
+                                //after sunset
+                                rotAngle = -clockDayAngle - (360.0f - clockDayAngle) * (DateTime.Now - clockSunset).Ticks / (clockTomorrowSunrise - clockSunset).Ticks;
+
+                            clockRotatedOrb = new Bitmap(clockOrb.Width, clockOrb.Height);
+
+                            Graphics tempGfx = Graphics.FromImage(clockRotatedOrb);
+                            tempGfx.TranslateTransform(clockOrb.Width / 2, clockOrb.Height / 2);
+                            tempGfx.RotateTransform(rotAngle);
+                            tempGfx.TranslateTransform(-clockOrb.Width / 2, -clockOrb.Height / 2);
+                            tempGfx.DrawImage(clockOrb, 0, 0, clockOrb.Width, clockOrb.Height);
+                            tempGfx.Dispose();
+
+                            //sound notifications
+                            if (ClockPlaySounds)
+                                switch (prevUpdateStatus)
+                                {
+                                    case UpdateStatus.FirstUpdate:
+                                        if (ClockPlaySoundsOnStartup && clockSunrise < DateTime.Now && DateTime.Now.Hour < 12)
+                                            Misc.PlaySound(imgsDir + "dota_clock\\morning.wav");
+
+                                        if (clockSunrise < DateTime.Now && DateTime.Now < clockSunset)
+                                            prevUpdateStatus = UpdateStatus.Day;
+                                        else
+                                            prevUpdateStatus = UpdateStatus.Night;
+                                        break;
+                                    case UpdateStatus.Day:
+                                        if (DateTime.Now > clockSunset)
+                                        {
+                                            Misc.PlaySound(imgsDir + "dota_clock\\night.wav");
+                                            prevUpdateStatus = UpdateStatus.Night;
+                                        }
+                                        break;
+                                    case UpdateStatus.Night:
+                                        if (DateTime.Now > clockSunrise && DateTime.Now < clockSunset)
+                                        {
+                                            Misc.PlaySound(imgsDir + "dota_clock\\morning.wav");
+                                            prevUpdateStatus = UpdateStatus.Day;
+                                        }
+                                        break;
+                                }
+
+                            clockNextUpdate = DateTime.Now.AddMinutes(1);
+                        }
+
+                        //calc sizes of clock elements
+                        int midX = left + zoomLength(clockFrame.Width / 2, Zoom);
+                        int frameH = zoomLength(clockFrame.Height, Zoom);
+                        int orbH = zoomLength(clockOrb.Height, Zoom);
+                        int orbY = y + zoomLength(29, Zoom) + clockYOffset;
+                        int iconW = zoomLength(clockDayIcon.Width, (int)(Zoom * 1.33));
+                        int iconH = zoomLength(clockDayIcon.Height, (int)(Zoom * 1.33));
+
+                        //clock animation?
+                        if (ClockMouseover)
+                        {
+                            //hide frame and show orb in full
+                            int orbMinY = Math.Max(y + frameH - orbH, 0);
+
+                            if (orbY > orbMinY)
+                            {
+                                orbY -= 2;
+                                clockYOffset -= 2;
+
+                                if (orbY < orbMinY)
+                                {
+                                    clockYOffset += orbMinY - orbY;
+                                    orbY = orbMinY;
+                                }
+                            }
+                        }
+                        else if (clockYOffset < 0)
+                        {
+                            //reverse animation until beginning
+                            clockYOffset += 2;
+
+                            if (clockYOffset > 0)
+                                clockYOffset = 0;
+                        }
+
+                        //draw clock
+                        gfx.DrawImage(clockRotatedOrb, midX - zoomLength(clockOrb.Width, Zoom) / 2 + 1, orbY, zoomLength(clockOrb.Width, Zoom), orbH);
+
+                        if (clockYOffset == 0)
+                        {
+                            gfx.DrawImage(clockFrame, left, y, zoomLength(clockFrame.Width, Zoom), frameH);
+
+                            if (clockSunrise < DateTime.Now && DateTime.Now < clockSunset)
+                                gfx.DrawImage(clockDayIcon, midX - iconW / 2 + 1, y + zoomLength(2, Zoom), iconW, iconH);
+                            else
+                                gfx.DrawImage(clockNightIcon, midX - iconW / 2 + 1, y + zoomLength(2, Zoom), iconW, iconH);
+
+                            string time;
+                            if (Clock24HrFormat)
+                                time = DateTime.Now.ToString("H:mm");
+                            else
+                                time = DateTime.Now.ToString("h:mm");
+
+                            gfx.DrawString(time, font, Brushes.White, midX - gfx.MeasureString(time, font).Width / 2, frameH - font.Size);
+                        }
+
+                        left += zoomLength(clockFrame.Width, Zoom);
+                        this.H = zoomLength(clockFrame.Height, Zoom);
+                        h = Math.Max(h, this.H);
+                    }
+                    break;
             }
 
             prevDraw = DateTime.Now;
@@ -410,5 +604,91 @@ namespace SysMana
                     return fixedH - drawH;
             }
         }
+
+        #region Sunrise/sunset calculations
+        void calcTwilights()
+        {
+            DateTime tmp;
+
+            calcTwilightsForDate(DateTime.Now.AddDays(-1), out tmp, out clockYesterdaySunset); //calc yesterday's sunset
+            calcTwilightsForDate(DateTime.Now, out clockSunrise, out clockSunset); //calc today's sunrise & sunset
+            calcTwilightsForDate(DateTime.Now.AddDays(1), out clockTomorrowSunrise, out tmp); //calc tomorrow's sunrise
+        }
+
+        void calcTwilightsForDate(DateTime date, out DateTime sunrise, out DateTime sunset)
+        {
+            if (ClockLatitude == 0 && ClockLongitude == 0)
+            {
+                sunrise = new DateTime(date.Year, date.Month, date.Day, 6, 0, 0);
+                sunset = new DateTime(date.Year, date.Month, date.Day, 18, 0, 0);
+                return;
+            }
+
+            //calc julian day
+            int a = (14 - date.Month) / 12;
+            int y = date.Year + 4800 - a;
+            int m = date.Month + 12 * a - 3;
+            int JD = date.Day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+
+            //calc julian cycle
+            double lw = -ClockLongitude;
+            double nAsterisk = JD - 2451545.0009 - lw / 360;
+            double n = Math.Round(nAsterisk);
+
+            //calc approximate solar noon
+            double JAsterisk = 2451545.0009 + lw / 360 + n;
+
+            //calc solar mean anomaly
+            double M = (357.5291 + 0.98560028 * (JAsterisk - 2451545)) % 360;
+
+            //calc equation of center
+            double C = 1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M);
+
+            //calc ecliptic longitude
+            double λ = (M + 102.9372 + C + 180) % 360;
+
+            //calc solar transit
+            double JTransit = JAsterisk + 0.0053 * sin(M) - 0.0069 * sin(2 * λ);
+
+            //calc sun declination
+            double δ = Math.Asin(sin(λ) * sin(23.45)) * 180.0 / Math.PI;
+
+            //calc hour angle
+            double Φ = ClockLatitude;
+            double ω0 = Math.Acos((sin(-0.83) - sin(Φ) * sin(δ)) / (cos(Φ) * cos(δ))) * 180.0 / Math.PI;
+
+            //calc sunrise & sunset
+            double JSet = 2451545.0009 + (ω0 + lw) / 360 + n + 0.0053 * sin(M) - 0.0069 * sin(2 * λ);
+            double JRise = JTransit - (JSet - JTransit);
+
+            //convert to time of day
+            double JRiseDiff = 1.0 - JRise % 1.0f;
+            double JSetDiff = JSet % 1.0f;
+
+            sunrise = date.Date.AddHours(12).Subtract(new TimeSpan(0, 0, (int)(JRiseDiff * 86400)));
+            sunset = date.Date.AddHours(12).AddSeconds(JSetDiff * 86400);
+
+            sunrise = sunrise.AddHours(utcTZone());
+            sunset = sunset.AddHours(utcTZone());
+        }
+
+        int utcTZone()
+        {
+            if (TimeZone.CurrentTimeZone.IsDaylightSavingTime(DateTime.Now))
+                return ClockTimeZone + 1;
+            else
+                return ClockTimeZone;
+        }
+
+        double sin(double degs)
+        {
+            return Math.Sin(degs * Math.PI / 180.0);
+        }
+
+        double cos(double degs)
+        {
+            return Math.Cos(degs * Math.PI / 180.0);
+        } 
+        #endregion
     }
 }

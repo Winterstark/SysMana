@@ -1,4 +1,4 @@
-950
+910
 842
 50
 1
@@ -9,9 +9,9 @@
 Bottom
 True
 True
-Segoe UI
-14
-False
+Hypatia Sans Pro
+10
+True
 False
 False
 False
