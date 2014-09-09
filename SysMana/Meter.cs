@@ -484,6 +484,8 @@ namespace SysMana
                             tempGfx.Dispose();
 
                             //sound notifications
+                            bool daytime = clockSunrise < DateTime.Now && DateTime.Now < clockSunset;
+
                             if (ClockPlaySounds)
                                 switch (prevUpdateStatus)
                                 {
@@ -491,20 +493,20 @@ namespace SysMana
                                         if (ClockPlaySoundsOnStartup && clockSunrise < DateTime.Now && DateTime.Now.Hour < 12)
                                             Misc.PlaySound(imgsDir + "dota_clock\\morning.wav");
 
-                                        if (clockSunrise < DateTime.Now && DateTime.Now < clockSunset)
+                                        if (daytime)
                                             prevUpdateStatus = UpdateStatus.Day;
                                         else
                                             prevUpdateStatus = UpdateStatus.Night;
                                         break;
                                     case UpdateStatus.Day:
-                                        if (DateTime.Now > clockSunset)
+                                        if (!daytime)
                                         {
                                             Misc.PlaySound(imgsDir + "dota_clock\\night.wav");
                                             prevUpdateStatus = UpdateStatus.Night;
                                         }
                                         break;
                                     case UpdateStatus.Night:
-                                        if (DateTime.Now > clockSunrise && DateTime.Now < clockSunset)
+                                        if (daytime)
                                         {
                                             Misc.PlaySound(imgsDir + "dota_clock\\morning.wav");
                                             prevUpdateStatus = UpdateStatus.Day;
@@ -512,7 +514,19 @@ namespace SysMana
                                         break;
                                 }
 
-                            clockNextUpdate = DateTime.Now.AddMinutes(1);
+                            //set time for next update
+                            clockNextUpdate = DateTime.Now.AddMinutes(5);
+
+                            if (daytime)
+                            {
+                                if (clockSunset < clockNextUpdate)
+                                    clockNextUpdate = clockSunset;
+                            }
+                            else
+                            {
+                                if (clockSunrise < clockNextUpdate)
+                                    clockNextUpdate = clockSunrise;
+                            }
                         }
 
                         //calc sizes of clock elements
