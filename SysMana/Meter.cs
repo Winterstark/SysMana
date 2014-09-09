@@ -50,6 +50,7 @@ namespace SysMana
         TextureBrush clockDayBrush, clockNightBrush;
         float clockDayAngle;
         int clockYOffset;
+        bool clockSpecialDay;
         enum UpdateStatus { FirstUpdate, Day, Night };
         UpdateStatus prevUpdateStatus;
 
@@ -197,8 +198,7 @@ namespace SysMana
                     clockDayIcon = LoadImg(imgsDir + "dota_clock\\day.png");
                     clockNightIcon = LoadImg(imgsDir + "dota_clock\\night.png");
 
-                    clockDayBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\day orb.png"));
-                    clockNightBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\night orb.png"));
+                    loadClockOrbs();
 
                     clockNextUpdate = DateTime.Now;
                     clockSunrise = new DateTime(); //force calcTwilights call
@@ -207,6 +207,20 @@ namespace SysMana
             
             //drawing resources
             graphPen = new Pen(GraphLineColor, GraphLineW);
+        }
+
+        void loadClockOrbs()
+        {
+            if (!clockSpecialDay)
+            {
+                clockDayBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\day orb.png"));
+                clockNightBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\night orb.png"));
+            }
+            else
+            {
+                clockDayBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\special day orb.png"));
+                clockNightBrush = new TextureBrush(LoadImg(imgsDir + "dota_clock\\special night orb.png"));
+            }
         }
 
         public string FormatForFile()
@@ -622,11 +636,30 @@ namespace SysMana
         #region Sunrise/sunset calculations
         void calcTwilights()
         {
-            DateTime tmp;
+            DateTime yesterdaySunrise, tomorrowSunset;
 
-            calcTwilightsForDate(DateTime.Now.AddDays(-1), out tmp, out clockYesterdaySunset); //calc yesterday's sunset
+            calcTwilightsForDate(DateTime.Now.AddDays(-1), out yesterdaySunrise, out clockYesterdaySunset); //calc yesterday's sunset
             calcTwilightsForDate(DateTime.Now, out clockSunrise, out clockSunset); //calc today's sunrise & sunset
-            calcTwilightsForDate(DateTime.Now.AddDays(1), out clockTomorrowSunrise, out tmp); //calc tomorrow's sunrise
+            calcTwilightsForDate(DateTime.Now.AddDays(1), out clockTomorrowSunrise, out tomorrowSunset); //calc tomorrow's sunrise
+
+            //check for astronomical observances
+            double yesterdaysDaylength = (clockYesterdaySunset - yesterdaySunrise).TotalSeconds;
+            double todaysDaylength = (clockSunset - clockSunrise).TotalSeconds;
+            double tomorrowsDaylength = (tomorrowSunset - clockTomorrowSunrise).TotalSeconds;
+            double halfDayLength = 60 * 60 * 12;
+
+            if ((todaysDaylength > yesterdaysDaylength && todaysDaylength > tomorrowsDaylength) //summer solstice
+                || (todaysDaylength < yesterdaysDaylength && todaysDaylength < tomorrowsDaylength) //winter solstice
+                || (todaysDaylength - halfDayLength < yesterdaysDaylength - halfDayLength && todaysDaylength - halfDayLength < tomorrowsDaylength - halfDayLength)) //equinox
+            {
+                clockSpecialDay = true;
+                loadClockOrbs();
+            }
+            else if (clockSpecialDay)
+            {
+                clockSpecialDay = false;
+                loadClockOrbs();
+            }
         }
 
         void calcTwilightsForDate(DateTime date, out DateTime sunrise, out DateTime sunset)
