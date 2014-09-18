@@ -54,9 +54,10 @@ Installation
 
 1. (You need to have [.NET framework](http://www.microsoft.com/en-us/download/details.aspx?id=30653) installed on your computer)
 2. Download either [the blank release](https://github.com/Winterstark/SysMana/releases/tag/v1.0)
- or [the above example release](https://github.com/Winterstark/SysMana/releases/tag/v1.0-example)
+ or [the above example release (latest)](https://github.com/Winterstark/SysMana/releases/tag/v1.1)
 3. Extract
 4. Run SysMana.exe
+5. If you downloaded the blank release, update to the latest version
 
 
 Usage
