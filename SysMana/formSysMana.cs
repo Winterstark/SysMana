@@ -18,7 +18,7 @@ namespace SysMana
 {
     public partial class formSysMana : Form
     {
-        const double VERSION = 1.0;
+        const double VERSION = 1.1;
 
         [DllImport("kernel32.dll")]
         static extern uint WinExec(string lpCmdLine, uint uCmdShow);
