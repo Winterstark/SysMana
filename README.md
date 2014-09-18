@@ -59,6 +59,8 @@ Installation
 4. Run SysMana.exe
 5. If you downloaded the blank release, update to the latest version
 
+It is recommended to download the example release because it is already mostly configured, and will demonstrate how to work with the various monitors and settings.
+
 
 Usage
 ------
