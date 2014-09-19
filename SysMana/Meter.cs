@@ -543,9 +543,17 @@ namespace SysMana
                             }
                         }
 
+                        //set clock height if window is set to autosize
+                        if (fixedH == 0)
+                            fixedH = zoomLength(112, Zoom);
+
                         //calc sizes of clock elements
                         int midX = left + zoomLength(clockFrame.Width / 2, Zoom);
+                        int frameW = zoomLength(clockFrame.Width, Zoom);
                         int frameH = zoomLength(clockFrame.Height, Zoom);
+
+                        y = fixedH - frameH; //ignore TopMargin and set y-coordinate such that the clock is drawn at the bottom of the window
+
                         int orbH = zoomLength(clockOrb.Height, Zoom);
                         int orbY = y + zoomLength(29, Zoom) + clockYOffset;
                         int iconW = zoomLength(clockDayIcon.Width, (int)(Zoom * 1.33));
@@ -583,7 +591,7 @@ namespace SysMana
 
                         if (clockYOffset == 0)
                         {
-                            gfx.DrawImage(clockFrame, left, y, zoomLength(clockFrame.Width, Zoom), frameH);
+                            gfx.DrawImage(clockFrame, left, y, frameW, frameH);
 
                             if (clockSunrise < DateTime.Now && DateTime.Now < clockSunset)
                                 gfx.DrawImage(clockDayIcon, midX - iconW / 2 + 1, y + zoomLength(2, Zoom), iconW, iconH);
@@ -596,11 +604,12 @@ namespace SysMana
                             else
                                 time = DateTime.Now.ToString("h:mm");
 
-                            gfx.DrawString(time, font, textBrush, midX - gfx.MeasureString(time, font).Width / 2, frameH - font.Size);
+                            var textSize = gfx.MeasureString(time, font);
+                            gfx.DrawString(time, font, textBrush, midX - textSize.Width / 2, y + frameH - textSize.Height);
                         }
 
-                        left += zoomLength(clockFrame.Width, Zoom);
-                        this.H = zoomLength(clockFrame.Height, Zoom);
+                        left += frameW;
+                        this.H = fixedH;
                         h = Math.Max(h, this.H);
                     }
                     break;
