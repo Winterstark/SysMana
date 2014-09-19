@@ -136,6 +136,10 @@
             this.buttAdd = new System.Windows.Forms.Button();
             this.listMeters = new System.Windows.Forms.ListBox();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.label41 = new System.Windows.Forms.Label();
+            this.buttPickTextColor = new System.Windows.Forms.Button();
+            this.picTextColor = new System.Windows.Forms.PictureBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.checkShowChangelog = new System.Windows.Forms.CheckBox();
             this.lblUpdateNotifications = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -171,10 +175,7 @@
             this.timerDelay = new System.Windows.Forms.Timer(this.components);
             this.folderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openTextFile = new System.Windows.Forms.OpenFileDialog();
-            this.buttPickTextColor = new System.Windows.Forms.Button();
-            this.picTextColor = new System.Windows.Forms.PictureBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
+            this.buttResetMinMax = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
@@ -202,13 +203,13 @@
             this.panelText.SuspendLayout();
             this.panelImageSequence.SuspendLayout();
             this.tabGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -240,6 +241,7 @@
             // 
             // groupMeter
             // 
+            this.groupMeter.Controls.Add(this.buttResetMinMax);
             this.groupMeter.Controls.Add(this.panelDotaClock);
             this.groupMeter.Controls.Add(this.buttChooseTextFile);
             this.groupMeter.Controls.Add(this.numTopMargin);
@@ -675,7 +677,7 @@
             // 
             // numDataMax
             // 
-            this.numDataMax.Location = new System.Drawing.Point(240, 103);
+            this.numDataMax.Location = new System.Drawing.Point(166, 103);
             this.numDataMax.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -694,7 +696,7 @@
             // 
             // numDataMin
             // 
-            this.numDataMin.Location = new System.Drawing.Point(84, 103);
+            this.numDataMin.Location = new System.Drawing.Point(43, 103);
             this.numDataMin.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -714,11 +716,11 @@
             // lblDataMax
             // 
             this.lblDataMax.AutoSize = true;
-            this.lblDataMax.Location = new System.Drawing.Point(172, 105);
+            this.lblDataMax.Location = new System.Drawing.Point(130, 105);
             this.lblDataMax.Name = "lblDataMax";
-            this.lblDataMax.Size = new System.Drawing.Size(62, 13);
+            this.lblDataMax.Size = new System.Drawing.Size(30, 13);
             this.lblDataMax.TabIndex = 1;
-            this.lblDataMax.Text = "Max. value:";
+            this.lblDataMax.Text = "Max:";
             // 
             // numLeftMargin
             // 
@@ -742,11 +744,11 @@
             // lblDataMin
             // 
             this.lblDataMin.AutoSize = true;
-            this.lblDataMin.Location = new System.Drawing.Point(19, 105);
+            this.lblDataMin.Location = new System.Drawing.Point(10, 105);
             this.lblDataMin.Name = "lblDataMin";
-            this.lblDataMin.Size = new System.Drawing.Size(59, 13);
+            this.lblDataMin.Size = new System.Drawing.Size(27, 13);
             this.lblDataMin.TabIndex = 1;
-            this.lblDataMin.Text = "Min. value:";
+            this.lblDataMin.Text = "Min:";
             // 
             // label3
             // 
@@ -1509,6 +1511,42 @@
             this.tabGeneral.Text = "General Options";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(27, 262);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(218, 13);
+            this.label41.TabIndex = 23;
+            this.label41.Text = "Doesn\'t apply when the window is autosized.";
+            // 
+            // buttPickTextColor
+            // 
+            this.buttPickTextColor.Location = new System.Drawing.Point(207, 124);
+            this.buttPickTextColor.Name = "buttPickTextColor";
+            this.buttPickTextColor.Size = new System.Drawing.Size(27, 23);
+            this.buttPickTextColor.TabIndex = 21;
+            this.buttPickTextColor.Text = "...";
+            this.buttPickTextColor.UseVisualStyleBackColor = true;
+            this.buttPickTextColor.Click += new System.EventHandler(this.buttPickTextColor_Click);
+            // 
+            // picTextColor
+            // 
+            this.picTextColor.Location = new System.Drawing.Point(126, 124);
+            this.picTextColor.Name = "picTextColor";
+            this.picTextColor.Size = new System.Drawing.Size(75, 23);
+            this.picTextColor.TabIndex = 22;
+            this.picTextColor.TabStop = false;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(63, 129);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(57, 13);
+            this.label40.TabIndex = 20;
+            this.label40.Text = "Text color:";
+            // 
             // checkShowChangelog
             // 
             this.checkShowChangelog.AutoSize = true;
@@ -1858,41 +1896,15 @@
             // 
             this.openTextFile.Filter = "Text files|*.txt|All files|*.*";
             // 
-            // buttPickTextColor
+            // buttResetMinMax
             // 
-            this.buttPickTextColor.Location = new System.Drawing.Point(207, 124);
-            this.buttPickTextColor.Name = "buttPickTextColor";
-            this.buttPickTextColor.Size = new System.Drawing.Size(27, 23);
-            this.buttPickTextColor.TabIndex = 21;
-            this.buttPickTextColor.Text = "...";
-            this.buttPickTextColor.UseVisualStyleBackColor = true;
-            this.buttPickTextColor.Click += new System.EventHandler(this.buttPickTextColor_Click);
-            // 
-            // picTextColor
-            // 
-            this.picTextColor.Location = new System.Drawing.Point(126, 124);
-            this.picTextColor.Name = "picTextColor";
-            this.picTextColor.Size = new System.Drawing.Size(75, 23);
-            this.picTextColor.TabIndex = 22;
-            this.picTextColor.TabStop = false;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(63, 129);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(57, 13);
-            this.label40.TabIndex = 20;
-            this.label40.Text = "Text color:";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(27, 262);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(218, 13);
-            this.label41.TabIndex = 23;
-            this.label41.Text = "Doesn\'t apply when the window is autosized.";
+            this.buttResetMinMax.Location = new System.Drawing.Point(258, 101);
+            this.buttResetMinMax.Name = "buttResetMinMax";
+            this.buttResetMinMax.Size = new System.Drawing.Size(60, 23);
+            this.buttResetMinMax.TabIndex = 50;
+            this.buttResetMinMax.Text = "Reset";
+            this.buttResetMinMax.UseVisualStyleBackColor = true;
+            this.buttResetMinMax.Click += new System.EventHandler(this.buttResetMinMax_Click);
             // 
             // formSetup
             // 
@@ -1939,13 +1951,13 @@
             this.panelImageSequence.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2097,5 +2109,6 @@
         private System.Windows.Forms.PictureBox picTextColor;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Button buttResetMinMax;
     }
 }

@@ -290,6 +290,65 @@ namespace SysMana
                     break;
             }
         }
+
+        void setMinMax()
+        {
+            switch (comboDataSource.Text)
+            {
+                case "CPU usage":
+                case "Battery percent remaining":
+                case "Wireless signal strength":
+                case "System volume":
+                case "Audio peak level":
+                    numDataMin.Value = 0;
+                    numDataMax.Value = 100;
+
+                    txtPostfix.Text = "%";
+                    break;
+                case "Available memory":
+                case "Used memory":
+                    numDataMin.Value = 0;
+                    numDataMax.Value = data.TotalRAM;
+
+                    txtPostfix.Text = " MB";
+                    break;
+                case "Available disk space":
+                case "Used disk space":
+                    showDiskMinMax();
+
+                    txtPostfix.Text = " MB";
+                    break;
+                case "Recycle bin file count":
+                    numDataMin.Value = 0;
+
+                    txtPostfix.Text = " files";
+                    break;
+                case "Recycle bin size":
+                    numDataMin.Value = 0;
+
+                    txtPostfix.Text = " MB";
+                    break;
+                case "Battery minutes remaining":
+                    numDataMin.Value = 0;
+                    numDataMax.Value = SystemInformation.PowerStatus.BatteryFullLifetime / 60;
+
+                    txtPostfix.Text = " min";
+                    break;
+                case "Download speed":
+                case "Upload speed":
+                    txtPostfix.Text = " KB/s";
+                    break;
+                case "Text file":
+                    numDataMin.Value = 0;
+                    numDataMax.Value = 0;
+
+                    txtPostfix.Text = "";
+
+                    if (openTextFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+                        comboDataSubsource.Text = openTextFile.FileName;
+                    break;
+            }
+        }
         
         #region Geolocation search functions
         string dlPage(string URL)
@@ -647,62 +706,7 @@ namespace SysMana
             //automatically fill in min&max values and prefix&postfix descriptors
             if (comboDataSource.Text != meters[listMeters.SelectedIndex].Data)
             {
-                switch (comboDataSource.Text)
-                {
-                    case "CPU usage":
-                    case "Battery percent remaining":
-                    case "Wireless signal strength":
-                    case "System volume":
-                    case "Audio peak level":
-                        numDataMin.Value = 0;
-                        numDataMax.Value = 100;
-
-                        txtPostfix.Text = "%";
-                        break;
-                    case "Available memory":
-                    case "Used memory":
-                        numDataMin.Value = 0;
-                        numDataMax.Value = data.TotalRAM;
-
-                        txtPostfix.Text = " MB";
-                        break;
-                    case "Available disk space":
-                    case "Used disk space":
-                        showDiskMinMax();
-
-                        txtPostfix.Text = " MB";
-                        break;
-                    case "Recycle bin file count":
-                        numDataMin.Value = 0;
-
-                        txtPostfix.Text = " files";
-                        break;
-                    case "Recycle bin size":
-                        numDataMin.Value = 0;
-
-                        txtPostfix.Text = " MB";
-                        break;
-                    case "Battery minutes remaining":
-                        numDataMin.Value = 0;
-                        numDataMax.Value = SystemInformation.PowerStatus.BatteryFullLifetime / 60;
-
-                        txtPostfix.Text = " min";
-                        break;
-                    case "Download speed":
-                    case "Upload speed":
-                        txtPostfix.Text = " KB/s";
-                        break;
-                    case "Text file":
-                        numDataMin.Value = 0;
-                        numDataMax.Value = 0;
-
-                        txtPostfix.Text = "";
-
-                        if (openTextFile.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
-                            comboDataSubsource.Text = openTextFile.FileName;
-                        break;
-                }
-
+                setMinMax();
                 txtPrefix.Text = comboDataSource.Text + ": ";
             }
             else
@@ -1162,6 +1166,11 @@ namespace SysMana
             picTextColor.BackColor = colorDialog.Color;
 
             checkForGeneralOptionsChanges();
+        }
+
+        private void buttResetMinMax_Click(object sender, EventArgs e)
+        {
+            setMinMax();
         }
     }
 }
