@@ -171,6 +171,10 @@
             this.timerDelay = new System.Windows.Forms.Timer(this.components);
             this.folderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openTextFile = new System.Windows.Forms.OpenFileDialog();
+            this.buttPickTextColor = new System.Windows.Forms.Button();
+            this.picTextColor = new System.Windows.Forms.PictureBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
@@ -204,6 +208,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -1463,6 +1468,10 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.label41);
+            this.tabGeneral.Controls.Add(this.buttPickTextColor);
+            this.tabGeneral.Controls.Add(this.picTextColor);
+            this.tabGeneral.Controls.Add(this.label40);
             this.tabGeneral.Controls.Add(this.checkShowChangelog);
             this.tabGeneral.Controls.Add(this.lblUpdateNotifications);
             this.tabGeneral.Controls.Add(this.label37);
@@ -1503,7 +1512,7 @@
             // checkShowChangelog
             // 
             this.checkShowChangelog.AutoSize = true;
-            this.checkShowChangelog.Location = new System.Drawing.Point(54, 399);
+            this.checkShowChangelog.Location = new System.Drawing.Point(61, 404);
             this.checkShowChangelog.Name = "checkShowChangelog";
             this.checkShowChangelog.Size = new System.Drawing.Size(166, 17);
             this.checkShowChangelog.TabIndex = 18;
@@ -1514,7 +1523,7 @@
             // lblUpdateNotifications
             // 
             this.lblUpdateNotifications.AutoSize = true;
-            this.lblUpdateNotifications.Location = new System.Drawing.Point(233, 348);
+            this.lblUpdateNotifications.Location = new System.Drawing.Point(240, 353);
             this.lblUpdateNotifications.Name = "lblUpdateNotifications";
             this.lblUpdateNotifications.Size = new System.Drawing.Size(60, 13);
             this.lblUpdateNotifications.TabIndex = 17;
@@ -1523,7 +1532,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(19, 332);
+            this.label37.Location = new System.Drawing.Point(26, 337);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(104, 13);
             this.label37.TabIndex = 16;
@@ -1532,7 +1541,7 @@
             // trackUpdate
             // 
             this.trackUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.trackUpdate.Location = new System.Drawing.Point(39, 348);
+            this.trackUpdate.Location = new System.Drawing.Point(46, 353);
             this.trackUpdate.Maximum = 3;
             this.trackUpdate.Name = "trackUpdate";
             this.trackUpdate.Size = new System.Drawing.Size(188, 45);
@@ -1541,7 +1550,7 @@
             // 
             // numFixedH
             // 
-            this.numFixedH.Location = new System.Drawing.Point(114, 166);
+            this.numFixedH.Location = new System.Drawing.Point(126, 175);
             this.numFixedH.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1561,20 +1570,20 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(18, 199);
+            this.label34.Location = new System.Drawing.Point(14, 198);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(130, 13);
+            this.label34.Size = new System.Drawing.Size(143, 13);
             this.label34.TabIndex = 13;
-            this.label34.Text = "(Set to 0 to autosize form.)";
+            this.label34.Text = "(Set to 0 to autosize window)";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(18, 168);
+            this.label33.Location = new System.Drawing.Point(14, 177);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(90, 13);
+            this.label33.Size = new System.Drawing.Size(106, 13);
             this.label33.TabIndex = 13;
-            this.label33.Text = "Fixed form height:";
+            this.label33.Text = "Fixed window height:";
             // 
             // comboFont
             // 
@@ -1594,7 +1603,7 @@
             "Top",
             "Center",
             "Bottom"});
-            this.comboVertAlign.Location = new System.Drawing.Point(118, 235);
+            this.comboVertAlign.Location = new System.Drawing.Point(126, 235);
             this.comboVertAlign.Name = "comboVertAlign";
             this.comboVertAlign.Size = new System.Drawing.Size(121, 21);
             this.comboVertAlign.TabIndex = 13;
@@ -1602,7 +1611,7 @@
             // 
             // numOpacity
             // 
-            this.numOpacity.Location = new System.Drawing.Point(118, 52);
+            this.numOpacity.Location = new System.Drawing.Point(126, 52);
             this.numOpacity.Name = "numOpacity";
             this.numOpacity.Size = new System.Drawing.Size(59, 20);
             this.numOpacity.TabIndex = 3;
@@ -1641,7 +1650,7 @@
             // 
             // numRefresh
             // 
-            this.numRefresh.Location = new System.Drawing.Point(118, 26);
+            this.numRefresh.Location = new System.Drawing.Point(126, 26);
             this.numRefresh.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1665,7 +1674,7 @@
             // 
             // buttPickBackColor
             // 
-            this.buttPickBackColor.Location = new System.Drawing.Point(199, 112);
+            this.buttPickBackColor.Location = new System.Drawing.Point(207, 95);
             this.buttPickBackColor.Name = "buttPickBackColor";
             this.buttPickBackColor.Size = new System.Drawing.Size(27, 23);
             this.buttPickBackColor.TabIndex = 4;
@@ -1675,7 +1684,7 @@
             // 
             // picBackColor
             // 
-            this.picBackColor.Location = new System.Drawing.Point(118, 112);
+            this.picBackColor.Location = new System.Drawing.Point(126, 95);
             this.picBackColor.Name = "picBackColor";
             this.picBackColor.Size = new System.Drawing.Size(75, 23);
             this.picBackColor.TabIndex = 9;
@@ -1776,7 +1785,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(183, 29);
+            this.label8.Location = new System.Drawing.Point(191, 29);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 13);
             this.label8.TabIndex = 0;
@@ -1785,7 +1794,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(66, 54);
+            this.label10.Location = new System.Drawing.Point(74, 54);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
             this.label10.TabIndex = 0;
@@ -1813,7 +1822,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 238);
+            this.label9.Location = new System.Drawing.Point(27, 238);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 13);
             this.label9.TabIndex = 0;
@@ -1822,7 +1831,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 29);
+            this.label7.Location = new System.Drawing.Point(47, 29);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 0;
@@ -1831,7 +1840,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 117);
+            this.label1.Location = new System.Drawing.Point(26, 99);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 0;
@@ -1848,6 +1857,42 @@
             // openTextFile
             // 
             this.openTextFile.Filter = "Text files|*.txt|All files|*.*";
+            // 
+            // buttPickTextColor
+            // 
+            this.buttPickTextColor.Location = new System.Drawing.Point(207, 124);
+            this.buttPickTextColor.Name = "buttPickTextColor";
+            this.buttPickTextColor.Size = new System.Drawing.Size(27, 23);
+            this.buttPickTextColor.TabIndex = 21;
+            this.buttPickTextColor.Text = "...";
+            this.buttPickTextColor.UseVisualStyleBackColor = true;
+            this.buttPickTextColor.Click += new System.EventHandler(this.buttPickTextColor_Click);
+            // 
+            // picTextColor
+            // 
+            this.picTextColor.Location = new System.Drawing.Point(126, 124);
+            this.picTextColor.Name = "picTextColor";
+            this.picTextColor.Size = new System.Drawing.Size(75, 23);
+            this.picTextColor.TabIndex = 22;
+            this.picTextColor.TabStop = false;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(63, 129);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(57, 13);
+            this.label40.TabIndex = 20;
+            this.label40.Text = "Text color:";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(27, 262);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(218, 13);
+            this.label41.TabIndex = 23;
+            this.label41.Text = "Doesn\'t apply when the window is autosized.";
             // 
             // formSetup
             // 
@@ -1900,6 +1945,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2047,5 +2093,9 @@
         private System.Windows.Forms.TextBox txtLocation;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblWAStatus;
+        private System.Windows.Forms.Button buttPickTextColor;
+        private System.Windows.Forms.PictureBox picTextColor;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
     }
 }

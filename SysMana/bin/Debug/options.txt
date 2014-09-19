@@ -1,19 +1,22 @@
-910
-842
+97
+373
 50
 1
-60
-65
-63
-66
+0
+0
+64
+64
 Bottom
 True
 True
-Hypatia Sans Pro
-10
+Segoe UI
+14
 True
 False
 False
 False
 1
 True
+255
+128
+64

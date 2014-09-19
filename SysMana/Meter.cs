@@ -67,8 +67,8 @@ namespace SysMana
             this.LoadImg = LoadImg;
             this.DisposeImg = DisposeImg;
 
-            Prefix = "CPU usage: ";
-            Postfix = "%";
+            Prefix = "Available memory: ";
+            Postfix = "MB";
             LeftMargin = 0;
             TopMargin = 0;
             Min = 0;
@@ -235,7 +235,7 @@ namespace SysMana
                 Clock24HrFormat + "--" + ClockPlaySounds + "--" + ClockPlaySoundsOnStartup + "--" + ClockLatitude + "--" + ClockLongitude + "--" + ClockTimeZone;
         }
 
-        public void Draw(Graphics gfx, Font font, int fixedH, VertAlign align, ref int left, ref int h)
+        public void Draw(Graphics gfx, Font font, Brush textBrush, int fixedH, VertAlign align, ref int left, ref int h)
         {
             left += LeftMargin;
             this.Left = left;
@@ -256,7 +256,7 @@ namespace SysMana
                     SizeF txtSize = gfx.MeasureString(output, font);
                     y += setAlignment(align, (int)txtSize.Height, fixedH);
 
-                    gfx.DrawString(output, font, Brushes.Black, left, y);
+                    gfx.DrawString(output, font, textBrush, left, y);
 
                     left += (int)txtSize.Width;
                     this.H = (int)txtSize.Height;
@@ -596,7 +596,7 @@ namespace SysMana
                             else
                                 time = DateTime.Now.ToString("h:mm");
 
-                            gfx.DrawString(time, font, Brushes.White, midX - gfx.MeasureString(time, font).Width / 2, frameH - font.Size);
+                            gfx.DrawString(time, font, textBrush, midX - gfx.MeasureString(time, font).Width / 2, frameH - font.Size);
                         }
 
                         left += zoomLength(clockFrame.Width, Zoom);
@@ -621,6 +621,9 @@ namespace SysMana
 
         int setAlignment(VertAlign align, int drawH, int fixedH)
         {
+            if (fixedH == 0)
+                return 0;
+
             switch (align)
             {
                 default:

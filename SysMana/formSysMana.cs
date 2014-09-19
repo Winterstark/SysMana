@@ -163,10 +163,12 @@ namespace SysMana
 
         formSetup setup;
         Font font;
+        Color textColor;
+        SolidBrush textBrush;
         VertAlign align;
 
         Meter clockMeter;
-        bool mousedown = false, mouseOverClock = false, initialized = false, showChangelog;
+        bool mousedown = false, initialized = false, showChangelog;
         Point prevPos;
         int fixedH, prevX, prevY, updateNotifs;
         
@@ -216,28 +218,39 @@ namespace SysMana
 
         void loadOptions()
         {
-            StreamReader file = new StreamReader(Application.StartupPath + "\\options.txt");
+            try
+            {
+                StreamReader file = new StreamReader(Application.StartupPath + "\\options.txt");
 
-            this.Left = int.Parse(file.ReadLine());
-            this.Top = int.Parse(file.ReadLine());
+                this.Left = int.Parse(file.ReadLine());
+                this.Top = int.Parse(file.ReadLine());
 
-            //timerRefresh.Interval = int.Parse(file.ReadLine());
-            timerUpdateData.Interval = int.Parse(file.ReadLine());
+                //timerRefresh.Interval = int.Parse(file.ReadLine());
+                timerUpdateData.Interval = int.Parse(file.ReadLine());
 
-            this.Opacity = double.Parse(file.ReadLine().Replace('.', ','));
-            fixedH = int.Parse(file.ReadLine());
-            this.BackColor = Color.FromArgb(int.Parse(file.ReadLine()), int.Parse(file.ReadLine()), int.Parse(file.ReadLine()));
-            this.TransparencyKey = this.BackColor;
-            align = (VertAlign)Enum.Parse(typeof(VertAlign), file.ReadLine());
-            this.TopMost = bool.Parse(file.ReadLine());
-            this.AllowTransparency = bool.Parse(file.ReadLine());
-            font = new Font(file.ReadLine(), int.Parse(file.ReadLine()), Misc.GenFontStyle(bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine())));
-            updateNotifs = int.Parse(file.ReadLine());
-            showChangelog = bool.Parse(file.ReadLine());
+                this.Opacity = double.Parse(file.ReadLine().Replace('.', ','));
+                fixedH = int.Parse(file.ReadLine());
+                this.BackColor = Color.FromArgb(int.Parse(file.ReadLine()), int.Parse(file.ReadLine()), int.Parse(file.ReadLine()));
+                this.TransparencyKey = this.BackColor;
+                align = (VertAlign)Enum.Parse(typeof(VertAlign), file.ReadLine());
+                this.TopMost = bool.Parse(file.ReadLine());
+                this.AllowTransparency = bool.Parse(file.ReadLine());
+                font = new Font(file.ReadLine(), int.Parse(file.ReadLine()), Misc.GenFontStyle(bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine())));
+                updateNotifs = int.Parse(file.ReadLine());
+                showChangelog = bool.Parse(file.ReadLine());
+                textColor = Color.FromArgb(int.Parse(file.ReadLine()), int.Parse(file.ReadLine()), int.Parse(file.ReadLine()));
 
-            file.Close();
+                file.Close();
+            }
+            catch
+            {
+            }
 
             menuOnTop.Checked = this.TopMost;
+
+            if (textBrush != null)
+                textBrush.Dispose();
+            textBrush = new SolidBrush(textColor);
         }
 
         void saveOptions()
@@ -263,6 +276,9 @@ namespace SysMana
             file.WriteLine(font.Strikeout);
             file.WriteLine(updateNotifs);
             file.WriteLine(showChangelog);
+            file.WriteLine(textColor.R);
+            file.WriteLine(textColor.G);
+            file.WriteLine(textColor.B);
 
             file.Close();
         }
@@ -488,7 +504,7 @@ namespace SysMana
 
             if (meters.Count == 0)
             {
-                e.Graphics.DrawString("Right-click here and select Setup to add meters.", font, Brushes.Black, 0, 0);
+                e.Graphics.DrawString("Right-click here and select Setup to add meters.", font, textBrush, 0, 0);
 
                 SizeF txtSize = e.Graphics.MeasureString("Right-click here and select Setup to add meters.", font);
                 left = (int)txtSize.Width;
@@ -496,7 +512,7 @@ namespace SysMana
             }
             else
                 foreach (Meter meter in meters)
-                    meter.Draw(e.Graphics, font, fixedH, align, ref left, ref h);
+                    meter.Draw(e.Graphics, font, textBrush, fixedH, align, ref left, ref h);
 
             this.Width = Math.Max(10, left);
 
@@ -627,7 +643,7 @@ namespace SysMana
             if (setup == null || setup.IsDisposed)
             {
                 setup = new formSetup();
-                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
+                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, textColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
                 setup.Show();
             }
         }

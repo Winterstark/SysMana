@@ -25,14 +25,14 @@ namespace SysMana
         List<Meter> meters;
         bool initiating = false, ignoreChanges = false;
 
-        Color backColor;
+        Color backColor, textColor;
         Font font;
         VertAlign align;
         int refresh, opacity, fixedH, updateNotifs;
         bool topMost, transparent, showChangelog;
 
 
-        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg, int updateNotifs, bool showChangelog)
+        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, Color textColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg, int updateNotifs, bool showChangelog)
         {
             initiating = true;
 
@@ -61,6 +61,7 @@ namespace SysMana
             numOpacity.Value = opacity;
             numFixedH.Value = fixedH;
             picBackColor.BackColor = backColor;
+            picTextColor.BackColor = textColor;
             comboVertAlign.Text = align.ToString();
             checkTopMost.Checked = topMost;
             checkTransparent.Checked = transparent;
@@ -79,6 +80,7 @@ namespace SysMana
             this.opacity = opacity;
             this.fixedH = fixedH;
             this.backColor = backColor;
+            this.textColor = textColor;
             this.align = align;
             this.topMost = topMost;
             this.transparent = transparent;
@@ -152,6 +154,7 @@ namespace SysMana
                 numOpacity.Value != opacity ||
                 numFixedH.Value != fixedH ||
                 picBackColor.BackColor != backColor ||
+                picTextColor.BackColor != textColor ||
                 comboVertAlign.Text != align.ToString() ||
                 checkTopMost.Checked != topMost ||
                 checkTransparent.Checked != transparent ||
@@ -393,6 +396,7 @@ namespace SysMana
             opacity = (int)numOpacity.Value;
             fixedH = (int)numFixedH.Value;
             backColor = picBackColor.BackColor;
+            textColor = picTextColor.BackColor;
             align = (VertAlign)Enum.Parse(typeof(VertAlign), comboVertAlign.Text);
             topMost = checkTopMost.Checked;
             transparent = checkTransparent.Checked;
@@ -429,6 +433,9 @@ namespace SysMana
             file.WriteLine(font.Strikeout);
             file.WriteLine(updateNotifs);
             file.WriteLine(showChangelog);
+            file.WriteLine(textColor.R);
+            file.WriteLine(textColor.G);
+            file.WriteLine(textColor.B);
 
             file.Close();
 
@@ -440,11 +447,11 @@ namespace SysMana
 
         private void buttAdd_Click(object sender, EventArgs e)
         {
-            meters.Add(new Meter("CPU usage", "Text", Application.StartupPath + "\\imgs\\", LoadImg, DisposeImg));
+            meters.Add(new Meter("Available memory", "Text", Application.StartupPath + "\\imgs\\", LoadImg, DisposeImg));
             saveMeters();
             InitData();
 
-            listMeters.Items.Add("CPU usage");
+            listMeters.Items.Add("Available memory");
         }
 
         private void buttDelete_Click(object sender, EventArgs e)
@@ -1146,6 +1153,15 @@ namespace SysMana
             }
 
             lblWAStatus.Text = "Enter your geocoordinates, or search by location:";
+        }
+
+        private void buttPickTextColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = picTextColor.BackColor;
+            colorDialog.ShowDialog();
+            picTextColor.BackColor = colorDialog.Color;
+
+            checkForGeneralOptionsChanges();
         }
     }
 }
