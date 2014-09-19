@@ -139,11 +139,11 @@ Note that you can view the exact data value by moving the mouse cursor over a me
 Credits
 ----------
 
-* SysMana Icon by [Raindropmemory](http://raindropmemory.deviantart.com/art/Legendora-Icon-Set-118999011).
+* SysMana Icon by [~Raindropmemory](http://raindropmemory.deviantart.com/art/Legendora-Icon-Set-118999011)
 Example monitor set images:
 * Diablo III orbs from [Diablo Gamepedia](http://diablo.gamepedia.com/Category:Diablo_III_User_Interface_Images)
 * Skyrim icons by [~SickAbomination](http://sickabomination.deviantart.com/art/Skyrim-Orb-270815282)
 * Animated weather icons by [Rasheed Sobhee](http://www.behance.net/gallery/Weather-Animation-Icons-Free-Download/10740083)
-* Moon phase icons by [VClouds](http://vclouds.deviantart.com/art/VClouds-Weather-2-179058977)
+* Moon phase icons by [~VClouds](http://vclouds.deviantart.com/art/VClouds-Weather-2-179058977)
 * Dota clock textures by [~yorgash](http://yorgash.deviantart.com/art/Dota-2-Game-HUD-1-02c-440595937)
 * Dota Three Spirits orb by [~yorgash](http://www.deviantart.com/art/Orbs-in-Dota2-Three-Spirits-style-415886031)

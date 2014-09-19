@@ -38,6 +38,9 @@
             this.tipInfo = new System.Windows.Forms.ToolTip(this.components);
             this.timerEnsureTopMost = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateData = new System.Windows.Forms.Timer(this.components);
+            this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,16 +53,19 @@
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuSetup,
             this.menuOnTop,
+            this.toolStripSeparator2,
+            this.menuSetup,
+            this.menuAbout,
+            this.toolStripSeparator1,
             this.menuExit});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(113, 70);
+            this.contextMenu.Size = new System.Drawing.Size(153, 126);
             // 
             // menuSetup
             // 
             this.menuSetup.Name = "menuSetup";
-            this.menuSetup.Size = new System.Drawing.Size(112, 22);
+            this.menuSetup.Size = new System.Drawing.Size(152, 22);
             this.menuSetup.Text = "Setup";
             this.menuSetup.Click += new System.EventHandler(this.menuSetup_Click);
             // 
@@ -68,14 +74,14 @@
             this.menuOnTop.Checked = true;
             this.menuOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuOnTop.Name = "menuOnTop";
-            this.menuOnTop.Size = new System.Drawing.Size(112, 22);
+            this.menuOnTop.Size = new System.Drawing.Size(152, 22);
             this.menuOnTop.Text = "On Top";
             this.menuOnTop.Click += new System.EventHandler(this.menuOnTop_Click);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(112, 22);
+            this.menuExit.Size = new System.Drawing.Size(152, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 
@@ -89,6 +95,23 @@
             // 
             this.timerUpdateData.Enabled = true;
             this.timerUpdateData.Tick += new System.EventHandler(this.timerUpdateData_Tick);
+            // 
+            // menuAbout
+            // 
+            this.menuAbout.Name = "menuAbout";
+            this.menuAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuAbout.Text = "About";
+            this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // formSysMana
             // 
@@ -128,6 +151,9 @@
         private System.Windows.Forms.Timer timerEnsureTopMost;
         private System.Windows.Forms.ToolStripMenuItem menuOnTop;
         private System.Windows.Forms.Timer timerUpdateData;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuAbout;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

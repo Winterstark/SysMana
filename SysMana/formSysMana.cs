@@ -162,6 +162,7 @@ namespace SysMana
         List<Meter> meters;
 
         formSetup setup;
+        formAbout about;
         Font font;
         Color textColor;
         SolidBrush textBrush;
@@ -638,16 +639,6 @@ namespace SysMana
                 meter.CurrDataValue = data.GetValue(meter.Data, meter.DataSubsource);
         }
 
-        private void menuSetup_Click(object sender, EventArgs e)
-        {
-            if (setup == null || setup.IsDisposed)
-            {
-                setup = new formSetup();
-                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, textColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
-                setup.Show();
-            }
-        }
-
         private void menuOnTop_Click(object sender, EventArgs e)
         {
             if (menuOnTop.Checked)
@@ -662,6 +653,26 @@ namespace SysMana
             }
 
             saveOptions();
+        }
+
+        private void menuSetup_Click(object sender, EventArgs e)
+        {
+            if (setup == null || setup.IsDisposed)
+            {
+                setup = new formSetup();
+                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, textColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
+                setup.Show();
+            }
+        }
+
+        private void menuAbout_Click(object sender, EventArgs e)
+        {
+            if (about == null || about.IsDisposed)
+            {
+                about = new formAbout();
+                about.lblVersion.Text = "v" + VERSION.ToString().Replace(',', '.');
+                about.Show();
+            }
         }
 
         private void menuExit_Click(object sender, EventArgs e)
