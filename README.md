@@ -75,10 +75,19 @@ The blank release has no resource meters when it first runs, so you will see onl
 
 #### Example Release
 
-This release already has a bunch of resource meters set up; most of them don't need any further modification except for:
-* Text file, third from the top (current "stamina" / time until next break): if you don't use [Take5](https://github.com/Winterstark/Take5) then this meter won't work at all; if you do, you need to specify the path to the "break_countdown.txt" file in Take5's directory.
-* The download speed graph: you need to select the network adapter to monitor (if you're unsure try one and see if it registers any traffic). Also you need to specify your maximum download speed (in kb/s) under max. value.
-* Text file, second from the bottom (weather status): if you don't use [Wallcreeper](https://github.com/Winterstark/Wallcreeper) then this meter won't work at all; if you do, you need to specify the path to the "weather_status.txt" file in Wallcreeper's directory.
+This release already has a bunch of resource meters, but you still need customize some of them. Open the Setup window by right-clicking on SysMana and selecting Setup, and then do the following:
+* Meters that track your system's available memory and disk space need to know the maximum value of those stats, so you need to select those two meters (the first two from the top in the list) and click the Reset button for each of them.
+* The Download speed tracker needs to know which network adapter to track and your maximum download speed (in kb/s), which you need to set manually. If you're unsure which network adapter to select try one and see if it registers any traffic.
+* If you use [Take5](https://github.com/Winterstark/Take5) and want to visualize time remaining until your next break, then you need to browse for the file "break_countdown.txt" in Take5's directory and set it as a data source for the Text file meter (3rd from the top). If you don't use it, you can delete that meter.
+* If you use [Wallcreeper](https://github.com/Winterstark/Wallcreeper) and want to display current weather, you need to browse for the file "weather_status.txt" in Wallcreeper's directory and set it as a data source for the other Text file meter (the penultimate one). If you don't use it, you can delete that meter.
+
+Optional customization:
+
+* The Recycle bin size meter's max. value is set to 10 GB by default, but you can change that if you wish.
+* If your available disk space is chronically low, the HP orb will always be practically empty. A better solution might be to change the max. value to a critically low number (like 15 GB) so the orb's rendering will scale better.
+* The Dota-style clock's appearance can be modified, and sound notifications turned off.
+* Also note that the font used in the above screenshot (for the clock digits) might not be on your computer, so your clock won't look the same. The font used is Hypatia Sans Pro (bold, size 11).
+* Some meters already have particular actions assigned to them but feel free to customize them.
 
 #### Adding meters
 

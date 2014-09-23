@@ -33,6 +33,7 @@
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabMeters = new System.Windows.Forms.TabPage();
             this.groupMeter = new System.Windows.Forms.GroupBox();
+            this.buttResetMinMax = new System.Windows.Forms.Button();
             this.panelDotaClock = new System.Windows.Forms.Panel();
             this.lblWAStatus = new System.Windows.Forms.Label();
             this.txtClockTimeZone = new System.Windows.Forms.TextBox();
@@ -57,7 +58,7 @@
             this.comboDataSubsource = new System.Windows.Forms.ComboBox();
             this.lblDataSubsource = new System.Windows.Forms.Label();
             this.numZoom = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
+            this.lblZoomPercent = new System.Windows.Forms.Label();
             this.lblZoom = new System.Windows.Forms.Label();
             this.comboDragFileAction = new System.Windows.Forms.ComboBox();
             this.comboClickAction = new System.Windows.Forms.ComboBox();
@@ -175,7 +176,6 @@
             this.timerDelay = new System.Windows.Forms.Timer(this.components);
             this.folderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openTextFile = new System.Windows.Forms.OpenFileDialog();
-            this.buttResetMinMax = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
@@ -251,7 +251,7 @@
             this.groupMeter.Controls.Add(this.comboDataSubsource);
             this.groupMeter.Controls.Add(this.lblDataSubsource);
             this.groupMeter.Controls.Add(this.numZoom);
-            this.groupMeter.Controls.Add(this.label18);
+            this.groupMeter.Controls.Add(this.lblZoomPercent);
             this.groupMeter.Controls.Add(this.lblZoom);
             this.groupMeter.Controls.Add(this.comboDragFileAction);
             this.groupMeter.Controls.Add(this.comboClickAction);
@@ -279,6 +279,16 @@
             this.groupMeter.TabIndex = 10;
             this.groupMeter.TabStop = false;
             this.groupMeter.Text = "No meter selected";
+            // 
+            // buttResetMinMax
+            // 
+            this.buttResetMinMax.Location = new System.Drawing.Point(258, 101);
+            this.buttResetMinMax.Name = "buttResetMinMax";
+            this.buttResetMinMax.Size = new System.Drawing.Size(60, 23);
+            this.buttResetMinMax.TabIndex = 50;
+            this.buttResetMinMax.Text = "Reset";
+            this.buttResetMinMax.UseVisualStyleBackColor = true;
+            this.buttResetMinMax.Click += new System.EventHandler(this.buttResetMinMax_Click);
             // 
             // panelDotaClock
             // 
@@ -544,15 +554,15 @@
             0});
             this.numZoom.ValueChanged += new System.EventHandler(this.meterOption_ValueChanged);
             // 
-            // label18
+            // lblZoomPercent
             // 
-            this.label18.AutoSize = true;
-            this.label18.Enabled = false;
-            this.label18.Location = new System.Drawing.Point(160, 366);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(15, 13);
-            this.label18.TabIndex = 6;
-            this.label18.Text = "%";
+            this.lblZoomPercent.AutoSize = true;
+            this.lblZoomPercent.Enabled = false;
+            this.lblZoomPercent.Location = new System.Drawing.Point(160, 366);
+            this.lblZoomPercent.Name = "lblZoomPercent";
+            this.lblZoomPercent.Size = new System.Drawing.Size(15, 13);
+            this.lblZoomPercent.TabIndex = 6;
+            this.lblZoomPercent.Text = "%";
             // 
             // lblZoom
             // 
@@ -1896,16 +1906,6 @@
             // 
             this.openTextFile.Filter = "Text files|*.txt|All files|*.*";
             // 
-            // buttResetMinMax
-            // 
-            this.buttResetMinMax.Location = new System.Drawing.Point(258, 101);
-            this.buttResetMinMax.Name = "buttResetMinMax";
-            this.buttResetMinMax.Size = new System.Drawing.Size(60, 23);
-            this.buttResetMinMax.TabIndex = 50;
-            this.buttResetMinMax.Text = "Reset";
-            this.buttResetMinMax.UseVisualStyleBackColor = true;
-            this.buttResetMinMax.Click += new System.EventHandler(this.buttResetMinMax_Click);
-            // 
             // formSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2025,7 +2025,7 @@
         private System.Windows.Forms.Label lblDataMax;
         private System.Windows.Forms.NumericUpDown numZoom;
         private System.Windows.Forms.Label lblZoom;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblZoomPercent;
         private System.Windows.Forms.ComboBox comboDataSubsource;
         private System.Windows.Forms.Label lblDataSubsource;
         private System.Windows.Forms.Panel panelProgressBar;

@@ -645,33 +645,22 @@ namespace SysMana
             }
         }
 
-        #region Sunrise/sunset calculations
+        #region Astronomic calculations
         void calcTwilights()
         {
             DateTime yesterdaySunrise, tomorrowSunset;
-
             calcTwilightsForDate(DateTime.Now.AddDays(-1), out yesterdaySunrise, out clockYesterdaySunset); //calc yesterday's sunset
             calcTwilightsForDate(DateTime.Now, out clockSunrise, out clockSunset); //calc today's sunrise & sunset
             calcTwilightsForDate(DateTime.Now.AddDays(1), out clockTomorrowSunrise, out tomorrowSunset); //calc tomorrow's sunrise
 
-            //check for astronomical observances
-            double yesterdaysDaylength = (clockYesterdaySunset - yesterdaySunrise).TotalSeconds;
-            double todaysDaylength = (clockSunset - clockSunrise).TotalSeconds;
-            double tomorrowsDaylength = (tomorrowSunset - clockTomorrowSunrise).TotalSeconds;
-            double halfDayLength = 60 * 60 * 12;
-
-            if ((todaysDaylength > yesterdaysDaylength && todaysDaylength > tomorrowsDaylength) //summer solstice
-                || (todaysDaylength < yesterdaysDaylength && todaysDaylength < tomorrowsDaylength) //winter solstice
-                || (todaysDaylength - halfDayLength < yesterdaysDaylength - halfDayLength && todaysDaylength - halfDayLength < tomorrowsDaylength - halfDayLength)) //equinox
-            {
-                clockSpecialDay = true;
-                loadClockOrbs();
-            }
-            else if (clockSpecialDay)
-            {
-                clockSpecialDay = false;
-                loadClockOrbs();
-            }
+            //check if today is equinox or solstice
+            clockSpecialDay = false;
+            clockSpecialDay |= DateTime.Now.Date == getSeasonStartDate(DateTime.Now.Year, 0).Date; //spring equinox
+            clockSpecialDay |= DateTime.Now.Date == getSeasonStartDate(DateTime.Now.Year, 1).Date; //summer solstice
+            clockSpecialDay |= DateTime.Now.Date == getSeasonStartDate(DateTime.Now.Year, 2).Date; //autumn equinox
+            clockSpecialDay |= DateTime.Now.Date == getSeasonStartDate(DateTime.Now.Year, 3).Date; //winter solstice
+            
+            loadClockOrbs();
         }
 
         void calcTwilightsForDate(DateTime date, out DateTime sunrise, out DateTime sunset)
@@ -747,7 +736,73 @@ namespace SysMana
         double cos(double degs)
         {
             return Math.Cos(degs * Math.PI / 180.0);
-        } 
+        }
+
+        DateTime getSeasonStartDate(int seasonYear, int seasonInd)
+        {
+            double mCalc = ((double)seasonYear - 2000) / 1000;
+            double val = 0;
+
+            switch (seasonInd)
+            {
+                case 0:
+                    val = 2451623.80984 + 365242.37404 * mCalc + 0.05169 * mCalc * mCalc - 0.00411 * mCalc * mCalc * mCalc - 0.00057 * mCalc * mCalc * mCalc * mCalc;
+                    break;
+                case 1:
+                    val = 2451716.56767 + 365241.62603 * mCalc + 0.00325 * mCalc * mCalc + 0.00888 * mCalc * mCalc * mCalc - 0.00030 * mCalc * mCalc * mCalc * mCalc;
+                    break;
+                case 2:
+                    val = 2451810.21715 + 365242.01767 * mCalc - 0.11575 * mCalc * mCalc + 0.00337 * mCalc * mCalc * mCalc + 0.00078 * mCalc * mCalc * mCalc * mCalc;
+                    break;
+                case 3:
+                    val = 2451900.05952 + 365242.74049 * mCalc - 0.06223 * mCalc * mCalc - 0.00823 * mCalc * mCalc * mCalc + 0.00032 * mCalc * mCalc * mCalc * mCalc;
+                    break;
+            }
+
+            double ut;
+            int jdn;
+            int year, month, day;
+            int hour, minute;
+            bool julian;
+            long x, z, m, d, y;
+            long daysPer400Years = 146097L;
+            long fudgedDaysPer4000Years = 1460970L + 31;
+
+            val += 0.5;
+
+            jdn = (int)Math.Floor(val);
+            ut = val - jdn;
+            julian = (jdn <= 2361221);
+            x = jdn + 68569L;
+
+            if (julian)
+            {
+                x += 38;
+                daysPer400Years = 146100L;
+                fudgedDaysPer4000Years = 1461000L + 1;
+            }
+
+            z = 4 * x / daysPer400Years;
+            x = x - (daysPer400Years * z + 3) / 4;
+            y = 4000 * (x + 1) / fudgedDaysPer4000Years;
+            x = x - 1461 * y / 4 + 31;
+            m = 80 * x / 2447;
+            d = x - 2447 * m / 80;
+            x = m / 11;
+            m = m + 2 - 12 * x;
+            y = 100 * (z - 49) + y + x;
+            year = (int)y;
+            month = (int)m;
+            day = (int)d;
+
+            if (year <= 0)
+                year--;
+
+            hour = (int)(ut * 24);
+            minute = (int)((ut * 24 - hour) * 60);
+
+            return new DateTime(year, month, day, hour, minute, 0);
+        }
         #endregion
     }
 }

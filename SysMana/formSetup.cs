@@ -785,6 +785,7 @@ namespace SysMana
 
                     numZoom.Enabled = false;
                     lblZoom.Enabled = false;
+                    lblZoomPercent.Enabled = false;
                     break;
                 case "Spinner":
                     panelText.Visible = false;
@@ -796,6 +797,7 @@ namespace SysMana
                     
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
+                    lblZoomPercent.Enabled = true;
                     break;
                 case "Progress bar":
                     panelText.Visible = false;
@@ -807,6 +809,7 @@ namespace SysMana
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
+                    lblZoomPercent.Enabled = true;
                     break;
                 case "Image sequence":
                     panelText.Visible = false;
@@ -818,6 +821,7 @@ namespace SysMana
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
+                    lblZoomPercent.Enabled = true;
 
                     dispImgSeq();
                     break;
@@ -831,6 +835,7 @@ namespace SysMana
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
+                    lblZoomPercent.Enabled = true;
 
                     dispImgSeq();
                     break;
@@ -844,6 +849,7 @@ namespace SysMana
 
                     numZoom.Enabled = true;
                     lblZoom.Enabled = true;
+                    lblZoomPercent.Enabled = true;
                     break;
             }
         }
