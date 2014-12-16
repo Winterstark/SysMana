@@ -15,8 +15,6 @@ True
 False
 False
 False
-1
-True
 255
 255
 255

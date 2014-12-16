@@ -19,6 +19,7 @@ namespace SysMana
     public partial class formSysMana : Form
     {
         const double VERSION = 1.1;
+        const string UPDATE_URL = "https://raw2.github.com/Winterstark/SysMana/master/update/update.txt";
 
         [DllImport("kernel32.dll")]
         static extern uint WinExec(string lpCmdLine, uint uCmdShow);
@@ -169,9 +170,9 @@ namespace SysMana
         VertAlign align;
 
         Meter clockMeter;
-        bool mousedown = false, initialized = false, showChangelog;
+        bool mousedown = false, initialized = false;
         Point prevPos;
-        int fixedH, prevX, prevY, updateNotifs;
+        int fixedH, prevX, prevY;
         
 
         public Image LoadImg(string path)
@@ -237,14 +238,14 @@ namespace SysMana
                 this.TopMost = bool.Parse(file.ReadLine());
                 this.AllowTransparency = bool.Parse(file.ReadLine());
                 font = new Font(file.ReadLine(), int.Parse(file.ReadLine()), Misc.GenFontStyle(bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine()), bool.Parse(file.ReadLine())));
-                updateNotifs = int.Parse(file.ReadLine());
-                showChangelog = bool.Parse(file.ReadLine());
                 textColor = Color.FromArgb(int.Parse(file.ReadLine()), int.Parse(file.ReadLine()), int.Parse(file.ReadLine()));
 
                 file.Close();
             }
             catch
             {
+                MessageBox.Show("Your options file is either corrupt or made with a previous version of SysMana.", "Error while loading options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             menuOnTop.Checked = this.TopMost;
@@ -275,8 +276,6 @@ namespace SysMana
             file.WriteLine(font.Italic);
             file.WriteLine(font.Underline);
             file.WriteLine(font.Strikeout);
-            file.WriteLine(updateNotifs);
-            file.WriteLine(showChangelog);
             file.WriteLine(textColor.R);
             file.WriteLine(textColor.G);
             file.WriteLine(textColor.B);
@@ -403,11 +402,7 @@ namespace SysMana
             audioDevice = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia);
 
             //check for updates
-            bool[] askPermissions = new bool[3] { true, true, true };
-            for (int i = 0; i < updateNotifs; i++)
-                askPermissions[i] = false;
-
-            Updater.Update(VERSION, "https://raw2.github.com/Winterstark/SysMana/master/update/update.txt", askPermissions, showChangelog);
+            Updater.Update(VERSION, UPDATE_URL);
         }
 
         private void formSysMana_Activated(object sender, EventArgs e)
@@ -660,7 +655,9 @@ namespace SysMana
             if (setup == null || setup.IsDisposed)
             {
                 setup = new formSetup();
-                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, textColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg, updateNotifs, showChangelog);
+                setup.Init(meters, timerUpdateData.Interval, (int)this.Opacity, fixedH, this.BackColor, textColor, align, this.TopMost, this.AllowTransparency, font, data, loadMeters, loadOptions, initDataSources, LoadImg, DisposeImg);
+                setup.CurrentVersion = VERSION;
+                setup.DefaultUpdateURL = UPDATE_URL;
                 setup.Show();
             }
         }

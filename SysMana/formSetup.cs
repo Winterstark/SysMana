@@ -18,6 +18,9 @@ namespace SysMana
 {
     public partial class formSetup : Form
     {
+        public double CurrentVersion;
+        public string DefaultUpdateURL;
+
         Func<string, Image> LoadImg;
         Action<Image> DisposeImg;
         Action LoadMeters, LoadOptions, InitData;
@@ -25,14 +28,15 @@ namespace SysMana
         List<Meter> meters;
         bool initiating = false, ignoreChanges = false;
 
+        UpdateConfig updateConfig;
         Color backColor, textColor;
         Font font;
         VertAlign align;
-        int refresh, opacity, fixedH, updateNotifs;
-        bool topMost, transparent, showChangelog;
+        int refresh, opacity, fixedH;
+        bool topMost, transparent;
 
 
-        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, Color textColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg, int updateNotifs, bool showChangelog)
+        public void Init(List<Meter> meters, int refresh, int opacity, int fixedH, Color backColor, Color textColor, VertAlign align, bool topMost, bool transparent, Font font, DataSources data, Action LoadMeters, Action LoadOptions, Action InitData, Func<string, Image> LoadImg, Action<Image> DisposeImg)
         {
             initiating = true;
 
@@ -65,8 +69,6 @@ namespace SysMana
             comboVertAlign.Text = align.ToString();
             checkTopMost.Checked = topMost;
             checkTransparent.Checked = transparent;
-            trackUpdate.Value = updateNotifs;
-            checkShowChangelog.Checked = showChangelog;
 
             comboFont.Text = font.Name;
             numFontSize.Value = (int)font.Size;
@@ -85,8 +87,6 @@ namespace SysMana
             this.topMost = topMost;
             this.transparent = transparent;
             this.font = font;
-            this.updateNotifs = updateNotifs;
-            this.showChangelog = showChangelog;
 
             //runs at startup?
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -163,9 +163,7 @@ namespace SysMana
                 checkFontBold.Checked != font.Bold ||
                 checkFontItalic.Checked != font.Italic ||
                 checkFontUnderline.Checked != font.Underline ||
-                checkFontStrikeout.Checked != font.Strikeout ||
-                trackUpdate.Value != updateNotifs ||
-                checkShowChangelog.Checked != showChangelog;
+                checkFontStrikeout.Checked != font.Strikeout;
         }
 
         void saveMeters()
@@ -270,25 +268,6 @@ namespace SysMana
         {
             numDataMin.Value = 0;
             numDataMax.Value = data.GetTotalDiskSpace(comboDataSubsource.Text);
-        }
-
-        void refreshUpdateNotifLabel()
-        {
-            switch (trackUpdate.Value)
-            {
-                case 0:
-                    lblUpdateNotifications.Text = "Always ask";
-                    break;
-                case 1:
-                    lblUpdateNotifications.Text = "Check for update automatically";
-                    break;
-                case 2:
-                    lblUpdateNotifications.Text = "Download update automatically";
-                    break;
-                case 3:
-                    lblUpdateNotifications.Text = "Install update automatically";
-                    break;
-            }
         }
 
         void setMinMax()
@@ -459,8 +438,6 @@ namespace SysMana
             align = (VertAlign)Enum.Parse(typeof(VertAlign), comboVertAlign.Text);
             topMost = checkTopMost.Checked;
             transparent = checkTransparent.Checked;
-            updateNotifs = trackUpdate.Value;
-            showChangelog = checkShowChangelog.Checked;
 
             font = new Font(comboFont.Text, (int)numFontSize.Value, Misc.GenFontStyle(checkFontBold.Checked, checkFontItalic.Checked, checkFontUnderline.Checked, checkFontStrikeout.Checked));
 
@@ -490,8 +467,6 @@ namespace SysMana
             file.WriteLine(font.Italic);
             file.WriteLine(font.Underline);
             file.WriteLine(font.Strikeout);
-            file.WriteLine(updateNotifs);
-            file.WriteLine(showChangelog);
             file.WriteLine(textColor.R);
             file.WriteLine(textColor.G);
             file.WriteLine(textColor.B);
@@ -1092,17 +1067,6 @@ namespace SysMana
             Tutorial tutorial = new Tutorial(Application.StartupPath + "\\tutorials\\setup.txt", this);
         }
 
-        private void trackUpdate_Scroll(object sender, EventArgs e)
-        {
-            refreshUpdateNotifLabel();
-            checkForGeneralOptionsChanges();
-        }
-
-        private void checkShowChangelog_CheckedChanged(object sender, EventArgs e)
-        {
-            checkForGeneralOptionsChanges();
-        }
-
         private void buttGetData_Click(object sender, EventArgs e)
         {
             //geocoordinates
@@ -1177,6 +1141,17 @@ namespace SysMana
         private void buttResetMinMax_Click(object sender, EventArgs e)
         {
             setMinMax();
+        }
+
+        private void buttUpdateOptions_Click(object sender, EventArgs e)
+        {
+            if (updateConfig == null || updateConfig.IsDisposed)
+            {
+                updateConfig = new UpdateConfig();
+                updateConfig.CurrentVersion = CurrentVersion;
+                updateConfig.DefaultUpdateURL = DefaultUpdateURL;
+                updateConfig.Show();
+            }
         }
     }
 }

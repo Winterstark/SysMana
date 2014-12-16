@@ -141,10 +141,6 @@
             this.buttPickTextColor = new System.Windows.Forms.Button();
             this.picTextColor = new System.Windows.Forms.PictureBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.checkShowChangelog = new System.Windows.Forms.CheckBox();
-            this.lblUpdateNotifications = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.trackUpdate = new System.Windows.Forms.TrackBar();
             this.numFixedH = new System.Windows.Forms.NumericUpDown();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -176,6 +172,7 @@
             this.timerDelay = new System.Windows.Forms.Timer(this.components);
             this.folderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openTextFile = new System.Windows.Forms.OpenFileDialog();
+            this.buttUpdateOptions = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.tabMeters.SuspendLayout();
             this.groupMeter.SuspendLayout();
@@ -204,7 +201,6 @@
             this.panelImageSequence.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
@@ -1480,14 +1476,11 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.buttUpdateOptions);
             this.tabGeneral.Controls.Add(this.label41);
             this.tabGeneral.Controls.Add(this.buttPickTextColor);
             this.tabGeneral.Controls.Add(this.picTextColor);
             this.tabGeneral.Controls.Add(this.label40);
-            this.tabGeneral.Controls.Add(this.checkShowChangelog);
-            this.tabGeneral.Controls.Add(this.lblUpdateNotifications);
-            this.tabGeneral.Controls.Add(this.label37);
-            this.tabGeneral.Controls.Add(this.trackUpdate);
             this.tabGeneral.Controls.Add(this.numFixedH);
             this.tabGeneral.Controls.Add(this.label34);
             this.tabGeneral.Controls.Add(this.label33);
@@ -1556,45 +1549,6 @@
             this.label40.Size = new System.Drawing.Size(57, 13);
             this.label40.TabIndex = 20;
             this.label40.Text = "Text color:";
-            // 
-            // checkShowChangelog
-            // 
-            this.checkShowChangelog.AutoSize = true;
-            this.checkShowChangelog.Location = new System.Drawing.Point(61, 404);
-            this.checkShowChangelog.Name = "checkShowChangelog";
-            this.checkShowChangelog.Size = new System.Drawing.Size(166, 17);
-            this.checkShowChangelog.TabIndex = 18;
-            this.checkShowChangelog.Text = "Show changelog after update";
-            this.checkShowChangelog.UseVisualStyleBackColor = true;
-            this.checkShowChangelog.CheckedChanged += new System.EventHandler(this.checkShowChangelog_CheckedChanged);
-            // 
-            // lblUpdateNotifications
-            // 
-            this.lblUpdateNotifications.AutoSize = true;
-            this.lblUpdateNotifications.Location = new System.Drawing.Point(240, 353);
-            this.lblUpdateNotifications.Name = "lblUpdateNotifications";
-            this.lblUpdateNotifications.Size = new System.Drawing.Size(60, 13);
-            this.lblUpdateNotifications.TabIndex = 17;
-            this.lblUpdateNotifications.Text = "Always ask";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(26, 337);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(104, 13);
-            this.label37.TabIndex = 16;
-            this.label37.Text = "Update notifications:";
-            // 
-            // trackUpdate
-            // 
-            this.trackUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.trackUpdate.Location = new System.Drawing.Point(46, 353);
-            this.trackUpdate.Maximum = 3;
-            this.trackUpdate.Name = "trackUpdate";
-            this.trackUpdate.Size = new System.Drawing.Size(188, 45);
-            this.trackUpdate.TabIndex = 17;
-            this.trackUpdate.Scroll += new System.EventHandler(this.trackUpdate_Scroll);
             // 
             // numFixedH
             // 
@@ -1906,6 +1860,16 @@
             // 
             this.openTextFile.Filter = "Text files|*.txt|All files|*.*";
             // 
+            // buttUpdateOptions
+            // 
+            this.buttUpdateOptions.Location = new System.Drawing.Point(21, 406);
+            this.buttUpdateOptions.Name = "buttUpdateOptions";
+            this.buttUpdateOptions.Size = new System.Drawing.Size(196, 26);
+            this.buttUpdateOptions.TabIndex = 24;
+            this.buttUpdateOptions.Text = "Update Options";
+            this.buttUpdateOptions.UseVisualStyleBackColor = true;
+            this.buttUpdateOptions.Click += new System.EventHandler(this.buttUpdateOptions_Click);
+            // 
             // formSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1952,7 +1916,6 @@
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackUpdate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFixedH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).EndInit();
@@ -2085,10 +2048,6 @@
         private System.Windows.Forms.TextBox txtGraphTexture;
         private System.Windows.Forms.PictureBox picGraphTexture;
         private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.CheckBox checkShowChangelog;
-        private System.Windows.Forms.Label lblUpdateNotifications;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.TrackBar trackUpdate;
         private System.Windows.Forms.Panel panelDotaClock;
         private System.Windows.Forms.RadioButton rdbClock24HourFormat;
         private System.Windows.Forms.RadioButton rdbClock12HourFormat;
@@ -2110,5 +2069,6 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Button buttResetMinMax;
+        private System.Windows.Forms.Button buttUpdateOptions;
     }
 }
