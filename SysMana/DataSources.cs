@@ -258,17 +258,24 @@ namespace SysMana
 
                     if (DateTime.Now.Subtract(prevFileCheck[subSource]).TotalSeconds > 5 && File.Exists(subSource))
                     {
-                        prevFileCheck[subSource] = DateTime.Now;
+                        try
+                        {
+                            prevFileCheck[subSource] = DateTime.Now;
 
-                        StreamReader file = new StreamReader(subSource);
-                        string contents = file.ReadLine();
-                        file.Close();
+                            StreamReader file = new StreamReader(subSource);
+                            string contents = file.ReadLine();
+                            file.Close();
 
-                        int temp;
-                        if (!int.TryParse(contents, out temp))
-                            prevFileValue[subSource] = -1;
-                        else
-                            prevFileValue[subSource] = temp;
+                            int temp;
+                            if (!int.TryParse(contents, out temp))
+                                prevFileValue[subSource] = -1;
+                            else
+                                prevFileValue[subSource] = temp;
+                        }
+                        catch
+                        {
+                            //file in use; check again later
+                        }
                     }
 
                     return prevFileValue[subSource];
