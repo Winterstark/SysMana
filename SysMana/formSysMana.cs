@@ -18,8 +18,8 @@ namespace SysMana
 {
     public partial class formSysMana : Form
     {
-        const double VERSION = 1.1;
-        const string UPDATE_URL = "https://raw2.github.com/Winterstark/SysMana/master/update/update.txt";
+        const double VERSION = 1.11;
+        const string UPDATE_URL = "https://raw.githubusercontent.com/Winterstark/SysMana/master/update/update.txt";
 
         [DllImport("kernel32.dll")]
         static extern uint WinExec(string lpCmdLine, uint uCmdShow);

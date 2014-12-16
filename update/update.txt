@@ -1,7 +1,7 @@
 [UPDATE]
-[VERSION]1.1[/VERSION]
-[FILE]https://raw.github.com/Winterstark/SysMana/master/update/update files/SysMana.exe->root\SysMana.exe[/FILE]
-[FILE]https://raw.github.com/Winterstark/SysMana/master/update/update files/README.md->root\README.md[/FILE]
-[CHANGELOG]* Implemented a Dota-style clock
-* New vector for progress bar: radial[/CHANGELOG]
+[VERSION]1.11[/VERSION]
+[FILE]https://raw.githubusercontent.com/Winterstark/SysMana/master/update/update files/SysMana.exe->root\SysMana.exe[/FILE]
+[FILE]https://raw.githubusercontent.com/Winterstark/SysMana/master/update/update files/GenericForms.dll->root\GenericForms.dll[/FILE]
+[FILE]https://raw.githubusercontent.com/Winterstark/SysMana/master/update/update files/README.md->root\README.md[/FILE]
+[CHANGELOG]* fixed the updater bug, and some other minor issues[/CHANGELOG]
 [/UPDATE]
