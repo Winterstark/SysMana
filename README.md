@@ -28,6 +28,8 @@ To display the data SysMana has a variety of methods:
 
 Keep in mind that SysMana might slow down your computer a little. After you set it up check Task Manager to see if it's using up too much CPU - you can reduce that number by increasing the Refresh interval in Options, and by eliminating some meters. Future versions of SysMana will probably be more optimized.
 
+IMPORTANT NOTICE: Github recently changed the URLs of some files, which caused the automatic updater to break. If SysMana keeps informing you that the update check failed, you should install the newest version manually, which has this issue fixed.
+
 
 Example monitor set
 ---------------------
